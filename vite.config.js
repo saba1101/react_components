@@ -30,6 +30,7 @@ export default defineConfig({
         additionalData: `
           @use "@/styles/global/_Variables.scss" as *;
           @use "@/styles/global/_Mixins.scss" as *;
+          @use "@/styles/global/_Fonts.scss" as *;
         `
       }
     },
