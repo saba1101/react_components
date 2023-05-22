@@ -2,6 +2,9 @@ import { useState } from "react"
 import Input from "../../components/Form/Input/Input"
 import './Home.scss'
 import SingleSelectDropdown from "../../components/Form/Selects/SingleSelect/SingleSelectDropdown"
+
+import { Data } from "../../utils/Data"
+
 const Home  = () => {
     const [value,setValue]  = useState('')
     return (
@@ -28,6 +31,8 @@ const Home  = () => {
             <div className="select-wrapper margin" style={{width:'365px'}}>
                 <SingleSelectDropdown 
                     label={'Select Option'}
+                    size={'medium'}
+                    data={Data}
                 />
             </div>
         </div>
