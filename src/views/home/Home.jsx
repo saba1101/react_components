@@ -40,7 +40,7 @@ const Home  = () => {
                     isRequired={true}
                     data={Data.Plain}
                     selectedOptonID={SelectedID}
-                    withFilter={false}
+                    withFilter={true}
                     withClear={true}
                     closeOnSelect={true}
                     selected={(obj) => setSelectedObj(obj)}

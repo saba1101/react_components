@@ -118,13 +118,12 @@ const SingleSelectDropdown = ({
                                         <li
                                             onClick={() => SelectOption(item,closeOnSelect ?? false)}
                                             className={`
-                                                ${style.singleOption} 
                                                 ${SelectedObj.current?.id && SelectedObj.current?.id === item.id ? style.selected : '' }
                                                 ${withFilter ? style[SetFilteredOptiopClassState(item.label)] : ''}
                                             `} 
                                             key={index}
                                         >
-                                            <span className='option-label'>
+                                            <span className={style.optionLabel}>
                                                 {item.label}
                                             </span>
                                         </li>
