@@ -2,39 +2,39 @@ export const Data = {
     Plain : [
         {
             label : 'item1',
-            id : crypto.randomUUID()
+            id : 11
         },
         {
             label : 'item2',
-            id : crypto.randomUUID()
+            id : 12
         },
         {
             label : 'item3',
-            id : crypto.randomUUID()
+            id : 13
         },
         {
             label : 'item4',
-            id : crypto.randomUUID()
+            id : 14
         },
         {
             label : 'item5',
-            id : crypto.randomUUID()
+            id : 15
         },
         {
             label : 'item6',
-            id : crypto.randomUUID()
+            id : 16
         },
         {
             label : 'item7',
-            id : crypto.randomUUID()
+            id : 17
         },
         {
             label : 'item8',
-            id : crypto.randomUUID()
+            id : 18
         },
         {
             label : 'item9',
-            id : crypto.randomUUID()
+            id : 19
         },
     ]
 }

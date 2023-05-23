@@ -7,6 +7,9 @@ import { Data } from "../../utils/Data"
 
 const Home  = () => {
     const [value,setValue]  = useState('')
+    const [SelectedObj,setSelectedObj] = useState({})
+    const [SelectedID,setSelectedID] = useState(14)
+
     return (
         <div className="page-home-wrapper">
             <div className="input-wrapper" style={{width: '365px'}}>
@@ -32,8 +35,12 @@ const Home  = () => {
                 <SingleSelectDropdown 
                     label={'Select Option'}
                     size={'medium'}
-                    data={Data}
+                    data={Data.Plain}
+                    selectedOptonID={SelectedID}
+                    selected={(obj) => setSelectedObj(obj)}
                 />
+                
+                <span>{SelectedObj?.label}</span>
             </div>
         </div>
     )
