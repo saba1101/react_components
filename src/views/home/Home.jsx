@@ -2,6 +2,8 @@ import { useState } from "react"
 import Input from "../../components/Form/Input/Input"
 import './Home.scss'
 import SingleSelectDropdown from "../../components/Form/Selects/SingleSelect/SingleSelectDropdown"
+import MainButton from "../../components/Form/Button/MainButton"
+import IconArrow from '@/assets/icons/svg/arrow.svg'
 
 import { Data } from "../../utils/Data"
 
@@ -49,6 +51,15 @@ const Home  = () => {
                             text : 'faasmfskfmaskfmasfafasfaklamkfa'
                         }
                     }
+                />
+            </div>
+
+            <div className="button-wrapper margin">
+                <MainButton 
+                    label={'Main Button'}
+                    size={'medium'}
+                    type={'background'}
+                    disabled={false}
                 />
             </div>
         </div>
