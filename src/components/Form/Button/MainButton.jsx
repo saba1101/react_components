@@ -25,11 +25,26 @@ const MainButton = (
     const iconSlot = () => {
         return icon
     }
+    const loadingDots = () => {
+        return (
+            <div className={style.loading}>
+                <div className={style.leftDot}></div>
+                <div className={style.centerDot}></div>
+                <div className={style.rightDot}></div>
+            </div>
+        )
+    }
 
     return (
-        <button style={customStyle && typeof customStyle == 'object' ? {...customStyle} : {}} className={`${style['mainButton']} ${style[_getSize()]} ${style[_getType()]} ${disabled ? style['disabled'] : ''}`}>
-                <span className={style['buttonLabel']}> { label ?? 'Button' } </span>
+        <button 
+            style={customStyle && typeof customStyle == 'object' ? {...customStyle} : {}} 
+            className={`${style['mainButton']} ${style[_getSize()]} ${style[_getType()]} ${disabled ? style['disabled'] : ''} ${loading ? style.loadingState : ''}`}
+        >
+            { loading && typeof loading === 'boolean' ? loadingDots() : ''  }
+            <span className={style['buttonLabel']}> { label ?? 'Button' } </span>
+            <div className={style.iconSlot}>
                 {icon ? iconSlot() : '' }
+            </div>
         </button>
     )
 }

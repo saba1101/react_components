@@ -5,6 +5,18 @@
     border-radius: 0.125rem;
     cursor: pointer;
 
+    &.loadingState{
+        pointer-events: none;
+        .buttonLabel,.iconSlot{
+            display: none;
+        }
+        &.border,&.text{
+            .loading > div{
+                background: $Day-Positive100;
+            }
+        }
+    }
+
     &.disabled{
         pointer-events: none;
         user-select: none;
@@ -103,4 +115,49 @@
             font-size: 1rem;
         }
     }
+
+    .loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    
+        & > div{
+          border-radius: 50%;
+          margin-left: 0.625rem;
+          animation: ease-in-out loading 1s infinite;
+    
+          &.leftDot{
+            animation-delay: -0.4s;
+          }
+          &.centerDot{
+            animation-delay: -0.3s;
+          }
+          &.rightDot{
+            animation-delay: -0.2s;
+          }
+    
+          &:first-child{
+            margin-left: 0;
+          }
+        }
+        .leftDot,.rightDot{
+          width: 0.375rem;
+          height: 0.375rem;
+          background: $Day-Steelgrey00;
+        }
+        .centerDot{
+          width: 0.625rem;
+          height: 0.625rem;
+          border: 0.125rem solid $Day-Steelgrey00;
+        }
+    
+        @keyframes loading {
+          0%, 40%, 100% {
+            transform: scale(1);
+          }  20% {
+               transform: scale(1.4) translateY(-0.125rem);
+             }
+        }
+      }
 }

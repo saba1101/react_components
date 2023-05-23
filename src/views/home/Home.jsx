@@ -60,6 +60,7 @@ const Home  = () => {
                     size={'medium'}
                     type={'background'}
                     disabled={false}
+                    loading={true}
                 />
             </div>
         </div>
