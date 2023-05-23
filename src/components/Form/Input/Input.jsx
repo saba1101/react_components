@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import './Input.scss'
+import style from './Input.module.scss'
 import IconPassword from '@/assets/icons/svg/password.svg'
 import IconPasswordHide from '@/assets/icons/svg/password-hide.svg'
 
@@ -69,26 +69,27 @@ const Input = (
     return (
         <div 
             className={
-                `component-input-wrapper ${_getSize()}
-                ${FocusStates.focusedIn || value ? 'focused' : ''}
-                ${FocusStates.focusedIn  ? 'active' : ''}
-                ${disabled  ? 'disabled' : ''}
+                `${style.componentInputWrapper}
+                ${style[_getSize()]}
+                ${FocusStates.focusedIn || value ? style.focused : ''}
+                ${FocusStates.focusedIn  ? style.active : ''}
+                ${disabled  ? style.disabled : ''}
                 ${
-                    (msg?.type && msg?.visible) ? `status--${msg?.type}` : ''
+                    (msg?.type && msg?.visible) ? style[msg?.type] : ''
                 }
                 `
             }>
 
-            <div className="input-label">
+            <div className={style.inputLabel}>
                 <span> {label ?? 'Label'} </span>
                 {
-                    isRequired ? <span className='required-mark'>*</span> : ''
+                    isRequired ? <span className={style.requiredMark}>*</span> : ''
                 }
 
             </div>
-            <div className="input-element-wrapper">
+            <div className={style.inputElementWrapper}>
                 <input
-                    className={`${inputType === 'password' ? 'padding-right' : ''}`}
+                    className={`${inputType === 'password' ? style.paddingRight : ''}`}
                     type={ElementInputType} 
                     value={value} 
                     onChange={(event) => Change(event)}
@@ -104,7 +105,7 @@ const Input = (
             {
                 inputType && inputType === 'password' ?
                     (
-                        <div className="icon-password" onClick={() => ShowPassword()}>
+                        <div className={style.iconPassword} onClick={() => ShowPassword()}>
                             <img src={PasswordVisible ? IconPasswordHide : IconPassword } alt="icon-visible" />
                         </div>
                     )
@@ -115,7 +116,7 @@ const Input = (
             {
                 msg?.type && msg?.visible && msg?.text 
                 ?   (
-                        <div className="msg-text">
+                        <div className={style.msgText}>
                             <p>{msg.text}</p>
                         </div>
                     )

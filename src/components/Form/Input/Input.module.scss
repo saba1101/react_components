@@ -1,4 +1,4 @@
-.component-input-wrapper{
+.componentInputWrapper{
     width: 100%;
     border: 0.0625rem solid $Day-Steelgrey06;
     background: $Day-Steelgrey01;
@@ -7,7 +7,7 @@
     transition: $Default-Transition;
     padding: 0.0625rem;
 
-    .input-label{
+    .inputLabel{
         position: absolute;
         top: 50%;
         transform: translate(0,-50%);
@@ -25,14 +25,14 @@
             color: $Day-Steelgrey12;
             transition: $Default-Transition;
 
-            &.required-mark{
+            &.requiredMark{
                 color: $Day-Negative100 !important;
                 font-weight: 900;
             }
         }
     }
 
-    .input-element-wrapper{
+    .inputElementWrapper{
         width: 100%;
         height: 100%;
 
@@ -42,13 +42,13 @@
             padding: 1rem 1rem 0 1rem;
             color: $Day-Steelgrey20;
 
-            &.padding-right{
+            &.paddingRight{
                 padding-right: 2.1875rem;
             }
         }
     }
 
-    .icon-password{
+    .iconPassword{
         position: absolute;
         right: 0.8125rem;
         top: 50%;
@@ -63,7 +63,7 @@
         }
     }
 
-    .msg-text{
+    .msgText{
         margin-top: 0.5rem;
         p{
             font-size: 0.75rem;
@@ -74,13 +74,13 @@
     &.small{
         height: 2.625rem;
 
-        .input-label > span{
+        .inputLabel > span{
             font-size: 0.875rem;
         }
 
 
         &.focused{
-            .input-label{
+            .inputLabel{
                 top: 0.5rem;
                 span{
                     font-size: 0.75rem;
@@ -96,12 +96,12 @@
     &.medium{
         height: 3rem;
 
-        .input-label > span {
+        .inputLabel > span {
             font-size: 0.875rem;
         }
 
         &.focused{
-            .input-label{
+            .inputLabel{
                 top: 0.625rem;
                 span{
                     font-size: 0.75rem;
@@ -117,12 +117,12 @@
     &.large{
         height: 3.5rem;
 
-        .input-label > span {
+        .inputLabel > span {
             font-size: 1rem;
         }
 
         &.focused{
-            .input-label{
+            .inputLabel{
                 top: 0.875rem;
                 span{
                     font-size: 0.875rem;
@@ -146,23 +146,21 @@
 
     &.disabled{
         pointer-events: none;
-        input,.input-label > span{
+        input,.inputLabel > span{
             color: $Day-Steelgrey09;
         }
     }
 
-    &.status{
-        &--error{
-            border: 0.0625rem solid rgba($Day-Negative100,.6);
-            .msg-text > p{
-                color: $Day-Negative100;
-            }
+    &.error{
+        border: 0.0625rem solid rgba($Day-Negative100,.6);
+        .msgText > p{
+            color: $Day-Negative100;
         }
-        &--success{
-            border: 0.0625rem solid rgba($Day-Positive100,.6);
-            .msg-text > p{
-                color: $Day-Positive100;
-            }
+    }
+    &.success{
+        border: 0.0625rem solid rgba($Day-Positive100,.6);
+        .msgText > p{
+            color: $Day-Positive100;
         }
     }
 }
