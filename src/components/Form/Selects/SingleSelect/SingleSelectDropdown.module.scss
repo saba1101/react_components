@@ -1,11 +1,11 @@
-.select-wrapper{
+.selectWrapper{
     width: 100%;
     position: relative;
 
     @include centerEl;
     place-items: baseline;
 
-    .select-container{
+    .selectContainer{
         width: 100%;
         height: 100%;
         border: 0.0625rem solid $Day-Steelgrey06;
@@ -14,7 +14,7 @@
         padding: 0.0625rem;
         @include centerEl;
 
-        .select-label{
+        .selectLabel{
             position: absolute;
             top: 50%;
             left: 1rem;
@@ -26,13 +26,13 @@
                 pointer-events: none;
                 user-select: none;
 
-                &.required-mark{
+                &.requiredMark{
                     color: $Day-Negative100;
                 }
             }
         }
 
-        .selected-option{
+        .selectedOption{
             width: 100%;
             height: 100%;
             display: grid;
@@ -50,7 +50,7 @@
             }
         }
 
-        .clear-action{
+        .clearAction{
             @include centerEl;
             cursor: pointer;
             position: absolute;
@@ -63,7 +63,7 @@
             }
         }
 
-        .collapse-action{
+        .collapseAction{
             @include centerEl;
             position: absolute;
             top: 50%;
@@ -82,7 +82,7 @@
         }
     }
 
-    .msg-text{
+    .msgText{
         margin-top: 0.5rem;
         text-align: left;
         p{
@@ -92,44 +92,42 @@
     }
 
 
-    &.status{
-        &--error{
-            .select-container{
-                border: 0.0625rem solid rgba($Day-Negative100,.6);
-            }
-            .msg-text > p{
-                color: $Day-Negative100;
-            }
+    &.error{
+        .selectContainer{
+            border: 0.0625rem solid rgba($Day-Negative100,.6);
         }
-        &--success{
-            .select-container{
-                border: 0.0625rem solid rgba($Day-Positive100,.6);
-            }
-            .msg-text > p{
-                color: $Day-Positive100;
-            }
+        .msgText > p{
+            color: $Day-Negative100;
+        }
+    }
+    &.success{
+        .selectContainer{
+            border: 0.0625rem solid rgba($Day-Positive100,.6);
+        }
+        .msgText > p{
+            color: $Day-Positive100;
         }
     }
 
     &.focused{
 
         &.small{
-            .select-label > span{
+            .selectLabel > span{
                 font-size: 0.75rem;
             }    
         }
         &.medium{
-            .select-label > span{
+            .selectLabel > span{
                 font-size: 0.75rem;
             }    
         }
         &.large{
-            .select-label > span{
+            .selectLabel > span{
                 font-size: 0.875rem;
             }    
         }
 
-        .select-label{
+        .selectLabel{
             top: 0.75rem !important;
         }
     }
@@ -138,14 +136,14 @@
     &.small{
         // height: 2.625rem;
 
-        .select-label > span{
+        .selectLabel > span{
             font-size: 0.875rem;
         }
     }
     &.medium{
         height: 3rem;
 
-        .select-label > span{
+        .selectLabel > span{
             font-size: 0.875rem;
 
         }
@@ -153,14 +151,14 @@
     &.large{
         height: 3.5rem;
         
-        .select-label > span{
+        .selectLabel > span{
             font-size: 1rem;
         }
     }
 }
 
-.collapsable-options{
-    width: 100%;
+.collapsableOptions{
+    width: 100;
     max-height: 21rem;
     position: absolute;
     left: 0;

@@ -46,7 +46,7 @@ const Home  = () => {
                     selected={(obj) => setSelectedObj(obj)}
                     msg={
                         {
-                            type : 'success',
+                            type : 'error',
                             visible : false,
                             text : 'faasmfskfmaskfmasfafasfaklamkfa'
                         }

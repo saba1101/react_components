@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import './SingleSelectDropdown.scss'
+import style from './SingleSelectDropdown.module.scss'
 import IconArrow from '@/assets/icons/svg/arrow.svg'
 import IconRemove from '@/assets/icons/svg/close-circle.svg'
 
@@ -108,7 +108,7 @@ const SingleSelectDropdown = ({
 
     const CollapsableDropdown = () => {
         return (
-            <div className="collapsable-options" ref={CollapsableRef}>
+            <div className={style.collapsableOptions} ref={CollapsableRef}>
                 <ul>
                     {
                         data ?
@@ -118,9 +118,9 @@ const SingleSelectDropdown = ({
                                         <li
                                             onClick={() => SelectOption(item,closeOnSelect ?? false)}
                                             className={`
-                                                single-option 
-                                                ${SelectedObj.current?.id && SelectedObj.current?.id === item.id ? 'selected' : '' }
-                                                ${withFilter ? SetFilteredOptiopClassState(item.label) : ''}
+                                                ${style.singleOption} 
+                                                ${SelectedObj.current?.id && SelectedObj.current?.id === item.id ? style.selected : '' }
+                                                ${withFilter ? style[SetFilteredOptiopClassState(item.label)] : ''}
                                             `} 
                                             key={index}
                                         >
@@ -142,28 +142,28 @@ const SingleSelectDropdown = ({
         <div
             ref={ComponentRef}
             className={`
-                select-wrapper
-                ${_getSize()}
-                ${FocusStates.focusedIn || Value ? 'focused' : ''}
+                ${style.selectWrapper}
+                ${style[_getSize()]}
+                ${FocusStates.focusedIn || Value ? style.focused : ''}
                 ${
-                    (msg?.type && msg?.visible) ? `status--${msg?.type}` : ''
+                    (msg?.type && msg?.visible) ? style[msg?.type] : ''
                 }
             `}
 
         >
-            <div className="select-container">
-                <div className="select-label" onClick={Focus}>
+            <div className={style.selectContainer}>
+                <div className={style.selectLabel} onClick={Focus}>
                     <span> { label ?? 'Label'} </span>
                     {
                         isRequired ? (
-                                <span className='required-mark'>
+                                <span className={style.requiredMark}>
                                     *
                                 </span>
                             )
                         : ''
                     }
                 </div>
-                <div className="selected-option">
+                <div className={style.selectedOption}>
                     <input 
                         type="text" 
                         value={Value} 
@@ -179,14 +179,14 @@ const SingleSelectDropdown = ({
                 
                 {
                     withClear ? (
-                        <div className="clear-action" onClick={clearSelection}>
+                        <div className={style.clearAction} onClick={clearSelection}>
                             <img src={IconRemove} alt="" />
                         </div>
                     )
                     : ''
                 }
 
-                <div className="collapse-action" onClick={Focus}>
+                <div className={style.collapseAction} onClick={Focus}>
                     <img src={IconArrow} alt="arrow" />
                 </div>
             </div>
@@ -197,7 +197,7 @@ const SingleSelectDropdown = ({
             {
                 msg?.type && msg?.visible && msg?.text 
                 ?   (
-                        <div className="msg-text">
+                        <div className={style.msgText}>
                             <p>{msg.text}</p>
                         </div>
                     )
