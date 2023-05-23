@@ -20,7 +20,7 @@ const Home  = () => {
                     size="medium"
                     label={'Input Label Placeholder'}
                     disabled={false}
-                    isRequired={false}
+                    isRequired={true}
                     msg={
                         {
                             type : 'error',
@@ -35,12 +35,21 @@ const Home  = () => {
                 <SingleSelectDropdown 
                     label={'Select Option'}
                     size={'medium'}
+                    isRequired={true}
                     data={Data.Plain}
                     selectedOptonID={SelectedID}
+                    withFilter={false}
+                    withClear={true}
+                    closeOnSelect={true}
                     selected={(obj) => setSelectedObj(obj)}
+                    msg={
+                        {
+                            type : 'success',
+                            visible : false,
+                            text : 'faasmfskfmaskfmasfafasfaklamkfa'
+                        }
+                    }
                 />
-                
-                <span>{SelectedObj?.label}</span>
             </div>
         </div>
     )

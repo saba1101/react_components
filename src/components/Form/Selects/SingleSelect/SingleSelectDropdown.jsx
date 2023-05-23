@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import './SingleSelectDropdown.scss'
 import IconArrow from '@/assets/icons/svg/arrow.svg'
+import IconRemove from '@/assets/icons/svg/close-circle.svg'
 
 const SingleSelectDropdown = ({
     label,
     size,
     withFilter,
+    withClear,
+    closeOnSelect,
     isRequired,
     disabled,
     msg,
@@ -24,7 +27,7 @@ const SingleSelectDropdown = ({
 
     const [Value,setValue] = useState('')
     // const [SelectedObj,setSelectedObj] = useState({})
-    let SelectedObj = useRef('')
+    let SelectedObj = useRef({})
     const [Collapsed,setCollapsed] = useState(false)
     const [FocusStates,setFocusStates] = useState({
         focusedIn: false,
@@ -45,10 +48,6 @@ const SingleSelectDropdown = ({
         else return size ? size : 'medium'
     }
 
-    const CollapseOptions = () => {
-        setCollapsed(state => !state)
-    }
-
     const Focus = () => {
         InputRef.current.focus()
         setFocusStates(prev => ({focusedIn : true, focusedOut : false}))
@@ -57,6 +56,26 @@ const SingleSelectDropdown = ({
     const Blur = () => {
         setFocusStates(prev => ({focusedIn : false, focusedOut : true}))
         // setCollapsed(state => false)
+    }
+
+    const onChange = (value) => {
+        setValue(value)
+    }
+
+    const SetFilteredOptiopClassState = (searchString) => {
+        let visible = true
+        if(withFilter){
+            if(
+                !searchString.toLowerCase().split(' ').join('').trim()
+                    .includes(Value.toLowerCase().split(' ').join('').trim())
+                    &&
+                Value.trim() !== ''
+            ){
+                visible = false
+            }
+        }
+
+        return visible ? 'visible' : 'hidden'
     }
 
     const SetPreSelectedObj = () => {
@@ -69,13 +88,22 @@ const SingleSelectDropdown = ({
         }
     }
 
-    const SelectOption = (obj) => {
+    const SelectOption = (obj,triggerClose) => {
         // setSelectedObj(obj)
         SelectedObj.current = obj
         setValue(obj.label)
-        setCollapsed(state => false)
+
+        if(triggerClose){
+            setCollapsed(state => false)
+        } 
 
         if(selected) selected(SelectedObj.current)
+    }
+
+    const clearSelection = () => {
+        SelectedObj.current = {}
+        setValue('')
+        selected({})
     }
 
     const CollapsableDropdown = () => {
@@ -87,11 +115,12 @@ const SingleSelectDropdown = ({
                             data.map((item,index) => 
                                 {
                                     return (
-                                        <li 
-                                            onClick={() => SelectOption(item)} 
+                                        <li
+                                            onClick={() => SelectOption(item,closeOnSelect ?? false)}
                                             className={`
                                                 single-option 
                                                 ${SelectedObj.current?.id && SelectedObj.current?.id === item.id ? 'selected' : '' }
+                                                ${withFilter ? SetFilteredOptiopClassState(item.label) : ''}
                                             `} 
                                             key={index}
                                         >
@@ -116,32 +145,63 @@ const SingleSelectDropdown = ({
                 select-wrapper
                 ${_getSize()}
                 ${FocusStates.focusedIn || Value ? 'focused' : ''}
+                ${
+                    (msg?.type && msg?.visible) ? `status--${msg?.type}` : ''
+                }
             `}
 
         >
             <div className="select-container">
                 <div className="select-label" onClick={Focus}>
-                    <span> { label ?? 'Label' } </span>
+                    <span> { label ?? 'Label'} </span>
+                    {
+                        isRequired ? (
+                                <span className='required-mark'>
+                                    *
+                                </span>
+                            )
+                        : ''
+                    }
                 </div>
                 <div className="selected-option">
                     <input 
                         type="text" 
                         value={Value} 
                         required={isRequired} 
-                        disabled={false} 
-                        readOnly={false}
+                        disabled={disabled} 
+                        readOnly={!withFilter}
                         onFocus={Focus}
                         onBlur={Blur}
                         ref={InputRef}
-                        onChange={(event) => setValue(event.target.value)}
+                        onChange={(event) => onChange(event.target.value)}
                     />
                 </div>
+                
+                {
+                    withClear ? (
+                        <div className="clear-action" onClick={clearSelection}>
+                            <img src={IconRemove} alt="" />
+                        </div>
+                    )
+                    : ''
+                }
+
                 <div className="collapse-action" onClick={Focus}>
                     <img src={IconArrow} alt="arrow" />
                 </div>
             </div>
             {
                 Collapsed && data  ? CollapsableDropdown() : ''
+            }
+            
+            {
+                msg?.type && msg?.visible && msg?.text 
+                ?   (
+                        <div className="msg-text">
+                            <p>{msg.text}</p>
+                        </div>
+                    )
+                : ''
             }
         </div>
     )

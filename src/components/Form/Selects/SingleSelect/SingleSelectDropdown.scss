@@ -3,6 +3,7 @@
     position: relative;
 
     @include centerEl;
+    place-items: baseline;
 
     .select-container{
         width: 100%;
@@ -24,6 +25,10 @@
                 color: $Day-Steelgrey12;
                 pointer-events: none;
                 user-select: none;
+
+                &.required-mark{
+                    color: $Day-Negative100;
+                }
             }
         }
 
@@ -40,14 +45,31 @@
                 border: none;
                 font-size: 1rem;
                 padding: 0.875rem;
+                padding-right: 4.0625rem;
+                font-weight: 400;
+            }
+        }
+
+        .clear-action{
+            @include centerEl;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            right: 2.5rem;
+            transform: translate(0,-50%);
+
+            img{
+                width: 1.125rem;
             }
         }
 
         .collapse-action{
+            @include centerEl;
             position: absolute;
             top: 50%;
             right: 1rem;
             transform: translate(0,-50%);
+            cursor: pointer;
 
             img{
                 width: 0.875rem;
@@ -55,8 +77,37 @@
             }
         }
     
-    &.active{
+        &.active{
 
+        }
+    }
+
+    .msg-text{
+        margin-top: 0.5rem;
+        text-align: left;
+        p{
+            font-size: 0.75rem;
+            word-wrap: break-word;
+        }
+    }
+
+
+    &.status{
+        &--error{
+            .select-container{
+                border: 0.0625rem solid rgba($Day-Negative100,.6);
+            }
+            .msg-text > p{
+                color: $Day-Negative100;
+            }
+        }
+        &--success{
+            .select-container{
+                border: 0.0625rem solid rgba($Day-Positive100,.6);
+            }
+            .msg-text > p{
+                color: $Day-Positive100;
+            }
         }
     }
 
@@ -85,7 +136,7 @@
     
 
     &.small{
-        height: 2.625rem;
+        // height: 2.625rem;
 
         .select-label > span{
             font-size: 0.875rem;
@@ -128,6 +179,24 @@
             padding: 1rem;
             transition: $Default-Transition;
             position: relative;
+            cursor: pointer;
+
+            &:hover{
+                background: $Day-Steelgrey03;
+            }
+
+            span{
+                color: $Day-TextPrimary;
+                font-size: 0.9375rem;
+                word-break: break-all;
+            }
+
+            &.hidden{
+                display: none;
+            }
+            &.visible{
+                display: block;
+            }
 
             &.selected{
                 background: $Day-Steelgrey03;
@@ -141,15 +210,6 @@
                     left: 0;
                 }
 
-            }
-
-            &:hover{
-                background: $Day-Steelgrey03;
-            }
-
-            span{
-                color: $Day-TextPrimary;
-                font-size: 0.875rem;
             }
         }
     }
