@@ -1,4 +1,4 @@
-import './MainButton.scss'
+import style from './MainButton.module.scss'
 
 const MainButton = (
     {
@@ -19,7 +19,7 @@ const MainButton = (
 
     const _getType = () => {
         if(type && !['background','border','text'].includes(type)) return 'background'
-        return type ? type : 'background'
+        return type ? type : 'type-background'
     }
 
     const iconSlot = () => {
@@ -27,8 +27,8 @@ const MainButton = (
     }
 
     return (
-        <button style={customStyle && typeof customStyle == 'object' ? {...customStyle} : {}} className={`main-button ${_getSize()} type--${_getType()} ${disabled ? 'disabled' : ''}`}>
-                <span className='button-label'> { label ?? 'Button' } </span>
+        <button style={customStyle && typeof customStyle == 'object' ? {...customStyle} : {}} className={`${style['mainButton']} ${style[_getSize()]} ${style[_getType()]} ${disabled ? style['disabled'] : ''}`}>
+                <span className={style['buttonLabel']}> { label ?? 'Button' } </span>
                 {icon ? iconSlot() : '' }
         </button>
     )

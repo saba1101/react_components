@@ -1,0 +1,106 @@
+
+.mainButton{
+    width: 10.75rem;
+    transition: $Default-Transition;
+    border-radius: 0.125rem;
+    cursor: pointer;
+
+    &.disabled{
+        pointer-events: none;
+        user-select: none;
+    }
+
+    &.background{
+        background: $Day-Positive100;
+        .buttonLabel{
+            color: #FFFFFF;
+        }
+
+        &:hover{
+            background: $Day-Positive80;
+        }
+        
+        &:active{
+            background: $Day-Positive120;
+        }
+
+        &.disabled{
+            background: $Day-Positive05;
+            border: 0.0625rem solid transparent;
+            .buttonLabel{
+                color: $Day-TextDisabled;
+            }
+        }
+    }
+    &.border{
+        border: 0.0625rem solid $Day-Positive100;
+        .buttonLabel{
+            color: $Day-Positive100;
+        }
+
+        &:hover{
+            border: 0.0625rem solid $Day-Positive80;
+            .buttonLabel{
+                color: $Day-Positive80;
+            }
+        }
+        &:active{
+            border: 0.0625rem solid $Day-Positive120;
+            .buttonLabel{
+                color: $Day-Positive120;
+            }
+        }
+        &.disabled{
+            border: 0.0625rem solid$Day-Positive05;
+            .buttonLabel{
+                color: $Day-TextDisabled;
+            }
+        }
+    }
+    &.text{
+        width: unset;
+        height: unset !important;
+        background: transparent;
+
+        &:hover{
+            .buttonLabel{
+                color: $Day-Positive80;
+            }
+        }
+
+        &:active{
+            .buttonLabel{
+                color: $Day-Positive120;
+            }
+        }
+
+        .buttonLabel{
+            color: $Day-Positive100;
+        }
+
+        &.disabled{
+            .buttonLabel{
+                color: $Day-TextDisabled;
+            }
+        }
+    }
+
+    &.small{
+        height: 2.625rem;
+        .buttonLabel{
+            font-size: 0.75rem;
+        }
+    }
+    &.medium{
+        height: 3rem;
+        .buttonLabel{
+            font-size: 0.875rem;
+        }
+    }
+    &.large{
+        height: 3.5rem;
+        .buttonLabel{
+            font-size: 1rem;
+        }
+    }
+}
