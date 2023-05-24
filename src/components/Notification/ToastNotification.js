@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 const createStyles = () =>{
     const style = document.createElement('style');
     style.setAttribute('id','toast_notification_style_key')
@@ -129,7 +127,7 @@ const createNotification = (text,type,timeout,position,max) => {
 
     let main = document.createElement('div')
     main.classList.add('notifications_wrapper',position ? position : 'bottom-right')
-    const toast_id = uuidv4()
+    const toast_id = crypto.randomUUID()
     let key = `data-key-${toast_id}`
     let notificationEL = document.querySelector('body > .notifications_wrapper')
     if(!notificationEL){

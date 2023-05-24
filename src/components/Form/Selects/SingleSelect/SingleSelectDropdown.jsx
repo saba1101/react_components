@@ -19,11 +19,14 @@ const SingleSelectDropdown = ({
 
     useEffect(() => {
         document.addEventListener('click',ClickHandler)
-        SetPreSelectedObj()
         return () => {
             document.removeEventListener('click',ClickHandler)
         }
     },[])
+
+    useEffect(() => {
+        SetPreSelectedObj()
+    },[selectedOptonID])
 
     const [Value,setValue] = useState('')
     // const [SelectedObj,setSelectedObj] = useState({})

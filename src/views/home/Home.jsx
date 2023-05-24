@@ -15,7 +15,7 @@ import { createNotification } from "../../components/Notification/ToastNotificat
 const Home  = () => {
     const [value,setValue]  = useState('')
     const [SelectedObj,setSelectedObj] = useState({})
-    const [SelectedID,setSelectedID] = useState(14)
+    const [SelectedID,setSelectedID] = useState(17)
     const [SearchValue,setSearchValue] = useState('asfsfas')
     const [Checked,setChecked] = useState(true)
     const [CheckedToggle,setCheckedToggle] = useState(false)
@@ -47,16 +47,16 @@ const Home  = () => {
                 />
             </div> */}
 
-            {/* <div className="select-wrapper margin" style={{width:'365px'}}>
+            <div className="select-wrapper margin" style={{width:'365px'}}>
                 <SingleSelectDropdown 
                     label={'Select Option'}
                     size={'medium'}
                     isRequired={true}
                     data={Data.Plain}
                     selectedOptonID={SelectedID}
-                    withFilter={true}
+                    withFilter={false}
                     withClear={true}
-                    closeOnSelect={true}
+                    closeOnSelect={false}
                     selected={(obj) => setSelectedObj(obj)}
                     msg={
                         {
@@ -66,7 +66,7 @@ const Home  = () => {
                         }
                     }
                 />
-            </div> */}
+            </div>
 
             {/* <div className="button-wrapper margin">
                 <MainButton 
@@ -123,13 +123,13 @@ const Home  = () => {
                 />
             </div> */}
 
-            <button
+            {/* <button
                 onClick={() => {
-                    createNotification('zdarova','error',3000,'top-right')
+                    createNotification('zdarova','success',3000,'top-right',3)
                 }}
             >
                 notify
-            </button>
+            </button> */}
 
         </div>  
     )
