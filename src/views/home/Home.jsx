@@ -9,7 +9,7 @@ import Search from '../../components/Search/Search'
 import Checkbox from "../../components/Form/FormControls/Checkbox/Checkbox"
 import Toggle from "../../components/Form/FormControls/Toggle/Toggle"
 import Radio from "../../components/Form/FormControls/Radio/Radio"
-
+import Tree from "../../components/Reusable/Tree/TreeNode"
 const Home  = () => {
     const [value,setValue]  = useState('')
     const [SelectedObj,setSelectedObj] = useState({})
@@ -18,6 +18,8 @@ const Home  = () => {
     const [Checked,setChecked] = useState(true)
     const [CheckedToggle,setCheckedToggle] = useState(false)
     const [CheckedRadio,setCheckedRadio] = useState(false)
+    
+    const [treedata,setTreedata] = useState(Data.Tree)
 
 
 
@@ -111,7 +113,12 @@ const Home  = () => {
                 />
             </div> */}
 
-        </div>
+            <div className="tree-wrapper margin">
+                <Tree 
+                    data={treedata}
+                />
+            </div>
+        </div>  
     )
 }
 

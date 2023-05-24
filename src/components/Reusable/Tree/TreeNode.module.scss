@@ -1,0 +1,28 @@
+ul{
+    width: 100%;
+    li{
+        padding: 1rem;
+        .nodeContent{
+            @include flex(flex-start,center,row,unset);
+
+            .checkbox{
+                
+            }
+
+            .collapseIcon{
+                @include centerEl;
+                transition: $Default-Transition;
+                img{
+                    width: 0.875rem;
+                }
+            }
+            
+
+            span{
+                color: $Day-TextPrimary;
+                font-size: 0.875rem;
+            }
+        }
+
+    }
+}

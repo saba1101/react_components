@@ -36,5 +36,39 @@ export const Data = {
             label : 'item9',
             id : 19
         },
-    ]
+    ],
+    Tree : [
+        {
+          id: 1,
+          label: 'Node 1',
+          selected: false,
+          children: [
+            {
+              id: 2,
+              label: 'Node 1.1',
+              selected: false,
+              children: [
+                {
+                  id: 3,
+                  label: 'Node 1.1.1',
+                  selected: false,
+                  children: []
+                }
+              ]
+            },
+            {
+              id: 4,
+              label: 'Node 1.2',
+              selected: false,
+              children: []
+            }
+          ]
+        },
+        {
+          id: 5,
+          label: 'Node 2',
+          selected: false,
+          children: []
+        }
+    ]      
 }
