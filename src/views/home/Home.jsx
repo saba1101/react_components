@@ -10,6 +10,7 @@ import Checkbox from "../../components/Form/FormControls/Checkbox/Checkbox"
 import Toggle from "../../components/Form/FormControls/Toggle/Toggle"
 import Radio from "../../components/Form/FormControls/Radio/Radio"
 // import Tree from "../../components/Reusable/Tree/TreeNode"
+import Grid from '../../components/DataGrid/Grid'
 import { createNotification } from "../../components/Notification/ToastNotification"
 
 const Home  = () => {
@@ -23,6 +24,7 @@ const Home  = () => {
     
     const [treedata,setTreedata] = useState(Data.Tree)
     const [SelectedNodes,setSelectedNodes] = useState([])
+    const [gridData,setGridData] = useState(Data.Grid)
 
 
 
@@ -47,7 +49,7 @@ const Home  = () => {
                 />
             </div> */}
 
-            <div className="select-wrapper margin" style={{width:'365px'}}>
+            {/* <div className="select-wrapper margin" style={{width:'365px'}}>
                 <SingleSelectDropdown 
                     label={'Select Option'}
                     size={'medium'}
@@ -66,7 +68,7 @@ const Home  = () => {
                         }
                     }
                 />
-            </div>
+            </div> */}
 
             {/* <div className="button-wrapper margin">
                 <MainButton 
@@ -130,6 +132,10 @@ const Home  = () => {
             >
                 notify
             </button> */}
+
+            <Grid 
+                data={gridData}
+            />
 
         </div>  
     )
