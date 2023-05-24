@@ -1,0 +1,52 @@
+.checkboxWrapper{
+    width: 1.125rem;
+    height: 1.125rem;
+    overflow: hidden;
+    border: 0.0625rem solid $Day-Steelgrey07;
+    background: $Day-Steelgrey00;
+    position: relative;
+    @include centerEl;
+    border-radius: 0.125rem;
+    cursor: pointer;
+    transition: $Default-Transition;
+
+    .checkMark{
+        @include centerEl;
+
+        img{
+            width: 0.625rem;
+            user-select: none;
+            pointer-events: none;
+        }
+    }
+
+    &:hover{
+        background: rgba($Day-Positive80,.2);
+        border: 0.0625rem solid $Day-Positive80;
+    }
+
+    &.checked{
+        background: $Day-Positive80;
+        border: 0.0625rem solid $Day-Positive80;
+
+        &:hover{
+            background: $Day-Positive120;
+            border: 0.0625rem solid $Day-Positive120;
+        }
+
+        &.disabled{
+            .checkMark{
+                img{
+                    opacity: .4;
+                    filter: invert(93%) sepia(5%) saturate(134%) hue-rotate(145deg) brightness(95%) contrast(85%);
+                }
+            }
+        }
+    }
+    &.disabled{
+        pointer-events: none;
+        user-select: none;
+        background: $Day-Steelgrey01;
+        border: 0.0625rem solid $Day-Steelgrey07;
+    }
+}

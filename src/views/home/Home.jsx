@@ -1,18 +1,25 @@
 import { useState } from "react"
 import Input from "../../components/Form/Input/Input"
 import './Home.scss'
+import { Data } from "../../utils/Data"
 import SingleSelectDropdown from "../../components/Form/Selects/SingleSelect/SingleSelectDropdown"
 import MainButton from "../../components/Form/Button/MainButton"
 import IconArrow from '@/assets/icons/svg/arrow.svg'
 import Search from '../../components/Search/Search'
-
-import { Data } from "../../utils/Data"
+import Checkbox from "../../components/Form/FormControls/Checkbox/Checkbox"
+import Toggle from "../../components/Form/FormControls/Toggle/Toggle"
+import Radio from "../../components/Form/FormControls/Radio/Radio"
 
 const Home  = () => {
     const [value,setValue]  = useState('')
     const [SelectedObj,setSelectedObj] = useState({})
     const [SelectedID,setSelectedID] = useState(14)
     const [SearchValue,setSearchValue] = useState('asfsfas')
+    const [Checked,setChecked] = useState(true)
+    const [CheckedToggle,setCheckedToggle] = useState(false)
+    const [CheckedRadio,setCheckedRadio] = useState(false)
+
+
 
     return (
         <div className="page-home-wrapper">
@@ -66,7 +73,7 @@ const Home  = () => {
                 />
             </div> */}
 
-            <div className="search-wrapper margin" style={{width: '240px'}}>
+            {/* <div className="search-wrapper margin" style={{width: '240px'}}>
                 <Search 
                     value={SearchValue}
                     change={(val) => setSearchValue(val)}
@@ -75,7 +82,35 @@ const Home  = () => {
                     size={'medium'}
                     placeholder={'Search...'}
                 />
-            </div>
+            </div> */}
+
+            {/* <div className="checkbox-wrapper margin">
+                <Checkbox
+                    checked={Checked}
+                    change={(state) => setChecked(state)}
+                    disabled={false}
+                    isRequired={false}
+                    multipleChecked={false}
+                />
+            </div> */}
+
+            {/* <div className="toggle-wrapper margin">
+                <Toggle
+                    checked={CheckedToggle}
+                    change={(state) => setCheckedToggle(state)}
+                    disabled={false}
+                />
+            </div> */}
+
+            {/* <div className="radio-wrapper margin">
+                <Radio 
+                    checked={CheckedRadio}
+                    change={(state) => setCheckedRadio(state)}
+                    disabled={false}
+                    isRequired={false}
+                />
+            </div> */}
+
         </div>
     )
 }

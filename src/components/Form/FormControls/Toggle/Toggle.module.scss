@@ -1,0 +1,53 @@
+.toggleWrapper{
+    $stateToggleWidth: 1.125rem;
+    width: 2.125rem;
+    height: 1.375rem;
+    position: relative;
+    overflow: hidden;
+    background: $Day-Steelgrey09;
+    border-radius: 9.375rem;
+    cursor: pointer;
+    transition: $Default-Transition;
+
+    &:hover{
+        background: $Day-Steelgrey08;
+    }
+
+
+    
+    .toggleState{
+        width: $stateToggleWidth;
+        height: 1.125rem;
+        border-radius: 50%;
+        background: $Day-Steelgrey00;
+        transition: $Default-Transition;
+        position: absolute;
+        top: 50%;
+        left: 0.125rem;
+        transform: translate(0,-50%);
+    }
+
+    &.checked{
+        background: $Day-Positive100;
+        .toggleState{
+            left: calc(100% - ($stateToggleWidth + 0.125rem));
+        }
+
+        &:hover{
+            background: $Day-Positive120;
+        }
+
+        &.disabled{
+            background: $Day-Positive40;
+        }
+    }
+
+    &.disabled{
+        pointer-events: none;
+        user-select: none;
+        background: $Day-Steelgrey06;
+        .toggleState{
+            background: $Day-Steelgrey01;
+        }
+    }
+}
