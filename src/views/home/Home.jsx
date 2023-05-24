@@ -9,7 +9,9 @@ import Search from '../../components/Search/Search'
 import Checkbox from "../../components/Form/FormControls/Checkbox/Checkbox"
 import Toggle from "../../components/Form/FormControls/Toggle/Toggle"
 import Radio from "../../components/Form/FormControls/Radio/Radio"
-import Tree from "../../components/Reusable/Tree/TreeNode"
+// import Tree from "../../components/Reusable/Tree/TreeNode"
+import { createNotification } from "../../components/Notification/ToastNotification"
+
 const Home  = () => {
     const [value,setValue]  = useState('')
     const [SelectedObj,setSelectedObj] = useState({})
@@ -114,16 +116,21 @@ const Home  = () => {
                 />
             </div> */}
 
-            <div className="tree-wrapper margin">
+            {/* <div className="tree-wrapper margin">
                 <Tree 
                     data={treedata}
                     selectedItems={(arr) => setSelectedNodes(arr)}
                 />
-            </div>
+            </div> */}
 
-            <span>
-                {JSON.stringify(SelectedNodes)}
-            </span>
+            <button
+                onClick={() => {
+                    createNotification('zdarova','error',3000,'top-right')
+                }}
+            >
+                notify
+            </button>
+
         </div>  
     )
 }
