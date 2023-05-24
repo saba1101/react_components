@@ -4,6 +4,7 @@ import './Home.scss'
 import SingleSelectDropdown from "../../components/Form/Selects/SingleSelect/SingleSelectDropdown"
 import MainButton from "../../components/Form/Button/MainButton"
 import IconArrow from '@/assets/icons/svg/arrow.svg'
+import Search from '../../components/Search/Search'
 
 import { Data } from "../../utils/Data"
 
@@ -11,6 +12,7 @@ const Home  = () => {
     const [value,setValue]  = useState('')
     const [SelectedObj,setSelectedObj] = useState({})
     const [SelectedID,setSelectedID] = useState(14)
+    const [SearchValue,setSearchValue] = useState('asfsfas')
 
     return (
         <div className="page-home-wrapper">
@@ -63,6 +65,17 @@ const Home  = () => {
                     loading={true}
                 />
             </div> */}
+
+            <div className="search-wrapper margin" style={{width: '240px'}}>
+                <Search 
+                    value={SearchValue}
+                    change={(val) => setSearchValue(val)}
+                    suggestions={['asd','dsfsa','gdsgsd','fsafmsakfmsafsmnas']}
+                    withSuggestions={true}
+                    size={'medium'}
+                    placeholder={'Search...'}
+                />
+            </div>
         </div>
     )
 }

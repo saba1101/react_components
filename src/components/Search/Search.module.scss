@@ -1,0 +1,123 @@
+.searchWrapper{
+    width: 100%;
+    border: 0.0625rem solid $Day-Steelgrey06;
+    transition: $Default-Transition;
+    border-radius: 0.25rem;
+    position: relative;
+
+    &.focused{
+        border: 0.0625rem solid $Main-Blue;
+        &::before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            border: 0.25rem solid rgba($Main-Blue,.1);
+            position: absolute;
+            border-radius: 0.375rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: -1;
+
+        }
+    }
+
+    .iconSearch{
+        position: absolute;
+        top: 50%;
+        left: 0.625rem;
+        transform: translate(0,-50%);
+        @include centerEl;
+        pointer-events: none;
+        user-select: none;
+
+        img{
+            width: 1.125rem;
+        }
+    }
+    
+    .iconClear{
+        position: absolute;
+        top: 50%;
+        right: 0.625rem;
+        transform: translate(0,-50%);
+        @include centerEl;
+        cursor: pointer;
+        user-select: none;
+        transition: $Default-Transition;
+
+        img{
+            width: 0.75rem;
+        }
+
+        &.visible{
+            opacity: 1;
+            pointer-events: all;
+        }
+        &.hidden{
+            pointer-events: none;
+            opacity: 0;
+        }
+    }
+
+    .inputWrapper{
+        width: 100%;
+        height: 100%;
+
+        input{
+            width: 100%;
+            height: 100%;
+            padding: 0 1.875rem 0 2rem;
+            font-size: 1rem;
+            color: #374151;
+        }
+    }
+
+    .suggestionOptions{
+        width: 100%;
+        max-height: 11rem;
+        overflow: auto;
+        border: 0.0625rem solid $Day-Steelgrey03;
+        position: absolute;
+        top: calc(100% + 0.375rem);
+        left: 0;
+        background: $Day-Steelgrey00;
+        border-radius: 0.25rem;
+
+        ul{
+            li{
+                padding: 1rem;
+                cursor: pointer;
+                transition: $Default-Transition;
+                
+                &:hover{
+                    background: $Day-Steelgrey01;
+                }
+
+                &.hidden{
+                    display: none;
+                }
+
+                span{
+                    color: $Day-TextPrimary;
+                    font-size: 0.9375rem;
+
+                    &.match_highlight{
+                        color: #0053FF;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+    
+    &.small{
+        height: 2.625rem;
+    }
+    &.medium{
+        height: 3rem;
+    }
+    &.large{
+        height: 3.5rem;
+    }
+}
