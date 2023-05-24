@@ -3,37 +3,56 @@ import style from './TreeNode.module.scss'
 import IconArrow from '@/assets/icons/svg/arrow.svg'
 import Checkbox from "../../Form/FormControls/Checkbox/Checkbox";
 
-const Tree = ({ data }) => {
+const Tree = ({ data,selectedItems}) => {
+    const [SelectedNodes,setSelectedNodes] = useState([])
 
-    const syncNode = (state,id) => {
+    const syncNode = (selected,obj) => {
+        if(selected){
+            setSelectedNodes([...SelectedNodes,obj])
 
+        }else{
+            setSelectedNodes(
+                SelectedNodes.filter(el => el.id !== obj.id)
+            )
+        }
+        selectedItems(SelectedNodes)
     }
 
   return (
     <ul>
       {data.map((node,ind) => (
-        <TreeNode key={ind} node={node} nodeUpdate={(state,id) => syncNode(state,id)} />
+        <TreeNode
+            key={ind} 
+            node={node}
+            selectedNodes={SelectedNodes}
+            nodeUpdate={(state,obj) => syncNode(state,obj)}
+            selectedItems={(arr) => selectedItems(arr)}
+        />
       ))}
     </ul>
   );
 };
 
-const TreeNode = ({ node,nodeUpdate }) => {
+const TreeNode = ({ node,selectedNodes,nodeUpdate }) => {
   const hasChildren = node.children && node.children.length > 0;
   const [expanded, setExpanded] = useState(false);
-  const [NodeSelected,setNodeSelected] = useState(node.selected)
+  const [NodeSelected,setNodeSelected] = useState(false)
 
   useEffect(() => {
-    setNodeSelected(node.selected)
+    if(selectedNodes.some(el => el.id === node.id)){
+        setNodeSelected(true)
+    }else{
+        setNodeSelected(false)
+    }
   },[node])
 
   const toggleExpand = () => {
     setExpanded(!expanded);
   };
 
-  const NodeSelectionChange = () => {
+  const NodeSelectionChange = (state) => {
     setNodeSelected(state)
-    nodeUpdate(state,node.id)
+    nodeUpdate(state,node)
   }
 
   return (
@@ -50,7 +69,7 @@ const TreeNode = ({ node,nodeUpdate }) => {
             <div className={style.checkbox}>
                 <Checkbox 
                     checked={NodeSelected}
-                    change={(state) => NodeSelectionChange(state}
+                    change={(state) => NodeSelectionChange(state)}
                 />
             </div>
 

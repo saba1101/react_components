@@ -20,6 +20,7 @@ const Home  = () => {
     const [CheckedRadio,setCheckedRadio] = useState(false)
     
     const [treedata,setTreedata] = useState(Data.Tree)
+    const [SelectedNodes,setSelectedNodes] = useState([])
 
 
 
@@ -116,8 +117,13 @@ const Home  = () => {
             <div className="tree-wrapper margin">
                 <Tree 
                     data={treedata}
+                    selectedItems={(arr) => setSelectedNodes(arr)}
                 />
             </div>
+
+            <span>
+                {JSON.stringify(SelectedNodes)}
+            </span>
         </div>  
     )
 }
