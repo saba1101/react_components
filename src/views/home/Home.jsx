@@ -14,7 +14,7 @@ const Home  = () => {
 
     return (
         <div className="page-home-wrapper">
-            <div className="input-wrapper" style={{width: '365px'}}>
+            {/* <div className="input-wrapper" style={{width: '365px'}}>
                 <Input
                     onChange={(value) => setValue(value)}
                     value={value}
@@ -31,9 +31,9 @@ const Home  = () => {
                         }
                     }
                 />
-            </div>
+            </div> */}
 
-            <div className="select-wrapper margin" style={{width:'365px'}}>
+            {/* <div className="select-wrapper margin" style={{width:'365px'}}>
                 <SingleSelectDropdown 
                     label={'Select Option'}
                     size={'medium'}
@@ -52,9 +52,9 @@ const Home  = () => {
                         }
                     }
                 />
-            </div>
+            </div> */}
 
-            <div className="button-wrapper margin">
+            {/* <div className="button-wrapper margin">
                 <MainButton 
                     label={'Main Button'}
                     size={'medium'}
@@ -62,7 +62,7 @@ const Home  = () => {
                     disabled={false}
                     loading={true}
                 />
-            </div>
+            </div> */}
         </div>
     )
 }
