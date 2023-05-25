@@ -12,7 +12,8 @@ import Radio from "../../components/Form/FormControls/Radio/Radio"
 // import Tree from "../../components/Reusable/Tree/TreeNode"
 import Grid from '../../components/DataGrid/Grid'
 import { createNotification } from "../../components/Notification/ToastNotification"
-import MultiSelectTreeDropdown from "../../components/Reusable/Tree/TreeNode"
+import TreeNodeDropdown from "../../components/Reusable/Tree/TreeNode"
+import MultiSelect from "../../components/Form/Selects/MultiSelect/MultiSelect"
 
 const Home  = () => {
     const [value,setValue]  = useState('')
@@ -140,8 +141,8 @@ const Home  = () => {
                 data={gridData}
             /> */}
 
-            <div className="tree-wrapper margin" style={{width: '326px'}}>
-                <MultiSelectTreeDropdown
+            {/* <div className="tree-wrapper margin" style={{width: '326px'}}>
+                <TreeNodeDropdown
                     data={treeData}
                     onSelectionChange={handleSelectionChange}
                 />
@@ -155,7 +156,25 @@ const Home  = () => {
                         ))}
                     </ul>
                 )
-            }
+            } */}
+
+            <div className="multiselect-wapper margin" style={{width: '326px'}}>
+                <MultiSelect 
+                    data={treeData}
+                    change={handleSelectionChange}
+                    size={'medium'}
+                />
+            </div>
+
+            {
+                SelectedNodes && (
+                    <ul>
+                        {SelectedNodes.map((el,ind) => (
+                            <li key={ind}> {el.label} </li>
+                        ))}
+                    </ul>
+                )
+            } 
 
         </div>  
     )

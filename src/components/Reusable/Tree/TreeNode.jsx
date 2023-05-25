@@ -27,7 +27,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes }) =>
         <div className={style.nodeContent}>
             {
                 (node.children && node.children.length) ? (
-                    <div className={style.collapseIcon} onClick={handleExpandClick}>
+                    <div className={`${style.collapseIcon} ${isExpanded ? style.expanded : ''}`} onClick={handleExpandClick}>
                         <img src={IconArrow} alt="arrow" />
                     </div>
                 )
@@ -74,7 +74,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes }) =>
   );
 };
 
-const MultiSelectTreeDropdown = ({ data, onSelectionChange }) => {
+const TreeNodeDropdown = ({ data, onSelectionChange }) => {
   const [expandedNodes, setExpandedNodes] = useState([]);
   const [selectedNodes, setSelectedNodes] = useState([]);
 
@@ -128,4 +128,4 @@ const MultiSelectTreeDropdown = ({ data, onSelectionChange }) => {
   );
 };
 
-export default MultiSelectTreeDropdown;
+export default TreeNodeDropdown;

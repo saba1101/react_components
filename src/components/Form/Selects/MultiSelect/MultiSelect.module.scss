@@ -1,0 +1,130 @@
+.multiselectWrapper{
+    width: 100%;
+    position: relative;
+
+    .selectedTags{
+        width: 100%;
+        border: 0.0625rem solid $Day-Steelgrey06;
+        position: relative;
+        padding: 1.25rem 1rem;
+        border-radius: 0.25rem;
+
+        .selectLabel{
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translate(0,-50%);
+            transition: $Default-Transition;
+
+            span{
+                transition: $Default-Transition;
+                color: $Day-Steelgrey11;
+                font-size: 0.875rem;
+            }
+        }
+
+        .selectArrow{
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translate(0,-50%);
+            cursor: pointer;
+
+            &.expanded{
+                img{
+                    transform: rotate(-180deg);
+                }
+            }
+
+            img{
+                width: 0.875rem;
+                transition: $Default-Transition;
+            }
+        }
+
+        .selectedTagsList{
+            width: 100%;
+            height: 100%;
+            @include flex(flex-start,center,row,0.3125rem);
+            align-items: flex-start;
+
+            .singleTag{
+
+                &.hidden{
+                    display: none;
+                }
+                span{
+                    color: $Day-Steelgrey20;
+                    font-size: 0.875rem;
+                    white-space: nowrap;
+                }
+            }
+
+            .tagsCount{
+                display: none;
+                position: none;
+
+                &.visible{
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .collapsableOptions{
+        width: 100%;
+        max-height: 0;
+        opacity: 0;
+        overflow: auto;
+        transition: $Default-Transition;
+        border: 0.0625rem solid $Day-Steelgrey06;
+        border-radius: 0.25rem;
+        background: $Day-Steelgrey00;
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 0;
+        z-index: 80;
+        padding: 1rem;
+        box-shadow: 0 0 10px $Day-Steelgrey05;
+
+        &.expanded{
+            max-height: 25rem;
+            opacity: 1;
+        }
+    }
+
+    &.focused{
+        .selectedTags{
+            border: 0.0625rem solid $Main-Blue-Light;
+
+            .selectLabel{
+                top: 0.5rem;
+                span{
+                    font-size: 0.75rem;
+                }
+            }
+        }
+    }
+
+    &.disabled{
+
+    }
+
+    &.small{
+        .selectedTags{
+            height: 2.625rem;
+        }
+    }
+
+    &.medium{
+        .selectedTags{
+            height: 3rem;
+        }
+    }
+
+    &.large{
+        .selectedTags{
+            height: 3.5rem;
+        }
+    }
+}

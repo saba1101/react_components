@@ -4,7 +4,10 @@ ul{
     
     &.withChildren{
         display: none;
-
+        & > li{
+            margin-left: 1rem;
+        }
+        
         &.expanded{
             display: block;
         }
@@ -13,7 +16,6 @@ ul{
 
     li{
         // margin-top: 0px;
-        margin-left: 1rem;
 
         &.selected{
             .nodeContent{
@@ -37,8 +39,17 @@ ul{
 
             .collapseIcon{
                 @include centerEl;
+                cursor: pointer;
                 transition: $Default-Transition;
+
+                &.expanded{
+                    img{
+                        transform: rotate(-180deg);
+                    }
+                }
+
                 img{
+                    transition: $Default-Transition;
                     width: 0.875rem;
                 }
             }

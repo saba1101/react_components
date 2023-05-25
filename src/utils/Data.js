@@ -2,39 +2,53 @@ export const Data = {
     Plain : [
         {
             label : 'Long Name Item For Wrap 1-2-3-4-5-6-2--35-345-435-34543-543-534-53-',
-            id : 11
+            id : 11,
+            itemNodeID: crypto.randomUUID(),
         },
         {
             label : 'item2',
-            id : 12
+            id : 12,
+            itemNodeID: crypto.randomUUID(),
         },
         {
             label : 'item3',
-            id : 13
+            id : 13,
+            itemNodeID: crypto.randomUUID(),
+
         },
         {
             label : 'item4',
-            id : 14
+            id : 14,
+            itemNodeID: crypto.randomUUID(),
+
         },
         {
             label : 'item5',
-            id : 15
+            id : 15,
+            itemNodeID: crypto.randomUUID(),
+
         },
         {
             label : 'item6',
-            id : 16
+            id : 16,
+            itemNodeID: crypto.randomUUID(),
+
         },
         {
             label : 'item7',
-            id : 17
+            id : 17,
+            itemNodeID: crypto.randomUUID(),
+          
         },
         {
             label : 'item8',
-            id : 18
+            id : 18,
+            itemNodeID: crypto.randomUUID(),
         },
         {
             label : 'item9',
-            id : 19
+            id : 19,
+            itemNodeID: crypto.randomUUID(),
         },
     ],
     Tree : [
@@ -54,7 +68,7 @@ export const Data = {
                   itemNodeID: crypto.randomUUID(),
                   id: 3,
                   label: 'Node 1.1.1',
-                  selected: true,
+                  selected: false,
                   children: []
                 }
               ]
