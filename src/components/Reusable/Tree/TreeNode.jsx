@@ -45,8 +45,13 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes }) =>
                 </span>
             </div>
       </div>
-      {isExpanded && node.children && (
-        <ul>
+      {node.children && (
+        <ul
+            className={`
+                ${isExpanded ? style.expanded : style.collapsed}
+                ${node.children ? style.withChildren : ''}
+            `}
+        >
           {node.children.map(child => (
             <li 
                 className={`
