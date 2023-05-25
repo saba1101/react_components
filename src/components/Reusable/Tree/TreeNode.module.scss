@@ -1,18 +1,27 @@
 ul{
     width: 100%;
     li{
-        padding: 1rem;
+        // margin-top: 0px;
+        margin-left: 1rem;
+
+        &.selected{
+            .nodeContent{
+
+            }
+        }
 
         .nodeContent{
             @include flex(flex-start,center,row,unset);
             transition: $Default-Transition;
+            padding: 0.625rem 0.3125rem;
             
             &:hover{
-
+                background: $Day-Steelgrey01;
             }
 
             .checkbox{
-                // margin-left: 0.625rem
+                margin-left: 0.625rem;
+                cursor: pointer;
             }
 
             .collapseIcon{

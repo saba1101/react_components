@@ -4,15 +4,15 @@ import Checkbox from '../../Form/FormControls/Checkbox/Checkbox';
 import IconArrow from '@/assets/icons/svg/arrow.svg'
 
 const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes }) => {
-  const isExpanded = expandedNodes.includes(node.id);
-  const isSelected = selectedNodes.includes(node.id);
+  const isExpanded = expandedNodes.includes(node.itemNodeID);
+  const isSelected = selectedNodes.includes(node.itemNodeID);
 
   const handleNodeClick = () => {
-    onSelect(node.id);
+    onSelect(node.itemNodeID);
   };
 
   const handleExpandClick = () => {
-    onExpand(node.id);
+    onExpand(node.itemNodeID);
   };
 
   return (
@@ -37,14 +37,16 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes }) =>
                     {node.label ?? '-'}
                 </span>
             </div>
-        {/* {node.children && <button onClick={handleExpandClick}> {isExpanded ? 'Collapse' : 'Expand'} </button>} 
-        {node.label} {isSelected ? ' (selected)' : ''}
-        <button onClick={handleNodeClick} > select </button> */}
       </div>
       {isExpanded && node.children && (
         <ul>
           {node.children.map(child => (
-            <li key={child.id}>
+            <li 
+                className={`
+                    ${isSelected ? style.selected : ''}
+                `} 
+                key={child.itemNodeID}
+            >
               <TreeNode
                 node={child}
                 onSelect={onSelect}
@@ -94,7 +96,7 @@ const MultiSelectTreeDropdown = ({ data, onSelectionChange }) => {
 
   const renderTreeNodes = nodes => {
     return nodes.map(node => (
-      <li key={node.id}>
+      <li key={node.itemNodeID}>
         <TreeNode
           node={node}
           onSelect={handleNodeSelect}
