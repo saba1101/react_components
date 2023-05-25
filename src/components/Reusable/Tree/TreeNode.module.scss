@@ -2,11 +2,17 @@ ul{
     width: 100%;
     li{
         padding: 1rem;
+
         .nodeContent{
             @include flex(flex-start,center,row,unset);
+            transition: $Default-Transition;
+            
+            &:hover{
+
+            }
 
             .checkbox{
-                
+                // margin-left: 0.625rem
             }
 
             .collapseIcon{
@@ -17,10 +23,12 @@ ul{
                 }
             }
             
-
-            span{
-                color: $Day-TextPrimary;
-                font-size: 0.875rem;
+            .nodeLabel{
+                margin-left: 0.625rem;                
+                span{
+                    color: $Day-TextPrimary;
+                    font-size: 0.875rem;
+                }
             }
         }
 

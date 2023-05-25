@@ -12,6 +12,7 @@ import Radio from "../../components/Form/FormControls/Radio/Radio"
 // import Tree from "../../components/Reusable/Tree/TreeNode"
 import Grid from '../../components/DataGrid/Grid'
 import { createNotification } from "../../components/Notification/ToastNotification"
+import MultiSelectTreeDropdown from "../../components/Reusable/Tree/TreeNode"
 
 const Home  = () => {
     const [value,setValue]  = useState('')
@@ -22,11 +23,13 @@ const Home  = () => {
     const [CheckedToggle,setCheckedToggle] = useState(false)
     const [CheckedRadio,setCheckedRadio] = useState(false)
     
-    const [treedata,setTreedata] = useState(Data.Tree)
+    const [treeData,setTreedata] = useState(Data.Tree)
     const [SelectedNodes,setSelectedNodes] = useState([])
     const [gridData,setGridData] = useState(Data.Grid)
 
-
+    const handleSelectionChange = selectedNodes => {
+        setSelectedNodes(selectedNodes)
+      };
 
     return (
         <div className="page-home-wrapper">
@@ -133,9 +136,26 @@ const Home  = () => {
                 notify
             </button> */}
 
-            <Grid 
+            {/* <Grid 
                 data={gridData}
-            />
+            /> */}
+
+            <div className="tree-wrapper margin" style={{width: '326px'}}>
+                <MultiSelectTreeDropdown
+                    data={treeData}
+                    onSelectionChange={handleSelectionChange}
+                />
+            </div>
+
+            {
+                SelectedNodes && (
+                    <ul>
+                        {SelectedNodes.map((el,ind) => (
+                            <li key={ind}> {el} </li>
+                        ))}
+                    </ul>
+                )
+            }
 
         </div>  
     )

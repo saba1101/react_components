@@ -40,15 +40,18 @@ export const Data = {
     Tree : [
         {
           id: 1,
+          itemNodeID: crypto.randomUUID(),
           label: 'Node 1',
           selected: false,
           children: [
             {
               id: 2,
+              itemNodeID: crypto.randomUUID(),
               label: 'Node 1.1',
               selected: false,
               children: [
                 {
+                  itemNodeID: crypto.randomUUID(),
                   id: 3,
                   label: 'Node 1.1.1',
                   selected: false,
@@ -58,6 +61,7 @@ export const Data = {
             },
             {
               id: 4,
+              itemNodeID: crypto.randomUUID(),
               label: 'Node 1.2',
               selected: false,
               children: []
@@ -66,6 +70,7 @@ export const Data = {
         },
         {
           id: 5,
+          itemNodeID: crypto.randomUUID(),
           label: 'Node 2',
           selected: false,
           children: []

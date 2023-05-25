@@ -1,88 +1,117 @@
-// import { useEffect, useState } from "react";
-// import style from './TreeNode.module.scss'
-// import IconArrow from '@/assets/icons/svg/arrow.svg'
-// import Checkbox from "../../Form/FormControls/Checkbox/Checkbox";
+import React, { useEffect, useState } from 'react';
+import style from './TreeNode.module.scss'
+import Checkbox from '../../Form/FormControls/Checkbox/Checkbox';
+import IconArrow from '@/assets/icons/svg/arrow.svg'
 
-// const Tree = ({ data,selectedItems}) => {
-    
-//     const [SelectedNodes,setSelectedNodes] = useState([])
+const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes }) => {
+  const isExpanded = expandedNodes.includes(node.id);
+  const isSelected = selectedNodes.includes(node.id);
 
-//     const syncNode = (selected,obj) => {
-//         if(selected){
-//             setSelectedNodes([...SelectedNodes,obj])
+  const handleNodeClick = () => {
+    onSelect(node.id);
+  };
 
-//         }else{
-//             setSelectedNodes(
-//                 SelectedNodes.filter(el => el.id !== obj.id)
-//             )
-//         }
-//         selectedItems(SelectedNodes)
-//     }
+  const handleExpandClick = () => {
+    onExpand(node.id);
+  };
 
-//   return (
-//     <ul>
-//       {data.map((node,ind) => (
-//         <TreeNode
-//             key={ind} 
-//             node={node}
-//             selectedNodes={SelectedNodes}
-//             nodeUpdate={(state,obj) => syncNode(state,obj)}
-//             selectedItems={(arr) => selectedItems(arr)}
-//         />
-//       ))}
-//     </ul>
-//   );
-// };
+  return (
+    <div>
+        <div className={style.nodeContent}>
+            {
+                (node.children && node.children.length) ? (
+                    <div className={style.collapseIcon} onClick={handleExpandClick}>
+                        <img src={IconArrow} alt="arrow" />
+                    </div>
+                )
+                : ''
+            }
+            <div className={style.checkbox}>
+                <Checkbox 
+                    checked={isSelected}
+                    change={() => handleNodeClick()}
+                />
+            </div>
+            <div className={style.nodeLabel}>
+                <span>
+                    {node.label ?? '-'}
+                </span>
+            </div>
+        {/* {node.children && <button onClick={handleExpandClick}> {isExpanded ? 'Collapse' : 'Expand'} </button>} 
+        {node.label} {isSelected ? ' (selected)' : ''}
+        <button onClick={handleNodeClick} > select </button> */}
+      </div>
+      {isExpanded && node.children && (
+        <ul>
+          {node.children.map(child => (
+            <li key={child.id}>
+              <TreeNode
+                node={child}
+                onSelect={onSelect}
+                onExpand={onExpand}
+                expandedNodes={expandedNodes}
+                selectedNodes={selectedNodes}
+              />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
 
-// const TreeNode = ({ node,selectedNodes,nodeUpdate }) => {
-//   const hasChildren = node.children && node.children.length > 0;
-//   const [expanded, setExpanded] = useState(false);
-//   const [NodeSelected,setNodeSelected] = useState(false)
+const MultiSelectTreeDropdown = ({ data, onSelectionChange }) => {
+  const [expandedNodes, setExpandedNodes] = useState([]);
+  const [selectedNodes, setSelectedNodes] = useState([]);
 
-//   useEffect(() => {
-//     if(selectedNodes.some(el => el.id === node.id)){
-//         setNodeSelected(true)
-//     }else{
-//         setNodeSelected(false)
-//     }
-//   },[node])
+  const handleNodeSelect = nodeId => {
+    const isSelected = selectedNodes.includes(nodeId);
 
-//   const toggleExpand = () => {
-//     setExpanded(!expanded);
-//   };
+    if (isSelected) {
+      setSelectedNodes(selectedNodes.filter(id => id !== nodeId));
+    } else {
+      setSelectedNodes([...selectedNodes, nodeId]);
+    }
+  };
 
-//   const NodeSelectionChange = (state) => {
-//     setNodeSelected(state)
-//     nodeUpdate(state,node)
-//   }
+  const handleNodeExpand = nodeId => {
+    const isExpanded = expandedNodes.includes(nodeId);
 
-//   return (
-//     <li>
-//         <div className={style.nodeContent}>
-//             {
-//                 hasChildren && (
-//                     <div className={ `${style.collapseIcon} ${expanded ? style.expanded : ''} `} onClick={toggleExpand}>
-//                         <img src={IconArrow} alt="" />
-//                     </div>
-//                 )
-//             }
+    if (isExpanded) {
+      setExpandedNodes(expandedNodes.filter(id => id !== nodeId));
+    } else {
+      setExpandedNodes([...expandedNodes, nodeId]);
+    }
+  };
 
-//             <div className={style.checkbox}>
-//                 <Checkbox 
-//                     checked={NodeSelected}
-//                     change={(state) => NodeSelectionChange(state)}
-//                 />
-//             </div>
+  const handleSelectionChange = () => {
+    onSelectionChange(selectedNodes);
+  };
 
-//             <span>
-//                 {node.label}
-//             </span>
-//         </div>
-//         {hasChildren && expanded && (
-//             <Tree data={node.children} />
-//         )}
-//     </li>
-//   );
-// };
+  useEffect(() => {
+    handleSelectionChange()
+  },[selectedNodes])
 
-// export default Tree;
+  const renderTreeNodes = nodes => {
+    return nodes.map(node => (
+      <li key={node.id}>
+        <TreeNode
+          node={node}
+          onSelect={handleNodeSelect}
+          onExpand={handleNodeExpand}
+          expandedNodes={expandedNodes}
+          selectedNodes={selectedNodes}
+        />
+      </li>
+    ));
+  };
+
+  return (
+    <div>
+      {/* handleSelectionChange */}
+      <ul>{renderTreeNodes(data)}</ul>
+    </div>
+  );
+};
+
+export default MultiSelectTreeDropdown;
