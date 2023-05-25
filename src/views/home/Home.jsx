@@ -151,7 +151,7 @@ const Home  = () => {
                 SelectedNodes && (
                     <ul>
                         {SelectedNodes.map((el,ind) => (
-                            <li key={ind}> {el} </li>
+                            <li key={ind}> {el.label} </li>
                         ))}
                     </ul>
                 )

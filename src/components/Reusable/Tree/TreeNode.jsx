@@ -5,15 +5,22 @@ import IconArrow from '@/assets/icons/svg/arrow.svg'
 
 const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes }) => {
   const isExpanded = expandedNodes.includes(node.itemNodeID);
-  const isSelected = selectedNodes.includes(node.itemNodeID);
+  const isSelected = selectedNodes.some(el => el.itemNodeID === node.itemNodeID)
+//   const isSelected = selectedNodes.includes(node.itemNodeID);
 
   const handleNodeClick = () => {
-    onSelect(node.itemNodeID);
+    onSelect(node);
   };
 
   const handleExpandClick = () => {
     onExpand(node.itemNodeID);
   };
+
+  useEffect(() => {
+    if(node && node.selected){
+        handleNodeClick(node)
+    }
+  },[node])
 
   return (
     <div>

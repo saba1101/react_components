@@ -54,7 +54,7 @@ export const Data = {
                   itemNodeID: crypto.randomUUID(),
                   id: 3,
                   label: 'Node 1.1.1',
-                  selected: false,
+                  selected: true,
                   children: []
                 }
               ]
