@@ -87,7 +87,29 @@ export const Data = {
           itemNodeID: crypto.randomUUID(),
           label: 'Node 2',
           selected: false,
-          children: []
+          children: [
+            {
+              id: 52,
+              itemNodeID: crypto.randomUUID(),
+              label: 'Node 2.2',
+              selected: false,
+              children: []
+            },
+            {
+              id: 522,
+              itemNodeID: crypto.randomUUID(),
+              label: 'Node 2.3',
+              selected: false,
+              children: []
+            },
+            {
+              id: 5222,
+              itemNodeID: crypto.randomUUID(),
+              label: 'Node 2.4',
+              selected: false,
+              children: []
+            },
+          ]
         }
     ],
     Grid:[

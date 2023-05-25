@@ -75,7 +75,6 @@
         width: 100%;
         max-height: 0;
         opacity: 0;
-        overflow: auto;
         transition: $Default-Transition;
         border: 0.0625rem solid $Day-Steelgrey06;
         border-radius: 0.25rem;
@@ -87,9 +86,39 @@
         padding: 1rem;
         box-shadow: 0 0 10px $Day-Steelgrey05;
 
+        .treeWrapper{
+            max-height: 16rem;
+            overflow: auto;
+        }
+
         &.expanded{
             max-height: 25rem;
             opacity: 1;
+        }
+
+        .bottomActions{
+            margin-top: 0.9375rem;
+            padding: 0.5rem;
+            border-top: 0.0625rem solid $Day-Steelgrey04;
+
+            .selectActions{
+                width: 100%;
+                @include flex(space-between,center,row,unset);
+
+                div > {
+                    span{
+                        cursor: pointer;
+                        color: $Day-Steelgrey20;
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        user-select: none;
+                    }
+                }
+            }
+
+            .apply{
+                margin-top: 0.9375rem;
+            }
         }
     }
 

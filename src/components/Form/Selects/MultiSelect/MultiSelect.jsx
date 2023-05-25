@@ -3,6 +3,7 @@ import TreeNodeDropdown from '../../../Reusable/Tree/TreeNode'
 import style from './MultiSelect.module.scss'
 import { _getSize } from '../../../../utils/Helpers'
 import IconArrow from '@/assets/icons/svg/arrow.svg'
+import MainButton from '../../Button/MainButton'
 
 const MultiSelect = (
     {
@@ -38,6 +39,22 @@ const MultiSelect = (
         if(event.composedPath().includes(MultiselectRef.current)) return
         setFocused(false)
     }
+
+    // const SelectAll = () => {
+    //     let newArr = []
+    //     const loop = (array) => {
+    //       array.forEach(node => {
+    //         node.selected = true
+    //         newArr.push(node)
+    //           if(node.children){
+    //             loop(node.children)
+    //           }
+    //       })
+    //     }
+    //     loop(data)
+    //     setSelectedNodesArr(newArr)
+    //     change(newArr)
+    // }
 
     const ToggleFocus = () => {
         setFocused(state => !state)
@@ -107,10 +124,34 @@ const MultiSelect = (
                     ${Focused ? style.expanded : ''}
                 `}
             >
-                <TreeNodeDropdown 
-                    data={data ?? []}
-                    onSelectionChange={(arr) => (change(arr),setSelectedNodesArr(arr))}
-                />
+                <div className={style.treeWrapper}>
+                    <TreeNodeDropdown 
+                        data={data ?? []}
+                        onSelectionChange={(arr) => (change(arr),setSelectedNodesArr(arr))}
+                    />
+                </div>
+                <div className={style.bottomActions}>
+                    <div className={style.selectActions}>
+                        <div className={style.selectAll}>
+                            <span>
+                                Select All
+                            </span>
+                        </div>
+                        <div className={style.clearAll}>
+                            <span>Clear All</span>
+                        </div>
+                    </div>
+                    <div className={style.apply}>
+                        <MainButton 
+                            label={'APPLY'}
+                            type={'background'}
+                            size={'small'}
+                            customStyle={
+                                {background: '#00ADEE',width: '100%'}
+                            }
+                        />
+                    </div>
+                </div>
             </div>  
         </div>
     )
