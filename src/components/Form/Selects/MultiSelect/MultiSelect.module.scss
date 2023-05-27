@@ -63,12 +63,19 @@
             .tagsCount{
                 display: none;
                 position: none;
+                span{
+                    color: $Main-Blue-Light;
+                }
 
                 &.visible{
                     display: block;
                 }
             }
         }
+    }
+
+    .searchWrapper{
+        padding-bottom: 0.625rem;
     }
 
     .collapsableOptions{
@@ -86,39 +93,20 @@
         padding: 1rem;
         box-shadow: 0 0 10px $Day-Steelgrey05;
 
-        .treeWrapper{
-            max-height: 16rem;
-            overflow: auto;
-        }
-
         &.expanded{
-            max-height: 25rem;
+            max-height: 28rem;
             opacity: 1;
+            overflow: hidden;
         }
+    }
 
-        .bottomActions{
-            margin-top: 0.9375rem;
-            padding: 0.5rem;
-            border-top: 0.0625rem solid $Day-Steelgrey04;
+    .msgText{
+        margin-top: 0.5rem;
+        text-align: left;
 
-            .selectActions{
-                width: 100%;
-                @include flex(space-between,center,row,unset);
-
-                div > {
-                    span{
-                        cursor: pointer;
-                        color: $Day-Steelgrey20;
-                        font-size: 0.75rem;
-                        font-weight: 700;
-                        user-select: none;
-                    }
-                }
-            }
-
-            .apply{
-                margin-top: 0.9375rem;
-            }
+        p{
+            font-size: 0.75rem;
+            word-wrap: break-word;
         }
     }
 
@@ -135,7 +123,27 @@
         }
     }
 
+    &.tagsUnfocused{
+        .selectedTags{
+            border: 0.0625rem solid $Day-Steelgrey06;
+        }
+    }
+
     &.disabled{
+        *{
+            pointer-events: none;
+            color: $Day-Steelgrey09 !important;
+            user-select: none;
+        }
+        .selectedTags{
+            border: 0.0625rem solid $Day-Steelgrey06;
+        }
+
+        .selectArrow{
+            img{
+                opacity: .6;
+            }
+        }
 
     }
 
@@ -154,6 +162,34 @@
     &.large{
         .selectedTags{
             height: 3.5rem;
+        }
+    }
+
+    &.error,&.success{
+        .msgText > p{
+            font-size: 0.75rem;
+        }
+    }
+
+    &.error{
+        .selectedTags{
+            border: 0.0625rem solid $Day-Negative100;
+        }
+
+        .msgText{
+            p{
+                color: $Day-Negative100;
+            }
+        }
+    }
+    &.success{
+        .selectedTags{
+            border: 0.0625rem solid $Day-Positive100;
+        }
+        .msgText{
+            p{
+                color: $Day-Positive100;
+            }
         }
     }
 }

@@ -61,13 +61,13 @@ export const Data = {
             {
               id: 2,
               itemNodeID: crypto.randomUUID(),
-              label: 'Node 1.1',
+              label: 'Node 1 1',
               selected: false,
               children: [
                 {
                   itemNodeID: crypto.randomUUID(),
                   id: 3,
-                  label: 'Node 1.1.1',
+                  label: 'Node 1 1 1',
                   selected: false,
                   children: []
                 }
@@ -76,7 +76,7 @@ export const Data = {
             {
               id: 4,
               itemNodeID: crypto.randomUUID(),
-              label: 'Node 1.2',
+              label: 'Node 1 2',
               selected: false,
               children: []
             }
@@ -91,21 +91,21 @@ export const Data = {
             {
               id: 52,
               itemNodeID: crypto.randomUUID(),
-              label: 'Node 2.2',
-              selected: false,
+              label: 'Node 2 2',
+              selected: true,
               children: []
             },
             {
               id: 522,
               itemNodeID: crypto.randomUUID(),
-              label: 'Node 2.3',
+              label: 'Node 2 3',
               selected: false,
               children: []
             },
             {
               id: 5222,
               itemNodeID: crypto.randomUUID(),
-              label: 'Node 2.4',
+              label: 'Node 2 4',
               selected: false,
               children: []
             },

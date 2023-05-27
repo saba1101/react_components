@@ -48,7 +48,7 @@ const Search = (
         if(change && typeof change === 'function'){
             change(value)
         }
-        if(suggestions.length && withSuggestions){
+        if(withSuggestions && suggestions && suggestions.length){
             setCollapsed(true)
         }
     }

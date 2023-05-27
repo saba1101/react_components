@@ -19,7 +19,9 @@ export default defineConfig({
       name: "masterComponents",
       filename: "remoteEntry.js",
       exposes: {
-        
+        './MainButton' : './src/components/Form/Button/MainButton.jsx',
+        './Input' : './src/components/Form/Input/Input.jsx'
+
       },
       shared: ["react", "react-dom"],
     }),

@@ -163,10 +163,18 @@ const Home  = () => {
                     data={treeData}
                     change={handleSelectionChange}
                     size={'medium'}
+                    disabled={false}
+                    msg={
+                        {
+                            type:'success',
+                            text: 'fasfasfasfa',
+                            visible: false,
+                        }
+                    }
                 />
             </div>
 
-            {
+            {/* {
                 SelectedNodes && (
                     <ul>
                         {SelectedNodes.map((el,ind) => (
@@ -174,7 +182,7 @@ const Home  = () => {
                         ))}
                     </ul>
                 )
-            } 
+            }  */}
 
         </div>  
     )

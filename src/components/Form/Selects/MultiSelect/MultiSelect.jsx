@@ -3,21 +3,26 @@ import TreeNodeDropdown from '../../../Reusable/Tree/TreeNode'
 import style from './MultiSelect.module.scss'
 import { _getSize } from '../../../../utils/Helpers'
 import IconArrow from '@/assets/icons/svg/arrow.svg'
-import MainButton from '../../Button/MainButton'
+import Search from '../../../Search/Search'
 
 const MultiSelect = (
     {
         label,
         size,
         disabled,
+        isRequired,
+        msg,
         data,
         change,
+        withApply,
+        withSearch = true,
     }
 ) => {
     const MultiselectRef = useRef(null)
     const CollapsableRef = useRef(null)
     const [Focused,setFocused] = useState(false)
     const [TagsOverflowed,setTagsOverflowed] = useState(false)
+    const [SearchValue,setSearchValue] = useState('')
     const VisibleTagsCount = 3
 
     const [SelectedNodesArr,setSelectedNodesArr] = useState([])
@@ -40,25 +45,31 @@ const MultiSelect = (
         setFocused(false)
     }
 
-    // const SelectAll = () => {
-    //     let newArr = []
-    //     const loop = (array) => {
-    //       array.forEach(node => {
-    //         node.selected = true
-    //         newArr.push(node)
-    //           if(node.children){
-    //             loop(node.children)
-    //           }
-    //       })
-    //     }
-    //     loop(data)
-    //     setSelectedNodesArr(newArr)
-    //     change(newArr)
-    // }
-
     const ToggleFocus = () => {
         setFocused(state => !state)
     }
+
+    const CloseCollapsable = () => {
+        setFocused(false)
+    }
+
+    const RemoveDuplicates = (arr) => {
+        const uniqueArray = arr.filter(
+          (object, index, self) =>
+            index ===
+            self.findIndex(
+              (obj) =>
+                obj.itemNodeID === object.itemNodeID
+            )
+        );
+        return uniqueArray
+      };
+
+      const SyncChange = (arr) => {
+        change(RemoveDuplicates(arr))
+        setSelectedNodesArr(RemoveDuplicates(arr))
+      }
+    
     return (
         <div 
             ref={MultiselectRef} 
@@ -66,6 +77,8 @@ const MultiSelect = (
                 ${style.multiselectWrapper}
                 ${style[_getSize(size)]}
                 ${Focused || SelectedNodesArr.length ? style.focused : ''}
+                ${disabled ? style.disabled : ''}
+                ${msg?.type && msg?.visible ? style[msg.type] : ''}
             `}
         >
             <div className={style.selectedTags} onClick={ToggleFocus}>
@@ -74,6 +87,7 @@ const MultiSelect = (
                         { label ?? 'Label' }
                     </span>
                 </div>
+                <input type="text" value={JSON.stringify(SelectedNodesArr)} hidden required={isRequired} readOnly/>
                 <div 
                     className={`
                         ${style.selectArrow}
@@ -82,7 +96,6 @@ const MultiSelect = (
                 >
                     <img src={IconArrow} alt="" />
                 </div>
-
                 {
                     SelectedNodesArr && (
                         <div className={style.selectedTagsList}>
@@ -115,44 +128,46 @@ const MultiSelect = (
                         </div>
                     )
                 }
-
-            </div>
-            <div 
-                ref={CollapsableRef} 
-                className={`
-                    ${style.collapsableOptions}
-                    ${Focused ? style.expanded : ''}
-                `}
-            >
-                <div className={style.treeWrapper}>
-                    <TreeNodeDropdown 
-                        data={data ?? []}
-                        onSelectionChange={(arr) => (change(arr),setSelectedNodesArr(arr))}
-                    />
-                </div>
-                <div className={style.bottomActions}>
-                    <div className={style.selectActions}>
-                        <div className={style.selectAll}>
-                            <span>
-                                Select All
-                            </span>
-                        </div>
-                        <div className={style.clearAll}>
-                            <span>Clear All</span>
-                        </div>
-                    </div>
-                    <div className={style.apply}>
-                        <MainButton 
-                            label={'APPLY'}
-                            type={'background'}
-                            size={'small'}
-                            customStyle={
-                                {background: '#00ADEE',width: '100%'}
-                            }
+                <div 
+                    ref={CollapsableRef}
+                    className={`
+                        ${style.collapsableOptions}
+                        ${Focused ? style.expanded : ''}
+                    `}
+                    onClick={(ev) => ev.stopPropagation()}
+                >
+                    {
+                        withSearch && (
+                            <div className={style.searchWrapper}>
+                                <Search 
+                                    value={SearchValue}
+                                    change={(value) => setSearchValue(value)}
+                                    placeholder={'search....'}
+                                    size={'small'}
+                                />
+                            </div>
+                        )
+                    }
+                    <div className={style.treeWrapper}>
+                        <TreeNodeDropdown 
+                            data={data ?? []}
+                            onSelectionChange={(arr) => SyncChange(arr)}
+                            SearchValue={SearchValue}
+                            WithApply={withApply ?? true}
+                            Apply={() => CloseCollapsable()}
                         />
                     </div>
                 </div>
-            </div>  
+            </div>
+            {
+                    msg?.type && msg?.visible && msg?.text 
+                        ?   (
+                            <div className={style.msgText}>
+                                <p>{msg.text}</p>
+                            </div>
+                        )
+                : ''
+            }
         </div>
     )
 }
