@@ -32,6 +32,18 @@ const Home  = () => {
         setSelectedNodes(selectedNodes)
       };
 
+    const idTemplate = (data) => {
+        return (
+            <pre>{data.data.id}</pre>
+        )
+    }
+
+    const masterDetailTemplate = (data) => {
+        return (
+            <h2>{data.data.data.first_name}</h2>
+        )
+    }
+
     return (
         <div className="page-home-wrapper">
             {/* <div className="input-wrapper" style={{width: '365px'}}>
@@ -137,10 +149,6 @@ const Home  = () => {
                 notify
             </button> */}
 
-            {/* <Grid 
-                data={gridData}
-            /> */}
-
             {/* <div className="tree-wrapper margin" style={{width: '326px'}}>
                 <TreeNodeDropdown
                     data={treeData}
@@ -158,7 +166,7 @@ const Home  = () => {
                 )
             } */}
 
-            <div className="multiselect-wapper margin" style={{width: '326px'}}>
+            {/* <div className="multiselect-wapper margin" style={{width: '326px'}}>
                 <MultiSelect 
                     data={treeData}
                     change={handleSelectionChange}
@@ -172,7 +180,7 @@ const Home  = () => {
                         }
                     }
                 />
-            </div>
+            </div> */}
 
             {/* {
                 SelectedNodes && (
@@ -183,6 +191,52 @@ const Home  = () => {
                     </ul>
                 )
             }  */}
+
+
+
+            <div className="grid-wrapper">
+                <Grid 
+                    data={gridData}
+                    detailTemplate={masterDetailTemplate}
+                    withMasterDetail={false}
+                    theme={'dark'}
+                    filterOptions={
+                        {
+                            headerFilter:true,
+                        }
+                    }
+                    customColumns={
+                        [
+                            {
+                                columnKey: 'id',
+                                columnName: 'ID',
+                                template: idTemplate,
+                            },
+                            {
+                                columnKey: 'first_name',
+                                columnName: 'First Name',
+                            },
+                            {
+                                columnKey: 'last_name',
+                                columnName: 'Last Name',
+                            },
+                            {
+                                columnKey: 'email',
+                                columnName: 'Email',
+                            },
+                            {
+                                columnKey: 'ip_address',
+                                columnName: 'IP Address',
+                            },
+                            {
+                                columnKey: 'car',
+                                columnName: 'Car Model',
+                            }
+                        ]
+                    }
+                />
+            </div>
+            
 
         </div>  
     )

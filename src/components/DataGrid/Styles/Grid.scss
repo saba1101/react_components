@@ -1,0 +1,10 @@
+@import 'devextreme/dist/css/dx.material.teal.light.css';
+// @import 'devextreme/dist/css/dx.material.teal.dark.css';
+.__dx_DataGrid_Component__{
+    &.light{
+
+    .dx-header-row{
+            background: $Day-Steelgrey05;
+        }
+    }
+}
