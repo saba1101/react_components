@@ -19,7 +19,7 @@ export default defineConfig({
       name: "masterComponents",
       filename: "remoteEntry.js",
       exposes: {
-        './MainButton' : './src/components/Form/Button/MainButton.jsx',
+        './MainButton' : './src/components/Button/MainButton.jsx',
         './Input' : './src/components/Form/Input/Input.jsx'
 
       },
