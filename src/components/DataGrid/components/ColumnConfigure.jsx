@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import IconConfigure from '@/assets/icons/svg/configure.svg';
 import style from './ColumnConfigure.module.scss';
-import CheckBox from '@/components/Form/FormControls/CheckBox/CheckBox.jsx'
+import CheckBox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx'
 import IconDrag from '@/assets/icons/svg/drag.svg'
 
 const ColumnConfigure = ({ items,change}) => {
