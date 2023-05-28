@@ -1,6 +1,6 @@
 import { NavLink,useLocation, useNavigate} from 'react-router-dom'
 import style from './Sidebar.module.scss'
-import { RoutesData } from '../../Routes/RoutesData.js'
+import { RoutesData } from '@/Routes/RoutesData.js'
 import { useEffect, useState } from 'react'
 import IconLogo from '@/assets/icons/svg/reactLogo.svg'
 const Sidebar = () => {
