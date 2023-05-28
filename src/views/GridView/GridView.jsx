@@ -49,6 +49,129 @@ const GridView = () => {
             example: 'Example',
             header: true
         },
+        {
+            title: 'data',
+            description: 'Grid DataSource',
+            type: 'Array',
+            example: '',
+        },
+        {
+            title: 'keyExpr',
+            description: 'data key',
+            type: 'String',
+            example: '"id"',
+        },
+        {
+            title: 'customColumns',
+            description: 'Array of Columns',
+            type: 'Array',
+            example: '[ { columnKey: String, columnName: String, template : React Component(returns column data in args) } ]',
+        },
+        {
+            title: 'withCustomStore',
+            description: 'Enables Custom Store Operations',
+            type: 'Boolean',
+        },
+        {
+            title: 'storeKey',
+            description: 'store key',
+            type: 'String',
+        },
+        {
+            title: 'loadFunction',
+            description: 'store load function',
+            type: 'function',
+        },
+        {
+            title: 'updateFunction',
+            description: 'store update function',
+            type: 'function',
+        },
+        {
+            title: 'insertFunction',
+            description: 'store insert function',
+            type: 'function',
+        },
+        {
+            title: 'removeFunction',
+            description: 'store remove function',
+            type: 'function',
+        },
+        {
+            title: 'withMasterDetail',
+            description: 'Enabled Expandable Dropdown',
+            type: 'Boolean',
+        },
+        {
+            title: 'detailTemplate',
+            description: 'MasterDetail template',
+            type: 'React Component/Function',
+        },
+        {
+            title: 'filterOptions',
+            description: 'Grid Filter Options',
+            type: 'Object',
+            example: '{ filterRow: Boolean, headerFilter: Boolean }'
+        },
+        {
+            title: 'searchPanel',
+            description: 'Grid Global Search Panel with Highlight',
+            type: 'Object',
+            example: '{ visible: Boolean, width: Number, placeholder: String }'
+        },
+        {
+            title: 'editingOptions',
+            description: 'grid editingOptions',
+            type: 'Object',
+            example: '{ mode: String(row,batch), allowUpdating : Boolean, allowDeleting: Boolean }'
+        },
+        {
+            title: 'scrollMode',
+            description: 'grid scrollMode',
+            type: 'String',
+            example: 'none,infinite',
+        },
+        {
+            title: 'pagerOptions',
+            description: 'Grid Paging Options',
+            type: 'Object',
+            example: '{ defaultPageSize: Number, visible: Boolean, allowedPageSizes : Array of Numbers, showPageSizeSelector: Boolean, showInfo: Boolean, showNavigationButtons: Boolean}',
+        },
+        {
+            title: 'selection',
+            description: 'Grid Row Selection',
+            type: 'Object',
+            example: '{ mode: String(single,multiple), selectAllMode: String(allPages,page) }'
+        },
+        {
+            propType: 'event',
+            title: 'onEvent',
+            description: 'returns Grid events with eventName and event arg',
+            type: 'function',
+            example: 'onEvent={(eventType,event) => ....}'
+        },
+        {
+            propType: 'event',
+            title: 'selectionChanged',
+            description: 'returns event on row selection change',
+            type: 'function',
+            example: 'selectionChanged={(event) => ....}'
+        },
+        {
+            propType: 'event',
+            title: 'focusedRowChanging',
+            description: 'returns event on row focused changing',
+            type: 'function',
+            example: 'focusedRowChanging={(event) => ....}'
+        },
+        {
+            propType: 'event',
+            title: 'focusedRowChanged',
+            description: 'returns event on row focused changed',
+            type: 'function',
+            example: 'focusedRowChanged={(event) => ....}'
+        },
+
     ]
 
     const componentTypes = useRef(
@@ -111,6 +234,14 @@ const GridView = () => {
                     showPageSizeSelector: true,
                     showInfo:true,
                     showNavigationButtons: true,
+                }
+            },
+            {
+                title: 'pagerOptions',
+                data: Data.Grid.slice(0,5),
+                customColumns: JSON.parse(JSON.stringify(customColumns.current)),
+                selection:{
+                    mode: 'multiple'
                 }
             },
         ]

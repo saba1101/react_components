@@ -50,6 +50,9 @@ const Grid = ({
     searchPanel,
 
     onEvent,
+    selectionChanged,
+    focusedRowChanging,
+    focusedRowChanged
 }) => {
 
 
@@ -68,15 +71,21 @@ const Grid = ({
     }
 
     const onSelectionChanged = (ev) => {
-
+        if(selectionChanged && typeof selectionChanged === 'function'){
+            selectionChanged(ev)
+        }
     }
 
     const onFocusedRowChanging = (ev) => {
-
+        if(focusedRowChanging && typeof focusedRowChanging === 'function'){
+            focusedRowChanging(ev)
+        }
     }
 
     const onFocusedRowChanged = (ev) => {
-
+        if(focusedRowChanged && typeof focusedRowChanged === 'function'){
+            focusedRowChanged(ev)
+        }
     }
 
     return (
