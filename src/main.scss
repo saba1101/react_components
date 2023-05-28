@@ -5,13 +5,42 @@
     font-family: 'Helvetica-Regular';
 }
 
+body{
+    background: #EDEFF2;
+}
+
 ul{
     list-style: none;
     list-style-type: none;
+}
+
+a{
+    text-decoration: none;
 }
 
 input,button{
     outline: none;
     border: none;
     background: none;
+}
+
+.content-wrapper-main-pages{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 15.3125rem calc(100% - 15.3125rem);
+    justify-content: left;
+    z-index: 120;
+
+    .content_sidebar_navigation{
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-shadow: 0 0 1.25rem rgba(#31383A,.5);
+        border-right: 0.3125rem solid rgba($Main-Blue-Light,.5);
+        // background: #FFFFFF;
+
+    }
+    .content_main_wrapper{
+        overflow: auto;
+        padding: 1.25rem 1.875rem;
+    }
 }

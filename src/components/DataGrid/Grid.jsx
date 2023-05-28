@@ -24,6 +24,8 @@ const Grid = ({
     data,
     customColumns,
     keyExpr,
+    theme,
+    height,
 
     // custom store
     withCustomStore,
@@ -57,7 +59,7 @@ const Grid = ({
         update: updateFunction,
         insert: insertFunction,
         remove: removeFunction,
-      });
+    });
 
     const LogEvent = (event,eventType) => {
         if(onEvent && typeof onEvent === 'function'){
@@ -78,8 +80,13 @@ const Grid = ({
     }
 
     return (
-        <div className="gridWrapper __dx_DataGrid_Component__ light">
+        <div className={`gridWrapper __dx_DataGrid_Component__ light ${theme && !['dark','light'].includes(theme) ? 'light' : theme }`}>
                 <DataGrid
+                    style={
+                        {
+                            height: `${height ? height : 'auto'}`
+                        }
+                    }
                     dataSource={withCustomStore ? store : data}
                     keyExpr={keyExpr ?? 'id'}
                     allowColumnReordering={true}
@@ -126,7 +133,7 @@ const Grid = ({
                     {
                         editingOptions && (
                             <Editing
-                                mode="row"
+                                mode={editingOptions?.mode ?? 'row'}
                                 allowUpdating={editingOptions?.allowUpdating ?? false}
                                 allowDeleting={editingOptions?.allowDeleting ?? false}
                                 allowAdding={false} 
@@ -177,7 +184,7 @@ const Grid = ({
                     <Paging defaultPageSize={pagerOptions?.defaultPageSize ?? 20} />
                     <Pager
                         visible={pagerOptions?.visible ?? false}
-                        allowedPageSizes={pagerOptions?.allowedPageSizes ?? [10,20,40,60,'all']}
+                        allowedPageSizes={pagerOptions?.allowedPageSizes ?? [5,10,20,40,60,'all']}
                         showPageSizeSelector={pagerOptions?.showPageSizeSelector ?? false}
                         showInfo={pagerOptions?.showInfo ?? false}
                         showNavigationButtons={pagerOptions?.showNavigationButtons ?? false} 

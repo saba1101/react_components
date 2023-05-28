@@ -45,7 +45,7 @@ const MainButton = (
             }}
         >
             { loading && typeof loading === 'boolean' ? loadingDots() : ''  }
-            <span className={style['buttonLabel']}> { label ?? 'Button' } </span>
+            <span style={{color: customStyle && customStyle?.color ? customStyle?.color : ''}} className={style['buttonLabel']}> { label ?? 'Button' } </span>
             <div className={style.iconSlot}>
                 {icon ? iconSlot() : '' }
             </div>

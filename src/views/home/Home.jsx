@@ -3,7 +3,7 @@ import Input from "../../components/Form/Input/Input"
 import './Home.scss'
 import { Data } from "../../utils/Data"
 import SingleSelectDropdown from "../../components/Form/Selects/SingleSelect/SingleSelectDropdown"
-import MainButton from "../../components/Form/Button/MainButton"
+import MainButton from "@/components/Button/MainButton.jsx"
 import IconArrow from '@/assets/icons/svg/arrow.svg'
 import Search from '../../components/Search/Search'
 import Checkbox from "../../components/Form/FormControls/Checkbox/Checkbox"
@@ -199,7 +199,7 @@ const Home  = () => {
                     data={gridData}
                     detailTemplate={masterDetailTemplate}
                     withMasterDetail={false}
-                    theme={'dark'}
+                    theme={'light'}
                     filterOptions={
                         {
                             headerFilter:true,

@@ -1,7 +1,7 @@
 export const Data = {
     Plain : [
         {
-            label : 'Long Name Item For Wrap 1-2-3-4-5-6-2--35-345-435-34543-543-534-53-',
+            label : 'Long Name Item Long Name Item Long Name Item ',
             id : 11,
             itemNodeID: crypto.randomUUID(),
         },
@@ -92,7 +92,7 @@ export const Data = {
               id: 52,
               itemNodeID: crypto.randomUUID(),
               label: 'Node 2 2',
-              selected: true,
+              selected: false,
               children: []
             },
             {

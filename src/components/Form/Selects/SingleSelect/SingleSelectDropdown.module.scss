@@ -91,6 +91,21 @@
         }
     }
 
+    &.disabled{
+        *{
+            pointer-events: none;
+            color: $Day-Steelgrey09 !important;
+            user-select: none;
+        }
+        .selectContainer{
+            border: 0.0625rem solid $Day-Steelgrey06;
+
+            img{
+                opacity: .6;
+            }
+        }
+    }
+
 
     &.error{
         .selectContainer{

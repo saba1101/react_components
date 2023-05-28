@@ -147,6 +147,7 @@ const SingleSelectDropdown = ({
                 ${style.selectWrapper}
                 ${style[_getSize()]}
                 ${FocusStates.focusedIn || Value ? style.focused : ''}
+                ${disabled ? style.disabled : ''}
                 ${
                     (msg?.type && msg?.visible) ? style[msg?.type] : ''
                 }
@@ -180,7 +181,7 @@ const SingleSelectDropdown = ({
                 </div>
                 
                 {
-                    withClear ? (
+                    (withClear && Value) ? (
                         <div className={style.clearAction} onClick={clearSelection}>
                             <img src={IconRemove} alt="" />
                         </div>

@@ -6,12 +6,17 @@ const Radio = (
         change,
         disabled,
         isRequired,
+        withUncheckState,
     }
 ) => {
 
     const onChange = () => {
         if(change && typeof change === 'function'){
-            change(!checked)
+            if(withUncheckState){
+                change(!checked)
+            }else{
+                change(true)
+            }
         }
     }
 
@@ -32,7 +37,7 @@ const Radio = (
                 readOnly={true}
                 hidden
                 disabled={disabled ?? false}
-                required={isRequired ?? fale}
+                required={isRequired ?? false}
             />
             <div className={style.radioState}></div>
         </div>

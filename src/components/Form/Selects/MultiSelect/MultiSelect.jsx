@@ -66,8 +66,10 @@ const MultiSelect = (
       };
 
       const SyncChange = (arr) => {
-        change(RemoveDuplicates(arr))
-        setSelectedNodesArr(RemoveDuplicates(arr))
+        if(change && typeof change === 'function'){
+            change(RemoveDuplicates(arr))
+            setSelectedNodesArr(RemoveDuplicates(arr))
+        }
       }
     
     return (

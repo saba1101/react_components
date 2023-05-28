@@ -92,11 +92,13 @@
         z-index: 80;
         padding: 1rem;
         box-shadow: 0 0 10px $Day-Steelgrey05;
+        pointer-events: none;
 
         &.expanded{
             max-height: 28rem;
             opacity: 1;
             overflow: hidden;
+            pointer-events: all;
         }
     }
 

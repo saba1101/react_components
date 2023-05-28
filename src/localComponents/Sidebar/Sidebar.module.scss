@@ -1,0 +1,110 @@
+.sidebarContent{
+    width: 100%;
+    height: 100%;
+    background: #1E2224;
+     & *{
+        font-family: 'Helvetica-Bold';
+    }
+
+
+    .logo{
+        width: 100%;
+        padding: 0.9375rem 0.625rem;
+        user-select: none;
+        @include flex(center,center,row,0.9375rem);
+
+        img{
+            width: 2rem;
+        }
+        span{
+            color: $Main-Blue-Light;
+            font-size: 1rem;
+        }
+    }
+
+    .parentNavList{
+        margin-top: 1.875rem;
+        width: 100%;
+        @include flex(center,flex-start,column,unset);   
+
+        .childNavList{
+            position: relative;
+            margin-top: 2.1875rem;
+
+            &.isExpanded{
+                border: 0.0625rem solid rgba(#00ADEE,.2);
+                border-radius: 0.25rem;
+            }
+            
+            .routeChildItem{
+                padding: 0.9375rem 0.625rem;
+
+                span{
+                    white-space: nowrap;
+                    font-size: 1rem;
+                }
+
+                &.current{
+                    position: relative;
+                    span{
+                        color: #00ADEE;
+                    }
+
+                    &::after{
+                        content: '';
+                        width: 100%;
+                        height: 0.0625rem;
+                        border-radius: 3.125rem;
+                        background: #00ADEE;
+                        position: absolute;
+                        left: 0;
+                        top: 100%;
+                    }
+                }
+            }
+        }
+
+        .routeItem{
+            cursor: pointer;
+            padding: 0.9375rem 1.875rem;
+
+            span{
+                color: #FFFFFF;
+                font-size: 1rem;
+
+                &.parentLabel{
+                    padding-bottom: 0.5rem;
+                    border-bottom: 1px solid #00ADEE;
+                    border-radius: 0.25rem;
+                    position: relative;
+
+                    &::after{
+                        content: '';
+                        width: 0.0625rem;
+                        height: 1.5625rem;
+                        border-radius: 3.125rem;
+                        background: #00ADEE;
+                        position: absolute;
+                        left: 50%;
+                        top: 100%;
+                        transform: translate(-50%,0);
+
+                    }
+                }
+            }
+
+
+            &.current{
+                span{
+                    color: #00ADEE;
+                }
+            }
+
+            &:hover{
+
+            }
+        }
+    }
+
+
+}
