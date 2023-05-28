@@ -2,6 +2,7 @@ import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
 import MainButton from '@/components/Button/MainButton.jsx'
 import { createNotification } from '../../components/Notification/ToastNotification'
+import PropsDoc from '@/localComponents/PropsDoc.jsx'
 
 const NotificationView = () => {
 
@@ -138,30 +139,7 @@ const NotificationView = () => {
             </div>
 
             <div className="docs__component_static_preview_props">
-                <ul>
-                    {
-                        propsList && propsList.map((p,ind) => {
-                            return (
-                                <li key={ind} className={p.propType && p.propType === 'event' ? 'event' : p.propType === 'component' ? 'component' : 'prop'}>
-                                    <span className='docs__label'>
-                                        <span> { p.title}</span> 
-                                    </span>
-                                    <span className='docs__type'>
-                                        <span>
-                                            { p.type} 
-                                        </span>
-                                    </span>
-                                    <span className='docs__description'>
-                                        <span>{ p.description}</span>
-                                    </span>
-                                    <span className='docs__example'> 
-                                        <span> { p.example} </span>
-                                    </span>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+                <PropsDoc propsList={propsList} />
             </div>
         </div>
     )
