@@ -1,0 +1,58 @@
+.configureWrapper{
+    position: relative;
+    width: 2.25rem;
+    height: 2.25rem;
+
+    .iconWrapper{
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 0.25rem;
+        background: $Day-Steelgrey07;
+        @include centerEl;
+        cursor: pointer;
+
+        img{
+            width: 1.125rem;
+            user-select: none;
+            pointer-events: none;
+        }
+        
+    }
+
+    ul{
+        width: 13.125rem;
+        max-height: 22.5rem;
+        position: absolute;
+        top: calc(100% + 0.625rem);
+        right: 0;
+        background: $Day-Steelgrey00;
+        overflow: auto;
+        z-index: 160;
+        border-radius: 0.375rem;
+        box-shadow: 0px 0px 4px #C6C6C6;
+
+        li{
+            padding: 0.625rem 0.625rem;
+            @include flex(flex-start,center,row,unset);
+
+            &.notVisible{
+                opacity: .5;
+            }
+
+            .iconDrag{
+                @include centerEl;
+                margin-right: 1rem;
+                cursor: pointer;
+                img{
+                    pointer-events: none;
+                    width: 0.5rem;
+                }
+            }
+            span{
+                color: $Day-TextPrimary;
+                font-size: 0.875rem;
+                margin-left: 0.625rem;
+            }
+        }
+    }
+}

@@ -18,7 +18,8 @@ import {
 } from 'devextreme-react/data-grid';
 import CustomStore from 'devextreme/data/custom_store';
 import './Styles/Grid.scss'
-
+import ColumnConfigure from './components/ColumnConfigure';
+import { useState } from 'react';
 
 const Grid = ({
     data,
@@ -34,6 +35,8 @@ const Grid = ({
     updateFunction,
     insertFunction,
     removeFunction,
+
+    withColumnConfigure,
 
     withMasterDetail,
     detailTemplate,
@@ -55,6 +58,7 @@ const Grid = ({
     focusedRowChanged
 }) => {
 
+    const [columns,setColumns] = useState(customColumns)
 
     const store = new CustomStore({
         key: storeKey ?? 'id',
@@ -90,6 +94,17 @@ const Grid = ({
 
     return (
         <div className={`gridWrapper __dx_DataGrid_Component__ light ${theme && !['dark','light'].includes(theme) ? 'light' : theme }`}>
+                {
+                    withColumnConfigure && (
+                        <div className="column_configure_wrapper">
+                            <ColumnConfigure 
+                                items={columns} 
+                                change={(cols) => setColumns(cols)}
+                            />
+                        </div>
+                    )
+                }
+
                 <DataGrid
                     style={
                         {
@@ -98,7 +113,7 @@ const Grid = ({
                     }
                     dataSource={withCustomStore ? store : data}
                     keyExpr={keyExpr ?? 'id'}
-                    allowColumnReordering={true}
+                    allowColumnReordering={false}
                     allowColumnResizing={true}
                     columnAutoWidth={true}
                     showColumnLines={false}
@@ -156,7 +171,7 @@ const Grid = ({
                     {/* <FilterPanel visible={true} />  create filter logic */}
 
                     {
-                        customColumns.map((col,ind) => {
+                        columns.map((col,ind) => {
                             return (
                                 <Column
                                     key={ind}
@@ -164,7 +179,7 @@ const Grid = ({
                                     caption={col.columnName}
                                     alignment={'left'}
                                     width={col.width}
-                                    visible={col?.visible ?? true}
+                                    visible={col.visible}
                                     dataType={col.dataType}
                                     format={col.format || (
                                         col.format === 'date' ? "M/d/yyyy, HH:mm" : col.format
@@ -173,6 +188,7 @@ const Grid = ({
                                     cellRender={col.template}
                                     allowFiltering={col.allowFiltering}
                                     allowSorting={col.allowSorting}
+                                    visibleIndex={col.orderIndex}
                                 />
                             )
                         })

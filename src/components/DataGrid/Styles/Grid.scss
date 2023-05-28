@@ -6,6 +6,13 @@
         padding: 0;
         padding-bottom: 0.9375rem;
     }
+
+    .column_configure_wrapper{
+        width: 100%;
+        @include flex(flex-end,center,row,unset);
+        padding-bottom: 0.625rem;
+    }
+
     &.light{
         .dx-header-row{
                 background: $Day-Steelgrey05;

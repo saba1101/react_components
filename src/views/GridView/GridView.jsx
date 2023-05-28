@@ -17,26 +17,38 @@ const GridView = () => {
                 columnKey: 'id',
                 columnName: 'ID',
                 template: null,
+                orderIndex: 3,
+                visible:true,
             },
             {
                 columnKey: 'first_name',
                 columnName: 'First Name',
+                orderIndex: 1,
+                visible:true,
             },
             {
                 columnKey: 'last_name',
                 columnName: 'Last Name',
+                visible:true,
+
             },
             {
                 columnKey: 'email',
                 columnName: 'Email',
+                visible:true,
+
             },
             {
                 columnKey: 'ip_address',
                 columnName: 'IP Address',
+                visible:true,
+
             },
             {
                 columnKey: 'car',
                 columnName: 'Car Model',
+                visible:true,
+
             }
         ]
     )
