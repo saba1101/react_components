@@ -19,7 +19,7 @@ import {
 import CustomStore from 'devextreme/data/custom_store';
 import './Styles/Grid.scss'
 import ColumnConfigure from './components/ColumnConfigure';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const Grid = ({
     data,
@@ -36,7 +36,7 @@ const Grid = ({
     insertFunction,
     removeFunction,
 
-    withColumnConfigure,
+    withColumnConfigure = true,
 
     withMasterDetail,
     detailTemplate,
@@ -57,8 +57,9 @@ const Grid = ({
     focusedRowChanging,
     focusedRowChanged
 }) => {
-
-    const [columns,setColumns] = useState(customColumns)
+    const [renderFlag,setRenderFlag] = useState(false)
+    // const [columns,setColumns] = useState(customColumns)
+    const columns = useRef(customColumns)
 
     const store = new CustomStore({
         key: storeKey ?? 'id',
@@ -98,8 +99,8 @@ const Grid = ({
                     withColumnConfigure && (
                         <div className="column_configure_wrapper">
                             <ColumnConfigure 
-                                items={columns} 
-                                change={(cols) => setColumns(cols)}
+                                items={columns.current} 
+                                change={(cols) => (columns.current = cols,setRenderFlag(state => !state))}
                             />
                         </div>
                     )
@@ -171,7 +172,7 @@ const Grid = ({
                     {/* <FilterPanel visible={true} />  create filter logic */}
 
                     {
-                        columns.map((col,ind) => {
+                        columns.current.map((col,ind) => {
                             return (
                                 <Column
                                     key={ind}

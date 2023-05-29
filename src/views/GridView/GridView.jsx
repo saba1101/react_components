@@ -19,7 +19,7 @@ const GridView = () => {
                 columnKey: 'id',
                 columnName: 'ID',
                 template: null,
-                orderIndex: 3,
+                orderIndex: 0,
                 visible:true,
             },
             {

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import IconConfigure from '@/assets/icons/svg/configure.svg';
 import style from './ColumnConfigure.module.scss';
-import CheckBox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx'
-import IconDrag from '@/assets/icons/svg/drag.svg'
+import CheckBox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx';
+import IconDrag from '@/assets/icons/svg/drag.svg';
 
-const ColumnConfigure = ({ items,change}) => {
-  const [listItems, setListItems] = useState(items);
+const ColumnConfigure = ({ items, change }) => {
+  const listItemsRef = useRef(items);
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [listVisible, setListVisible] = useState(false);
+  const [render, setRender] = useState(false);
 
   const handleDragStart = (event, index) => {
     setDraggedIndex(index);
@@ -23,11 +24,11 @@ const ColumnConfigure = ({ items,change}) => {
   const handleDragEnter = (event, targetIndex) => {
     if (targetIndex === draggedIndex) return;
 
-    const updatedItems = [...listItems];
+    const updatedItems = [...listItemsRef.current];
     const draggedItemData = updatedItems[draggedIndex];
     updatedItems.splice(draggedIndex, 1);
     updatedItems.splice(targetIndex, 0, draggedItemData);
-    setListItems(updatedItems);
+    listItemsRef.current = updatedItems;
     setDraggedIndex(targetIndex);
   };
 
@@ -35,7 +36,7 @@ const ColumnConfigure = ({ items,change}) => {
     setDraggedIndex(null);
     // resetItemOpacity();
     sortItems();
-    change(listItems)
+    change(listItemsRef.current);
   };
 
   // const resetItemOpacity = () => {
@@ -47,11 +48,11 @@ const ColumnConfigure = ({ items,change}) => {
   // };
 
   const sortItems = () => {
-    setListItems((prevItems) => [...prevItems].sort((a, b) => a.orderIndex - b.orderIndex));
+    setRender((prevRender) => !prevRender); // Trigger re-render by toggling the render flag
   };
 
   useEffect(() => {
-    setListItems(listItems.map((el, ind) => ({ ...el, orderIndex: ind })));
+    listItemsRef.current = listItemsRef.current.map((el, ind) => ({ ...el, orderIndex: ind }));
   }, [draggedIndex]);
 
   // useEffect(() => {
@@ -59,11 +60,10 @@ const ColumnConfigure = ({ items,change}) => {
   // },[listItems])
 
   const handleCheckboxChange = (index) => {
-    setListItems((prevItems) =>
-      prevItems.map((item, i) =>
-        i === index ? { ...item, visible: !item.visible } : item
-      )
+    listItemsRef.current = listItemsRef.current.map((item, i) =>
+      i === index ? { ...item, visible: !item.visible } : item
     );
+    setRender((prevRender) => !prevRender); // Trigger re-render by toggling the render flag
   };
 
   const ExpandList = () => {
@@ -77,24 +77,26 @@ const ColumnConfigure = ({ items,change}) => {
       </div>
       {listVisible && (
         <ul className="draggable-list">
-          {listItems.map((item, index) => (
+          {listItemsRef.current.map((item, index) => (
             <li
               key={index}
-              className={`draggable-item${index === draggedIndex ? ' dragged' : ''} ${!item.visible ? style.notVisible : ''}`}
+              className={`draggable-item${index === draggedIndex ? ' dragged' : ''} ${
+                !item.visible ? style.notVisible : ''
+              }`}
               draggable
               onDragStart={(event) => handleDragStart(event, index)}
               onDragOver={handleDragOver}
               onDragEnter={(event) => handleDragEnter(event, index)}
               onDragEnd={handleDragEnd}
             >
-              <div className={style.iconDrag}> 
+              <div className={style.iconDrag}>
                 <img src={IconDrag} alt="" />
               </div>
-                <CheckBox
-                  checked={item.visible || false}
-                  change={() => (handleCheckboxChange(index),change(listItems))}
-                />
-                <span>{item.columnName}</span>
+              <CheckBox
+                checked={item.visible || false}
+                change={() => (handleCheckboxChange(index), change(listItemsRef.current))}
+              />
+              <span>{item.columnName}</span>
             </li>
           ))}
         </ul>
