@@ -9,6 +9,22 @@ const ColumnConfigure = ({ items, change }) => {
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [listVisible, setListVisible] = useState(false);
   const [render, setRender] = useState(false);
+  const collapsableRef = useRef(null)
+  const confugureRef = useRef(null)
+
+
+  useEffect(() => {
+    document.addEventListener('click',ClickHandler)
+
+      return () => {
+          document.removeEventListener('click',ClickHandler)
+      }
+  },[])
+
+  const ClickHandler = (event) => {
+    if(event.composedPath().includes(confugureRef.current)) return
+    setListVisible(false)
+}
 
   const handleDragStart = (event, index) => {
     setDraggedIndex(index);
@@ -38,6 +54,7 @@ const ColumnConfigure = ({ items, change }) => {
     sortItems();
     change(listItemsRef.current);
   };
+  
 
   // const resetItemOpacity = () => {
   //   const list = document.getElementsByClassName('draggable-list')[0];
@@ -71,12 +88,12 @@ const ColumnConfigure = ({ items, change }) => {
   };
 
   return (
-    <div className={style.configureWrapper}>
+    <div className={style.configureWrapper} ref={confugureRef}>
       <div className={style.iconWrapper} onClick={ExpandList}>
         <img src={IconConfigure} alt="" />
       </div>
       {listVisible && (
-        <ul className="draggable-list">
+        <ul className="draggable-list" ref={collapsableRef}>
           {listItemsRef.current.map((item, index) => (
             <li
               key={index}

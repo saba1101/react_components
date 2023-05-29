@@ -36,7 +36,7 @@ const Grid = ({
     insertFunction,
     removeFunction,
 
-    withColumnConfigure = true,
+    withColumnConfigure,
 
     withMasterDetail,
     detailTemplate,
