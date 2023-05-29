@@ -2,8 +2,9 @@
     width: 100%;
     height: 100%;
     background: #1E2224;
+
      & *{
-        font-family: 'Helvetica-Bold';
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
 
@@ -41,7 +42,7 @@
 
                 span{
                     white-space: nowrap;
-                    font-size: 1rem;
+                    font-size: 0.875rem;
                 }
 
                 &.current{
@@ -70,7 +71,7 @@
 
             span{
                 color: #FFFFFF;
-                font-size: 1rem;
+                font-size: 0.875rem;
 
                 &.parentLabel{
                     padding-bottom: 0.5rem;
@@ -88,7 +89,6 @@
                         left: 50%;
                         top: 100%;
                         transform: translate(-50%,0);
-
                     }
                 }
             }

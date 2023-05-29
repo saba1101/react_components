@@ -75,7 +75,9 @@
 
     .docs__component_static_preview_props{
         margin-top: 3.125rem;
-
+        & *{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
         ul{
             @include flex(flex-start,flex-start,column,0);
             max-height: unset;
@@ -93,12 +95,15 @@
                 grid-column-gap: 0.625rem;
                 grid-template-columns: repeat(4, 1fr);
                 transition: $Default-Transition;
+
                 &:hover{
                     background: rgba(#23282A,.08);
                 }
 
                 &:first-child{
                     position: sticky;
+                    background: rgba(#23282A,.2);
+                    border-top: 3px solid #EBB924;
                     top: 0;
                     span{
                         background: none !important;
