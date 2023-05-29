@@ -23,7 +23,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, Sear
     }
   }, [node]);
 
-  const recursivelyAddItemNodeID = (arr) => {
+  const RecursiveMap = (arr) => {
     if (Array.isArray(arr)) {
       arr.forEach((obj) => {
         if (!obj.hasOwnProperty('itemNodeID')) {
@@ -32,14 +32,14 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, Sear
 
         Object.values(obj).forEach((value) => {
           if (typeof value === 'object' && value !== null) {
-            recursivelyAddItemNodeID(value);
+            RecursiveMap(value);
           }
         });
       });
     }
   };
 
-  recursivelyAddItemNodeID([node]); // Add itemNodeID recursively
+  RecursiveMap([node]); // Add itemNodeID recursively
 
   const HandleRecursiveSelect = () => {
     if (isSelected) {

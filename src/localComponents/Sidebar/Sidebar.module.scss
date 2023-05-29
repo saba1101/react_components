@@ -27,6 +27,8 @@
         margin-top: 1.875rem;
         width: 100%;
         @include flex(center,flex-start,column,unset);   
+        overflow: auto;
+        max-height: calc(100% - 10rem);
 
         .childNavList{
             position: relative;
