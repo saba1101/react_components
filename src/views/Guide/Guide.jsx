@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Guide.scss';
-
 const Guide = () => {
   const [code, setCode] = useState(`plugins: [
     react(),

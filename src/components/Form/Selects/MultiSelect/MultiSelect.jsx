@@ -157,6 +157,8 @@ const MultiSelect = (
                             SearchValue={SearchValue}
                             WithApply={withApply ?? true}
                             Apply={() => CloseCollapsable()}
+                            WithBottomAction={true}
+                            WithMaxHeight={true}
                         />
                     </div>
                 </div>

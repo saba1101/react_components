@@ -50,4 +50,13 @@ export const RoutesData = [
         label : 'Grid',
         path : '/GridView',
     },
+    {
+        label : 'Modal',
+        path : '/ModalView',
+    },
+    {
+        label : 'TreeNodeView',
+        path : '/TreeNodeView',
+    },
+
 ]

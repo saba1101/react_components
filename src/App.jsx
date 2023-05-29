@@ -13,17 +13,10 @@ import RadioView from './views/FormView/RadioView/RadioView.jsx'
 import ToggleView from './views/FormView/ToggleView/ToggleView.jsx'
 import SearchView from './views/SearchView/SearchView.jsx'
 import NotificationView from './views/NotificationView/NotificationView.jsx'
+import ModalView from './views/ModalView/ModalView.jsx'
 import GridView from './views/GridView/GridView.jsx'
-
+import TreeNodeView from './views/TreeView/TreeNodeView.jsx'
 function App() {
-
-  const getElementByPath = (path) => {
-    const viewsArr = [
-      <FormView/>,
-      <Guide/>
-    ]
-    return viewsArr
-  }
 
   return (
     <>
@@ -50,7 +43,8 @@ function App() {
                 <Route path="/NotificationView" element={<NotificationView />} />
 
                 <Route path="/GridView" element={<GridView />} />
-
+                <Route path="/ModalView" element={<ModalView />} />
+                <Route path="/TreeNodeView" element={<TreeNodeView />} />
 
               </Routes>
             </div>

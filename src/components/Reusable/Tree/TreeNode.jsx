@@ -4,27 +4,44 @@ import Checkbox from '@/components/Form/FormControls/Checkbox/Checkbox';
 import IconArrow from '@/assets/icons/svg/arrow.svg';
 import MainButton from '@/components/Button/MainButton.jsx';
 
-const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes,SearchValue }) => {
-  // const isExpanded = expandedNodes.includes(node.itemNodeID);
+const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, SearchValue }) => {
   const [isExpanded, setIsExpanded] = useState(expandedNodes.includes(node.itemNodeID));
   const isSelected = selectedNodes.some((el) => el.itemNodeID === node.itemNodeID);
 
-  const handleNodeClick = () => {
+  const HandleNodeClick = () => {
     onSelect(node);
   };
 
-  const handleExpandClick = () => {
+  const HandleExpandClick = () => {
     onExpand(node.itemNodeID);
-    setIsExpanded(state => !state)
+    setIsExpanded((state) => !state);
   };
 
   useEffect(() => {
     if (node && node.selected) {
-      handleNodeClick(node);
+      HandleNodeClick(node);
     }
   }, [node]);
 
-  const handleRecursiveSelect = () => {
+  const recursivelyAddItemNodeID = (arr) => {
+    if (Array.isArray(arr)) {
+      arr.forEach((obj) => {
+        if (!obj.hasOwnProperty('itemNodeID')) {
+          obj.itemNodeID = crypto.randomUUID();
+        }
+
+        Object.values(obj).forEach((value) => {
+          if (typeof value === 'object' && value !== null) {
+            recursivelyAddItemNodeID(value);
+          }
+        });
+      });
+    }
+  };
+
+  recursivelyAddItemNodeID([node]); // Add itemNodeID recursively
+
+  const HandleRecursiveSelect = () => {
     if (isSelected) {
       const unselectChildren = (node) => {
         onSelect(node);
@@ -51,40 +68,34 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes,Searc
   };
 
   const SetNodeVisibilityState = (searchString) => {
-    let visible = true
+    let visible = true;
 
-    if(!searchString || searchString.trim() == ''){
-      visible = true
-      return visible
+    if (!searchString || searchString.trim() === '') {
+      visible = true;
+      return visible;
     }
 
-    if(searchString && 
-        node.label.toLowerCase().split(' ').join('').trim().includes(searchString.toLowerCase().split(' ').join('').trim())
-      ){
-        visible = true
-      }else{
-        visible = false
-      }
+    if (
+      searchString &&
+      node.label.toLowerCase().split(' ').join('').trim().includes(searchString.toLowerCase().split(' ').join('').trim())
+    ) {
+      visible = true;
+    } else {
+      visible = false;
+    }
 
-
-    return visible
-  }
-
-  // useEffect(() => {
-  //   if (SearchValue && SearchValue.length) {
-  //     setIsExpanded(true);
-  //   }
-  // }, [SearchValue]);
+    return visible;
+  };
 
   return (
-    <div className={
-      SetNodeVisibilityState(SearchValue) ? style.visible : style.hidden
-    }>
+    <div
+      className={SetNodeVisibilityState(SearchValue) ? style.visible : style.hidden}
+    >
       <div className={style.nodeContent}>
         {node.children && node.children.length ? (
           <div
             className={`${style.collapseIcon} ${isExpanded ? style.expanded : ''}`}
-            onClick={handleExpandClick}
+            onClick={HandleExpandClick}
           >
             <img src={IconArrow} alt="arrow" />
           </div>
@@ -92,7 +103,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes,Searc
           ''
         )}
         <div className={style.checkbox}>
-          <Checkbox checked={isSelected} change={handleRecursiveSelect} />
+          <Checkbox checked={isSelected} change={HandleRecursiveSelect} />
         </div>
         <div className={style.nodeLabel}>
           <span>{node.label ?? '-'}</span>
@@ -105,12 +116,12 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes,Searc
             ${node.children ? style.withChildren : ''}
           `}
         >
-          {node.children.map((child) => (
+          {node.children.map((child,index) => (
             <li
               className={`
                 ${isSelected ? style.selected : ''}
               `}
-              key={child.itemNodeID}
+              key={index}
             >
               <TreeNode
                 node={child}
@@ -118,6 +129,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes,Searc
                 onExpand={onExpand}
                 expandedNodes={expandedNodes}
                 selectedNodes={selectedNodes}
+                SearchValue={SearchValue}
               />
             </li>
           ))}
@@ -127,7 +139,15 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes,Searc
   );
 };
 
-const TreeNodeDropdown = ({ data, onSelectionChange,SearchValue, WithApply,Apply }) => {
+const TreeNodeDropdown = ({
+  data,
+  onSelectionChange,
+  SearchValue,
+  WithApply,
+  Apply,
+  WithBottomAction,
+  WithMaxHeight,
+}) => {
   const [expandedNodes, setExpandedNodes] = useState([]);
   const [selectedNodes, setSelectedNodes] = useState([]);
 
@@ -160,7 +180,9 @@ const TreeNodeDropdown = ({ data, onSelectionChange,SearchValue, WithApply,Apply
     const isExpanded = expandedNodes.includes(nodeId);
 
     if (isExpanded) {
-      setExpandedNodes((prevExpandedNodes) => prevExpandedNodes.filter((id) => id !== nodeId));
+      setExpandedNodes((prevExpandedNodes) =>
+        prevExpandedNodes.filter((id) => id !== nodeId)
+      );
     } else {
       setExpandedNodes((prevExpandedNodes) => [...prevExpandedNodes, nodeId]);
     }
@@ -195,8 +217,8 @@ const TreeNodeDropdown = ({ data, onSelectionChange,SearchValue, WithApply,Apply
   }, [selectedNodes]);
 
   const renderTreeNodes = (nodes) => {
-    return nodes.map((node) => (
-      <li key={node.itemNodeID}>
+    return nodes.map((node,ind) => (
+      <li key={ind}>
         <TreeNode
           node={node}
           onSelect={handleNodeSelect}
@@ -211,18 +233,18 @@ const TreeNodeDropdown = ({ data, onSelectionChange,SearchValue, WithApply,Apply
 
   return (
     <div>
-      <ul>{renderTreeNodes(data)}</ul>
-      <div className={style.bottomActions}>
-        <div className={style.selectActions}>
-          <div className={style.selectAll} onClick={handleSelectAll}>
-            <span>Select All</span>
+      <ul className={`${WithMaxHeight ? style.maxHeight : ''}`}>{renderTreeNodes(data)}</ul>
+      {WithBottomAction && (
+        <div className={style.bottomActions}>
+          <div className={style.selectActions}>
+            <div className={style.selectAll} onClick={handleSelectAll}>
+              <span>Select All</span>
+            </div>
+            <div className={style.clearAll} onClick={handleClearAll}>
+              <span>Clear All</span>
+            </div>
           </div>
-          <div className={style.clearAll} onClick={handleClearAll}>
-            <span>Clear All</span>
-          </div>
-        </div>
-        {
-          WithApply && (
+          {WithApply && (
             <div className={style.apply}>
               <MainButton
                 label={'APPLY'}
@@ -232,9 +254,9 @@ const TreeNodeDropdown = ({ data, onSelectionChange,SearchValue, WithApply,Apply
                 onClick={() => Apply()}
               />
             </div>
-          )
-        }
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

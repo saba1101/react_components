@@ -1,0 +1,93 @@
+.modalOverlay{
+    width: 100vw;
+    height: 100vh;
+    @include centerEl;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 250;
+    background: rgba(#00000080,.3);
+
+    .popupContainer{
+        min-height: 13.75rem;
+        max-height: calc(100vh - 5.625rem);
+        position: relative;
+        transition: $Default-Transition;
+        background: $Day-Steelgrey00;
+        z-index: 280;
+        border-radius: 0.375rem;
+        box-shadow: 0 0 1.25rem rgba(#00000080,.1);
+        overflow: auto;
+        animation: fadeIn .3s forwards;
+        @keyframes fadeIn {
+            from{
+                transform: translateY(1.25rem);
+                opacity: 0;
+            }
+            to{
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .popupHeader{
+            width: 100%;
+            position: sticky;
+            top: 0;
+            background: $Day-Steelgrey00;
+            z-index: 1;
+            padding: 1.375rem 1.375rem;
+
+            &.left{
+                text-align: left;
+            }
+            &.right{
+                text-align: right;
+            }
+            &.center{
+                text-align: center;
+            }
+
+
+            .popupTitle{
+                h2{
+                    font-size: 1.5rem;
+                    color: $Day-TextPrimary;
+                    font-weight: 700;
+                }
+            }
+            .popupDescription{
+                margin-top: 1rem;
+                p{
+                    font-size: 0.875rem;
+                    color: $Night-Steelgrey10;
+                    line-height: 1.5rem;
+                }
+            }
+            .typeIcon{
+                margin-bottom: 1.5rem;
+                pointer-events: none;
+                img{
+                    width: 2.25rem;
+                    user-select: none;
+                }
+            }
+        }
+
+        .templateWrapper{
+            width: 100%;
+            padding: 1.375rem 1.375rem;
+            position: relative;
+        }
+
+        &.small{
+            width: 22.5rem;
+        }
+        &.medium{
+            width: 51.75rem ;
+        }
+        &.large{
+            width: calc(100% - 7.5rem);
+        }
+    }
+}
