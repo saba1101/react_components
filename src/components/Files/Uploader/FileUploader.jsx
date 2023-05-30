@@ -1,66 +1,169 @@
-// import React, { useState } from 'react';
+import style from './FileUploader.module.scss'
+import IconUpload from '@/assets/icons/svg/upload.svg'
+import MainButton from '@/components/Button/MainButton.jsx'
+import { _calculateSizeByUnit,_getFileFormat,_toBase64 } from '@/utils/Helpers'
+import { useRef, useState } from 'react'
+import FileBlock from '@/components/Files/FileBlock/FileBlock.jsx'
 
-// const FileUploader = () => {
-//   const [selectedFiles, setSelectedFiles] = useState([]);
+const FileUploader = (
+    {
+        validators,
+        directionStyle,
+        multiple,
+        onChange,
+    }
+) => {
 
-//   const handleDrop = (event) => {
-//     event.preventDefault();
-//     const files = event.dataTransfer.files;
-//     handleFiles(files);
-//   };
+    const UploaderID = useRef(crypto.randomUUID())
+    const [RenderFlag,setRenderFlag] = useState(false)
+    const [IsActive,setIsActive] = useState(false)
+    const Files = useRef([])
 
-//   const handleFiles = (files) => {
-//     const fileList = Array.from(files);
-//     setSelectedFiles(fileList);
-//   };
+    const ToggleIsActive = (state) => {
+        setIsActive(state)
+    }
+    
+    const DragEnter = (ev) => {
+        ev.preventDefault()
+        ToggleIsActive(true)
+    }
 
-//   const handleFileRemove = (file) => {
-//     const updatedFiles = selectedFiles.filter((f) => f !== file);
-//     setSelectedFiles(updatedFiles);
-//   };
+    const DragLeave = (ev) => {
+        ev.preventDefault()
+        ToggleIsActive(false)
+    }
 
-//   const handleFileInputChange = (event) => {
-//     const files = event.target.files;
-//     handleFiles(files);
-//   };
+    const DragOver = (ev) => {
+        ev.preventDefault()
+        ToggleIsActive(true)
+    }
 
-//   const renderSelectedFiles = () => {
-//     return selectedFiles.map((file, index) => (
-//       <div key={index}>
-//         <span>{file.name}</span>
-//         <button onClick={() => handleFileRemove(file)}>Remove</button>
-//       </div>
-//     ));
-//   };
+    const Drop = (event) => {
+        event.preventDefault()
+        CollectFiles(event.dataTransfer.files)
+        ToggleIsActive(false)
+    }
 
-//   return (
-//     <div>
-//       <div
-//         onDragOver={(event) => event.preventDefault()}
-//         onDrop={handleDrop}
-//         style={{ border: '1px dashed black', padding: '10px', marginBottom: '10px' }}
-//       >
-//         <p>Drag and drop files here</p>
-//       </div>
-//       {selectedFiles.length > 0 && (
-//         <div>
-//           <h4>Selected Files:</h4>
-//           {renderSelectedFiles()}
-//         </div>
-//       )}
-//       <label htmlFor="file-input">
-//         Upload
-//         <input
-//           id="file-input"
-//           type="file"
-//           accept=".jpg,.jpeg,.png,.gif"
-//           multiple
-//           onChange={handleFileInputChange}
-//           style={{ display: 'none' }}
-//         />
-//       </label>
-//     </div>
-//   );
-// };
+    const HandleFileRemove = (file) => {
+        Files.current = Files.current.filter((f,ind) => {
+            return (
+                f.fileID !== file.fileID
+            )
+        })
+        setRenderFlag(state => !state)
+        SyncChange()
+    }
 
-// export default FileUploader;
+    const Change = (event) => {
+        CollectFiles(event.target.files)
+    }
+
+    const SyncChange = () => {
+        if(onChange && typeof onChange === 'function'){
+            onChange(Files.current)
+        }
+    }
+
+    const CollectFiles = async (array) => {
+
+        if(!multiple && (Files.current.length === 1 || Files.current.length > 1)) return
+
+        let files = array
+        let mappedFiles = []
+
+        for(let i = 0; i < files.length; i++){
+
+          let fileObject = {
+            fileName: files[i].name,
+            size: files[i].size,
+            unitSize: _calculateSizeByUnit(files[i].size),
+            type: files[i].type,
+            format: _getFileFormat(files[i].name),
+            base64: await _toBase64(files[i]),
+            fileID: crypto.randomUUID(),
+          }
+          mappedFiles.push(fileObject)
+        }
+
+        if(!multiple && mappedFiles.length > 1) mappedFiles = mappedFiles.slice(0,1)
+        
+        // if (multiple && validators && validators?.maxFiles && files.length + mappedFiles.length > validators.maxFiles) {
+        //     mappedFiles = mappedFiles.slice(0,validators.maxFiles)
+        // }
+
+        Files.current = [...Files.current,...mappedFiles]
+        setRenderFlag(state => !state)
+        SyncChange()
+      }
+
+    return (
+        <div className={style.fileUploaderWrapper}>
+
+            <div 
+                className={`${style.fileUploaderContent} ${directionStyle && directionStyle === 'rowStyle' ? style.directionRow : ''} ${IsActive ? style.activeDropzone : ''}`}
+                onDragEnter={DragEnter}
+                onDragLeave={DragLeave}
+                onDragOver={DragOver}
+                onDrop={Drop}
+            >
+                
+                <div className={style.iconWrapper}>
+                    <img src={IconUpload} alt="" />
+                </div>
+
+                <div className={style.fileUploaderLabel}>
+                    <span>
+                        Select a file or drag and drop here
+                    </span>
+                </div>
+
+                {
+                    validators && (
+                        <div className={style.validators}>
+
+                        </div>
+                    )
+                }
+
+                <div className={style.uploadAction}>
+                    <MainButton 
+                        label={'Select File'}
+                        size={'small'}
+                        customStyle={
+                            {
+                                width: '6.25rem',
+                                height: '2rem',
+                                borderRadius: '0.375rem',
+                            }
+
+                        }
+                    />
+                    <input 
+                        type="file" 
+                        name="" 
+                        id={UploaderID}
+                        multiple={multiple  ? true : false}
+                        onChange={Change}
+                    />
+                </div>
+                
+            </div>
+
+            {
+                (Files && Files.current && Files.current.length) ? (
+                    Files.current.map((f,ind) => {
+                        return (
+                            <FileBlock 
+                                key={ind}
+                                file={f}
+                                onDelete={HandleFileRemove}
+                            />
+                        )
+                    })
+                ) : ''
+            }
+        </div>
+    )
+}
+
+export default FileUploader

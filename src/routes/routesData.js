@@ -51,6 +51,10 @@ export const RoutesData = [
         path : '/GridView',
     },
     {
+        label : 'FileUploader',
+        path : '/FileUploaderView',
+    },
+    {
         label : 'Modal',
         path : '/ModalView',
     },

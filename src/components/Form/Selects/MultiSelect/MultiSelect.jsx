@@ -79,6 +79,7 @@ const MultiSelect = (
                 ${style.multiselectWrapper}
                 ${style[_getSize(size)]}
                 ${Focused || SelectedNodesArr.length ? style.focused : ''}
+                ${!Focused && SelectedNodesArr.length ? style.unfocused : ''}
                 ${disabled ? style.disabled : ''}
                 ${msg?.type && msg?.visible ? style[msg.type] : ''}
             `}

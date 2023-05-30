@@ -168,3 +168,27 @@
         }
     }
 }
+
+:global(body.theme_dark){
+    .componentInputWrapper{
+        border: 0.0625rem solid $Night-Steelgrey06;
+        background: $Night-Steelgrey00;
+
+        .inputLabel{
+            span{
+                color: $Night-Steelgrey12;
+            }
+        }
+        .inputElementWrapper{
+            input{
+                color: $Night-Steelgrey20;
+            }
+        }
+
+        &.disabled{
+            input,.inputLabel > span{
+                color: $Night-Steelgrey09;
+            }
+        }
+    }
+}

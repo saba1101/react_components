@@ -125,9 +125,9 @@
         }
     }
 
-    &.tagsUnfocused{
+    &.unfocused{
         .selectedTags{
-            border: 0.0625rem solid $Day-Steelgrey06;
+            border: 0.0625rem solid $Day-Steelgrey06 !important;
         }
     }
 

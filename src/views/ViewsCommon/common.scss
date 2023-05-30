@@ -50,6 +50,11 @@
             grid-template-columns: repeat(auto-fill,minmax(10.625rem,1fr));
         }
 
+        &.comp__uploader{
+            grid-template-columns: auto auto;
+            justify-content: left;
+        }
+
         &.comp_grid{
             grid-template-columns: 100%;
             h5{

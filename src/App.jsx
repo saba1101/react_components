@@ -16,6 +16,8 @@ import NotificationView from './views/NotificationView/NotificationView.jsx'
 import ModalView from './views/ModalView/ModalView.jsx'
 import GridView from './views/GridView/GridView.jsx'
 import TreeNodeView from './views/TreeView/TreeNodeView.jsx'
+import FileUploaderView from './views/FileUploaderView/FileUploaderView.jsx'
+
 function App() {
 
   return (
@@ -42,9 +44,11 @@ function App() {
                 <Route path="/SearchView" element={<SearchView />} />
                 <Route path="/NotificationView" element={<NotificationView />} />
 
+                <Route path="/FileUploaderView" element={<FileUploaderView />} />
                 <Route path="/GridView" element={<GridView />} />
                 <Route path="/ModalView" element={<ModalView />} />
                 <Route path="/TreeNodeView" element={<TreeNodeView />} />
+
 
               </Routes>
             </div>
