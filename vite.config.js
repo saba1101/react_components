@@ -20,7 +20,20 @@ export default defineConfig({
       filename: "remoteEntry.js",
       exposes: {
         './MainButton' : './src/components/Button/MainButton.jsx',
-        './Input' : './src/components/Form/Input/Input.jsx'
+        './FormInput' : './src/components/Form/Input/Input.jsx',
+        './CheckBox' : './src/components/Form/FormControls/Checkbox/Checkbox.jsx',
+        './Radio' : './src/components/Form/FormControls/Radio/Radio.jsx',
+        './Toggle' : './src/components/Form/FormControls/Toggle/Toggle.jsx',
+        './FormDropdown' : './src/components/Form/Selects/SingleSelect/SingleSelectDropdown.jsx',
+        './FormMultiSelectDropdown' : './src/components/Form/Selects/MultiSelect/MultiSelect.jsx',
+        './Popup' : './src/components/Modal/Popup.jsx',
+        './Notification' : './src/components/Notification/ToastNotification.js',
+        './Search' : './src/components/Search/Search.jsx',
+        './TreeNode' : './src/components/Reusable/Tree/TreeNode.jsx',
+        './Grid' : './src/components/DataGrid/Grid.jsx',
+        './FileUploader' : './src/components/Files/Uploader/FileUploader.jsx',
+
+
 
       },
       shared: ["react", "react-dom"],
