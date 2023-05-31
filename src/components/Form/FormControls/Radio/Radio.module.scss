@@ -4,7 +4,7 @@
     border-radius: 50%;
     overflow: hidden;
     position: relative;
-    @include centerEl;
+    // @include centerEl;
     background: $Day-Steelgrey05;
     border: 0.0625rem solid $Day-Steelgrey09;
     cursor: pointer;
@@ -16,12 +16,17 @@
     }
 
     .radioState {
-        width: calc(100% - 0.1875rem);
-        height: calc(100% - 0.1875rem);
+        width: 0.8125rem;
+        height: 0.8125rem;
         background: $Day-Positive100;
         border-radius: 50%;
         opacity: 0;
         transition: $Default-Transition;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        
     }
 
     &.checked{

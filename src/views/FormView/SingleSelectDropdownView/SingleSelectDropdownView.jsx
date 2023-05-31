@@ -1,6 +1,6 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
-import SingleSelectDropdown from '../../../components/Form/Selects/SingleSelect/SingleSelectDropdown'
+import SingleSelectDropdown from '@/components/Form/Selects/SingleSelect/SingleSelectDropdown.jsx'
 import {Data} from '@/utils/Data'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 

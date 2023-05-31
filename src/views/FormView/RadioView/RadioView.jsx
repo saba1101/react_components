@@ -1,6 +1,6 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
-import Radio from '../../../components/Form/FormControls/Radio/Radio'
+import Radio from '@/components/Form/FormControls/Radio/Radio.jsx'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 
 const RadioView = () => {

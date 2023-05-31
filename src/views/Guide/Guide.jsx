@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './Guide.scss';
+import '@/views/Guide/Guide.scss';
+
 const Guide = () => {
   const [code, setCode] = useState(`plugins: [
     react(),

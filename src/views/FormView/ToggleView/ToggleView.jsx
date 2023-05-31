@@ -1,6 +1,6 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
-import Toggle from '../../../components/Form/FormControls/Toggle/Toggle'
+import Toggle from '@/components/Form/FormControls/Toggle/Toggle.jsx'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 
 const ToggleView = () => {

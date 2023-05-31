@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import style from './PropsBlock.module.scss'
-import Checkbox from '../../components/Form/FormControls/Checkbox/Checkbox'
-import Radio from '../../components/Form/FormControls/Radio/Radio'
+import style from '@/localComponents/PropsBlock.module.scss'
+import Checkbox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx'
+import Radio from '@/components/Form/FormControls/Radio/Radio.jsx'
 
 const PropsBlock = (
     {

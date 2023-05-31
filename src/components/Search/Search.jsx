@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import style from './Search.module.scss'
+import style from '@/components/Search/Search.module.scss'
 import IconSearch from '@/assets/icons/svg/search.svg'
 import IconClear from '@/assets/icons/svg/x.svg'
-import { _getSize } from '../../utils/Helpers'
+import { _getSize } from '@/utils/Helpers.js'
 
 const Search = (
     {

@@ -1,4 +1,4 @@
-import style from './MainButton.module.scss'
+import style from '@/components/Button/MainButton.module.scss'
 
 const MainButton = (
     {

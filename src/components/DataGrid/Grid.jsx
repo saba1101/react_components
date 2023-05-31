@@ -17,9 +17,11 @@ import {
 
 } from 'devextreme-react/data-grid';
 import CustomStore from 'devextreme/data/custom_store';
-import './Styles/Grid.scss'
-import ColumnConfigure from './components/ColumnConfigure';
+// import './Styles/Grid.scss'
+// import ColumnConfigure from './components/ColumnConfigure.jsx';
 import { useRef, useState } from 'react';
+import ColumnConfigure from '@/components/DataGrid/components/ColumnConfigure.jsx'
+import '@/components/DataGrid/Styles/Grid.scss'
 
 const Grid = ({
     data,

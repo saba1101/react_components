@@ -1,4 +1,4 @@
-import style from './FileBlock.module.scss'
+import style from '@/components/Files/FileBlock/FileBlock.module.scss'
 import IconFile from '@/assets/icons/svg/file.svg'
 import IconDelete from '@/assets/icons/svg/xWhite.svg'
 

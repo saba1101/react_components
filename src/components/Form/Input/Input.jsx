@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import style from './Input.module.scss'
 import IconPassword from '@/assets/icons/svg/password.svg'
 import IconPasswordHide from '@/assets/icons/svg/password-hide.svg'
-
+import style from '@/components/Form/Input/Input.module.scss'
 
 const Input = (
     {

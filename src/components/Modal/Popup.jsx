@@ -1,5 +1,5 @@
-import style from './Popup.module.scss'
-import { _getSize } from '@/utils/Helpers'
+import style from '@/components/Modal/Popup.module.scss'
+import { _getSize } from '@/utils/Helpers.js'
 import IconError from '@/assets/icons/svg/error.svg'
 import IconInfo from '@/assets/icons/svg/info.svg'
 import IconWarning from '@/assets/icons/svg/warning.svg'

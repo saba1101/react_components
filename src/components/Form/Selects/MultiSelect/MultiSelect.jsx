@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import TreeNodeDropdown from '../../../Reusable/Tree/TreeNode'
-import style from './MultiSelect.module.scss'
-import { _getSize } from '../../../../utils/Helpers'
 import IconArrow from '@/assets/icons/svg/arrow.svg'
-import Search from '../../../Search/Search'
+import TreeNodeDropdown from '@/components/Reusable/Tree/TreeNode.jsx'
+import style from '@/components/Form/Selects/MultiSelect/MultiSelect.module.scss'
+import {_getSize} from '@/utils/Helpers.js'
+import Search from '@/components/Search/Search.jsx'
 
 const MultiSelect = (
     {

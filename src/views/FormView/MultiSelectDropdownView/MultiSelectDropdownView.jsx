@@ -1,6 +1,6 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
-import MultiSelect from '../../../components/Form/Selects/MultiSelect/MultiSelect.jsx'
+import MultiSelect from '@/components/Form/Selects/MultiSelect/MultiSelect.jsx'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 
 import {Data} from '@/utils/Data'

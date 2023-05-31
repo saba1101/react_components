@@ -1,4 +1,4 @@
-import style from './Radio.module.scss'
+import style from '@/components/Form/FormControls/Radio/Radio.module.scss'
 
 const Radio = (
     {

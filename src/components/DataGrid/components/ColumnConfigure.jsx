@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import IconConfigure from '@/assets/icons/svg/configure.svg';
-import style from './ColumnConfigure.module.scss';
+import style from '@/components/DataGrid/components/ColumnConfigure.module.scss'
 import CheckBox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx';
 import IconDrag from '@/assets/icons/svg/drag.svg';
 

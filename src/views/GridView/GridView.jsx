@@ -1,8 +1,8 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
-import { Data } from '../../utils/Data'
-import Grid from '../../components/DataGrid/Grid'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
+import { Data } from '@/utils/Data.js'
+import Grid from '@/components/DataGrid/Grid.jsx'
 
 
 const GridView = () => {

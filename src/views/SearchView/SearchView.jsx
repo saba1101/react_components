@@ -1,6 +1,6 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
-import Search from '../../components/Search/Search'
+import Search from '@/components/Search/Search.jsx'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 
 const SearchView = () => {

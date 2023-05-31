@@ -1,7 +1,7 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
 import MainButton from '@/components/Button/MainButton.jsx'
-import { createNotification } from '../../components/Notification/ToastNotification'
+import { createNotification } from '@/components/Notification/ToastNotification.js'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 
 const NotificationView = () => {

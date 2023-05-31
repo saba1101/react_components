@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import style from './TreeNode.module.scss';
-import Checkbox from '@/components/Form/FormControls/Checkbox/Checkbox';
+import style from '@/components/Reusable/Tree/TreeNode.module.scss'
+import Checkbox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx';
 import IconArrow from '@/assets/icons/svg/arrow.svg';
 import MainButton from '@/components/Button/MainButton.jsx';
 

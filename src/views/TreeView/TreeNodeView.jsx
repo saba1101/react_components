@@ -2,7 +2,7 @@ import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 import TreeNodeDropdown from '@/components/Reusable/Tree/TreeNode.jsx'
-import { Data } from '../../utils/Data'
+import { Data } from '@/utils/Data.js'
 const TreeNodeView = () => {
     const [renderFlag,setRenderFlag] = useState(false)
     const [data,setData] = useState(Data.Tree)

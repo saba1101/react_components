@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import style from './Checkbox.module.scss'
+import style from '@/components/Form/FormControls/Checkbox/Checkbox.module.scss'
 import IconCheckMark from '@/assets/icons/svg/checkmark.svg'
 import IconMinus from '@/assets/icons/svg/minus.svg'
 const Checkbox = (

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import style from './SingleSelectDropdown.module.scss'
 import IconArrow from '@/assets/icons/svg/arrow.svg'
 import IconRemove from '@/assets/icons/svg/close-circle.svg'
+import style from '@/components/Form/Selects/SingleSelect/SingleSelectDropdown.module.scss'
 
 const SingleSelectDropdown = ({
     label,

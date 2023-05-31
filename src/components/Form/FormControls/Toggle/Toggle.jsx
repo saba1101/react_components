@@ -1,5 +1,4 @@
-import style from './Toggle.module.scss'
-
+import style from '@/components/Form/FormControls/Toggle/Toggle.module.scss'
 const Toggle = (
     {
         checked,

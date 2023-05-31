@@ -1,8 +1,9 @@
 import { NavLink,useLocation, useNavigate} from 'react-router-dom'
-import style from './Sidebar.module.scss'
+import style from '@/localComponents/Sidebar/Sidebar.module.scss'
 import { RoutesData } from '@/routes/routesData.js'
 import { useEffect, useState } from 'react'
 import IconLogo from '@/assets/icons/svg/reactLogo.svg'
+
 const Sidebar = () => {
     const [FormNavExpanded,setFormNavExpanded] = useState(false)
     const location = useLocation();

@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import { BrowserRouter,Routes,Route,Link} from 'react-router-dom'
-import Sidebar from './localComponents/Sidebar/Sidebar.jsx'
-import Home from './views/home/Home.jsx'
-import Guide from "./views/Guide/Guide"
-import FormView from "./views/FormView/FormViews.jsx"
-import InputView from './views/FormView/InputView/InputView.jsx'
-import SingleSelectDropdownView from './views/FormView/SingleSelectDropdownView/SingleSelectDropdownView.jsx'
-import MultiSelectDropdownView from './views/FormView/MultiSelectDropdownView/MultiSelectDropdownView.jsx'
-import ButtonsView from './views/ButtonsView/ButtonsView.jsx'
-import CheckboxView from './views/FormView/CheckboxView/CheckboxView.jsx'
-import RadioView from './views/FormView/RadioView/RadioView.jsx'
-import ToggleView from './views/FormView/ToggleView/ToggleView.jsx'
-import SearchView from './views/SearchView/SearchView.jsx'
-import NotificationView from './views/NotificationView/NotificationView.jsx'
-import ModalView from './views/ModalView/ModalView.jsx'
-import GridView from './views/GridView/GridView.jsx'
-import TreeNodeView from './views/TreeView/TreeNodeView.jsx'
-import FileUploaderView from './views/FileUploaderView/FileUploaderView.jsx'
+import Sidebar from '@/localComponents/Sidebar/Sidebar.jsx'
+// import Home from './views/home/Home.jsx'
+import Guide from "@/views/Guide/Guide.jsx"
+import FormView from "@/views/FormView/FormViews.jsx"
+import InputView from '@/views/FormView/InputView/InputView.jsx'
+import SingleSelectDropdownView from '@/views/FormView/SingleSelectDropdownView/SingleSelectDropdownView.jsx'
+import MultiSelectDropdownView from '@/views/FormView/MultiSelectDropdownView/MultiSelectDropdownView.jsx'
+import ButtonsView from '@/views/ButtonsView/ButtonsView.jsx'
+import CheckboxView from '@/views/FormView/CheckboxView/CheckboxView.jsx'
+import RadioView from '@/views/FormView/RadioView/RadioView.jsx'
+import ToggleView from '@/views/FormView/ToggleView/ToggleView.jsx'
+import SearchView from '@/views/SearchView/SearchView.jsx'
+import NotificationView from '@/views/NotificationView/NotificationView.jsx'
+import ModalView from '@/views/ModalView/ModalView.jsx'
+import GridView from '@/views/GridView/GridView.jsx'
+import TreeNodeView from '@/views/TreeView/TreeNodeView.jsx'
+import FileUploaderView from '@/views/FileUploaderView/FileUploaderView.jsx'
 
 function App() {
 

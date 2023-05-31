@@ -1,9 +1,9 @@
-import style from './FileUploader.module.scss'
 import IconUpload from '@/assets/icons/svg/upload.svg'
 import MainButton from '@/components/Button/MainButton.jsx'
 import { _calculateSizeByUnit,_getFileFormat,_toBase64 } from '@/utils/Helpers'
 import { useRef, useState } from 'react'
 import FileBlock from '@/components/Files/FileBlock/FileBlock.jsx'
+import style from '@/components/Files/Uploader/FileUploader.module.scss'
 
 const FileUploader = (
     {
