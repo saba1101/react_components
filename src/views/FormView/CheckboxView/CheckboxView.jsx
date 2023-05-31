@@ -1,6 +1,6 @@
 import '@/views/ViewsCommon/common.scss'
 import { useRef, useState } from 'react'
-import Checkbox from '@/components/Form/FormControls/CheckBox/CheckBox.jsx'
+import Checkbox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx'
 import PropsDoc from '@/localComponents/PropsDoc.jsx'
 
 const CheckboxView = () => {
