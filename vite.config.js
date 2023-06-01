@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import federation from "@originjs/vite-plugin-federation";
 import path from 'path'
+import svgr from '@svgr/rollup';
 
 export default defineConfig({
   resolve: {
@@ -15,6 +16,7 @@ export default defineConfig({
     {
       include: "**/*.jsx",
     },
+    svgr(),
     federation({
       name: "masterComponents",
       filename: "remoteEntry.js",
