@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import style from '@/components/Reusable/Tree/TreeNode.module.scss'
 import Checkbox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx';
-import IconArrow from '@/assets/icons/svg/arrow.svg';
+// import IconArrow from '@/assets/icons/svg/arrow.svg';
+import Arrow from '@/assets/svgComponents/Arrow.jsx'
 import MainButton from '@/components/Button/MainButton.jsx';
 
 const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, SearchValue }) => {
@@ -97,7 +98,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, Sear
             className={`${style.collapseIcon} ${isExpanded ? style.expanded : ''}`}
             onClick={HandleExpandClick}
           >
-            <img src={IconArrow} alt="arrow" />
+            <Arrow/>
           </div>
         ) : (
           ''
@@ -106,7 +107,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, Sear
           <Checkbox checked={isSelected} change={HandleRecursiveSelect} />
         </div>
         <div className={style.nodeLabel}>
-          <span>{node.label ?? '-'}</span>
+          <span>{node.label}</span>
         </div>
       </div>
       {node.children && (
@@ -232,7 +233,7 @@ const TreeNodeDropdown = ({
   };
 
   return (
-    <div>
+    <div className={style.treeNodeComponentWrapper}>
       <ul className={`${WithMaxHeight ? style.maxHeight : ''}`}>{renderTreeNodes(data)}</ul>
       {WithBottomAction && (
         <div className={style.bottomActions}>
@@ -250,7 +251,7 @@ const TreeNodeDropdown = ({
                 label={'APPLY'}
                 type={'background'}
                 size={'small'}
-                customStyle={{ background: '#00ADEE', width: '100%' }}
+                customStyle={{width: '100%' }}
                 onClick={() => Apply()}
               />
             </div>

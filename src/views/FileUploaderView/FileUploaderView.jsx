@@ -27,6 +27,12 @@ const FileUploaderView = () => {
             example: 'rowStyle,colStyle'
         },
         {
+            title: 'maxSize',
+            description: 'Defines max File size, must be provided in bytes ',
+            type: 'Number/Bytes',
+            example: '300000'
+        },
+        {
             propType: 'event',
             title: 'onChange',
             description: 'returns Files Array',

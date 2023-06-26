@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import IconArrow from '@/assets/icons/svg/arrow.svg'
+// import IconArrow from '@/assets/svgComponents/Arrow.jsx'
+import Arrow from '@/assets/svgComponents/Arrow.jsx'
 import TreeNodeDropdown from '@/components/Reusable/Tree/TreeNode.jsx'
 import style from '@/components/Form/Selects/MultiSelect/MultiSelect.module.scss'
 import {_getSize} from '@/utils/Helpers.js'
@@ -16,6 +17,7 @@ const MultiSelect = (
         change,
         withApply,
         withSearch = true,
+        fixedDropdown,
     }
 ) => {
     const MultiselectRef = useRef(null)
@@ -24,6 +26,12 @@ const MultiSelect = (
     const [TagsOverflowed,setTagsOverflowed] = useState(false)
     const [SearchValue,setSearchValue] = useState('')
     const VisibleTagsCount = 3
+    const FixedPosition = useRef(
+        {
+            top: 0,
+            left: 0,
+        }
+    )
 
     const [SelectedNodesArr,setSelectedNodesArr] = useState([])
     
@@ -47,6 +55,7 @@ const MultiSelect = (
 
     const ToggleFocus = () => {
         setFocused(state => !state)
+        CalculatePos()
     }
 
     const CloseCollapsable = () => {
@@ -71,6 +80,18 @@ const MultiSelect = (
             setSelectedNodesArr(RemoveDuplicates(arr))
         }
       }
+
+    const CalculatePos = () => {
+        const componentRect = MultiselectRef.current.getBoundingClientRect()
+        const gap = 6
+        FixedPosition.current.width = componentRect.width
+        FixedPosition.current.left = componentRect.left
+        FixedPosition.current.top = (componentRect.top + componentRect.height + gap)
+    }
+
+    useEffect(() => {
+        CalculatePos()
+    },[MultiselectRef])
     
     return (
         <div 
@@ -97,7 +118,7 @@ const MultiSelect = (
                         ${Focused ? style.expanded : ''}
                     `}
                 >
-                    <img src={IconArrow} alt="" />
+                    <Arrow/>
                 </div>
                 {
                     SelectedNodesArr && (
@@ -112,7 +133,7 @@ const MultiSelect = (
                                         key={ind}
                                     >
                                         <span>
-                                            {tag.label ?? '-'}
+                                            {tag?.label}
                                         </span>
                                     </div>
 
@@ -137,6 +158,13 @@ const MultiSelect = (
                         ${style.collapsableOptions}
                         ${Focused ? style.expanded : ''}
                     `}
+                    style={fixedDropdown ? {
+                        width: FixedPosition.current.width,
+                        top: FixedPosition.current.top,
+                        left: FixedPosition.current.left,
+                        position: 'fixed',
+                        zIndex: '150',
+                    } : {}}
                     onClick={(ev) => ev.stopPropagation()}
                 >
                     {

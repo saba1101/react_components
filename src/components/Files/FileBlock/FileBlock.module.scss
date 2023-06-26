@@ -1,6 +1,6 @@
 .fileBlockWrapper{
     width: 100%;
-    border: 0.0625rem solid rgba($Day-Steelgrey08,.5);
+    border: 0.0625rem solid $Day-Steelgrey05;
     background: Day-Steelgrey04;
     box-shadow: 0 0 1.25rem rgba($Day-Steelgrey08,.2);
     position: relative;
@@ -58,7 +58,7 @@
                 }
             }
 
-            img{
+            svg{
                 width: 1.25rem;
             }
         }
@@ -68,6 +68,11 @@
             span{
                 color: $Day-TextPrimary;
                 font-size: 0.8125rem;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: block;
+                max-width: 90%;
             }
         }
     }
@@ -100,10 +105,36 @@
             background: $Day-Negative100;
         }
 
-        img{
+        svg{
             width: calc(100% - 0.8125rem);
             object-fit: contain;
+            path{
+                fill: #FFFFFF;
+            }
         }
     }
 
+}
+
+:global(body.theme_dark){
+    .fileBlockWrapper{
+        background: $Night-Steelgrey06;
+        border: 0.0625rem solid $Night-Steelgrey08;
+        box-shadow: 0 0 0.3125rem rgba($Night-Steelgrey08,.4);
+
+        .leftSide{
+            .fileName{
+                span{
+                    color: $Night-Steelgrey20;
+                }
+            }
+        }
+        .rightSide{
+            .fileSize{
+                span{
+                    color: $Night-Steelgrey20;
+                }
+            }
+        }
+    }
 }

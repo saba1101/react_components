@@ -1,6 +1,8 @@
 import style from '@/components/Files/FileBlock/FileBlock.module.scss'
-import IconFile from '@/assets/icons/svg/file.svg'
-import IconDelete from '@/assets/icons/svg/xWhite.svg'
+import Xicon from '@/assets/svgComponents/Xicon.jsx'
+import File from '@/assets/svgComponents/File.jsx'
+// import IconFile from '@/assets/icons/svg/file.svg'
+// import IconDelete from '@/assets/icons/svg/xWhite.svg'
 
 const FileBlock = (
     {
@@ -20,7 +22,8 @@ const FileBlock = (
                     <div className={style.fileFormat}>
                         <span> { file && file?.format ? file.format : 'FILE' } </span>
                     </div>
-                    <img src={IconFile} alt="" />
+                    <File/>
+                    {/* <img src={IconFile} alt="" /> */}
                 </div>
                 <div className={style.fileName}>
                     <span>
@@ -36,7 +39,8 @@ const FileBlock = (
                 </div>
             </div>
             <div className={style.deleteFile} onClick={DeleteFile}>
-                <img src={IconDelete} alt="delete" />
+                <Xicon/>
+                {/* <img src={IconDelete} alt="delete" /> */}
             </div>
         </div>
     )

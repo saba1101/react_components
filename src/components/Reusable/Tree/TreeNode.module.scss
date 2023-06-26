@@ -11,6 +11,10 @@ ul{
     overflow: auto;
     transition: $Default-Transition;
 
+    *{
+        font-family: 'Helvetica_Neue_LT_GEO_400';
+    }
+
     &.maxHeight{
         max-height: 16rem;
     }
@@ -56,13 +60,10 @@ ul{
                 transition: $Default-Transition;
 
                 &.expanded{
-                    img{
-                        transform: rotate(-180deg);
-                    }
+                    transform: rotate(-180deg);
                 }
 
-                img{
-                    transition: $Default-Transition;
+                svg{
                     width: 0.875rem;
                 }
             }
@@ -92,7 +93,7 @@ ul{
                 cursor: pointer;
                 color: $Day-Steelgrey20;
                 font-size: 0.75rem;
-                font-weight: 700;
+                font-weight: 500;
                 user-select: none;
             }
         }
@@ -100,5 +101,43 @@ ul{
 
     .apply{
         margin-top: 0.9375rem;
+    }
+}
+
+:global(body.theme_dark){
+    .treeNodeComponentWrapper{
+        li{
+
+            .nodeContent{
+                &:hover{
+                    background: $Night-Steelgrey09;
+                }
+
+                .collapseIcon{
+                    svg{
+                        path{
+                            stroke: $Night-Steelgrey20;
+                        }
+                    }
+                }
+
+                .nodeLabel{
+                    span{
+                        color: $Night-Steelgrey20 !important; 
+                    }
+                }
+            }
+        }
+        
+        .bottomActions{
+            border-top: 0.0625rem solid rgba($Night-Steelgrey09,.3);
+
+            .selectActions{
+                div > span{
+                    color : $Night-Steelgrey20;
+                    font-weight: 500;
+                }
+            }
+        }
     }
 }

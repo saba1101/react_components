@@ -1,9 +1,11 @@
-import IconUpload from '@/assets/icons/svg/upload.svg'
+// import IconUpload from '@/assets/icons/svg/upload.svg'
+import Upload from '@/assets/svgComponents/Upload.jsx'
 import MainButton from '@/components/Button/MainButton.jsx'
 import { _calculateSizeByUnit,_getFileFormat,_toBase64 } from '@/utils/Helpers'
 import { useRef, useState } from 'react'
 import FileBlock from '@/components/Files/FileBlock/FileBlock.jsx'
 import style from '@/components/Files/Uploader/FileUploader.module.scss'
+import { createNotification } from '@/components/Notification/ToastNotification.js'
 
 const FileUploader = (
     {
@@ -11,9 +13,11 @@ const FileUploader = (
         directionStyle,
         multiple,
         onChange,
+        maxSize,
+        withFileValidation,
+        acceptedFileFormats, // = ['jpeg','png','svg','jpg'],
     }
 ) => {
-
     const UploaderID = useRef(crypto.randomUUID())
     const [RenderFlag,setRenderFlag] = useState(false)
     const [IsActive,setIsActive] = useState(false)
@@ -82,7 +86,16 @@ const FileUploader = (
             base64: await _toBase64(files[i]),
             fileID: crypto.randomUUID(),
           }
-          mappedFiles.push(fileObject)
+
+          if(withFileValidation && acceptedFileFormats && !acceptedFileFormats.includes(fileObject.format.toLowerCase())){
+            createNotification(`File ${files[i].name} is Wrong Format`,'info',1500,'top-right',2)
+            return
+          }
+          
+          if(maxSize && files[i].size > maxSize){
+            createNotification(`File ${files[i].name} is Too Large`,'info',1500,'top-right',2)
+          } else mappedFiles.push(fileObject)
+
         }
 
         if(!multiple && mappedFiles.length > 1) mappedFiles = mappedFiles.slice(0,1)
@@ -108,7 +121,8 @@ const FileUploader = (
             >
                 
                 <div className={style.iconWrapper}>
-                    <img src={IconUpload} alt="" />
+                    <Upload/>
+                    {/* <img src={IconUpload} alt="" /> */}
                 </div>
 
                 <div className={style.fileUploaderLabel}>
@@ -144,6 +158,7 @@ const FileUploader = (
                         id={UploaderID}
                         multiple={multiple  ? true : false}
                         onChange={Change}
+                        accept=''
                     />
                 </div>
                 

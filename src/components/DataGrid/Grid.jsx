@@ -1,35 +1,41 @@
 import { 
-    DataGrid,
-    Column,
-    MasterDetail,
-    Paging,
-    Scrolling,
-    Pager,
-    LoadPanel,
-    Sorting,
-    Editing,
-    Lookup,
-    FilterRow,
-    HeaderFilter,
-    FilterPanel,
-    SearchPanel,
-    Selection,
-
+  DataGrid,
+  Column,
+  MasterDetail,
+  Paging,
+  Scrolling,
+  Pager,
+  LoadPanel,
+  Sorting,
+  Editing,
+  Lookup,
+  FilterRow,
+  HeaderFilter,
+  FilterPanel,
+  SearchPanel,
+  Selection,
+  Summary,
+  TotalItem,
 } from 'devextreme-react/data-grid';
 import CustomStore from 'devextreme/data/custom_store';
 // import './Styles/Grid.scss'
 // import ColumnConfigure from './components/ColumnConfigure.jsx';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ColumnConfigure from '@/components/DataGrid/components/ColumnConfigure.jsx'
+import Actions from '@/components/DataGrid/components/Actions.jsx'
+import '@/components/DataGrid/Styles/Grid.theme.scss'
 import '@/components/DataGrid/Styles/Grid.scss'
-
+import DeleteAll from '@/components/DataGrid/components/DeleteAll.jsx'
 const Grid = ({
     data,
     customColumns,
+    summary,
     keyExpr,
     theme,
     height,
-
+    focusedRowEnabled = true,
+    rowAlternationEnabled,
+    columnAutoWidth = true,
     // custom store
     withCustomStore,
     storeKey,
@@ -39,6 +45,7 @@ const Grid = ({
     removeFunction,
 
     withColumnConfigure,
+    withDeleteAll,
 
     withMasterDetail,
     detailTemplate,
@@ -57,11 +64,48 @@ const Grid = ({
     onEvent,
     selectionChanged,
     focusedRowChanging,
-    focusedRowChanged
+    focusedRowChanged,
+    onRowClick,
+
+    refresh,
+    customActions,
+    onColumnConfigure,
+    onDeleteAll,
+
 }) => {
-    const [renderFlag,setRenderFlag] = useState(false)
     // const [columns,setColumns] = useState(customColumns)
+    const [renderFlag,setRenderFlag] = useState(false)
     const columns = useRef(customColumns)
+    const DataGridRef = useRef(null)
+    const [ExpandedActionsKey,setExpandedActionsKey] = useState('')
+    const Instance = useRef({
+        Refresh: () => DataGridRef.current.instance.refresh(),
+        SelectedRowKeys: () => DataGridRef.current.instance.getSelectedRowKeys()
+    })
+    const [DefaultActions,setDefaultActions] = useState(customActions)
+    const DeleteAllRef = useRef(null)
+
+    const ClickHandler = (event) => {
+        if(customActions && customActions.length) {
+            DestroyCustomActionsContainer()
+            // setExpandedActionsKey('')
+        }
+    }
+
+    const ScrollHandler = () => {
+        if(customActions && customActions.length){
+            DestroyCustomActionsContainer()
+            // setExpandedActionsKey('')
+        }
+    }
+
+    const DestroyCustomActionsContainer = () => {
+        const actionColLists = document.querySelectorAll('.datagrid_action_data_controller > ul')
+        actionColLists.forEach(element => {
+            element.style.display = 'none'
+            element.style.pointerEvents = 'none'
+        })
+    }
 
     const store = new CustomStore({
         key: storeKey ?? 'id',
@@ -78,6 +122,9 @@ const Grid = ({
     }
 
     const onSelectionChanged = (ev) => {
+        if(focusedRowEnabled && selection?.mode === 'multiple' && withDeleteAll) {
+            DeleteAllRef.current.setValue(ev.selectedRowKeys.length)
+        }
         if(selectionChanged && typeof selectionChanged === 'function'){
             selectionChanged(ev)
         }
@@ -95,33 +142,114 @@ const Grid = ({
         }
     }
 
-    return (
+    const RowClick = (ev) => {
+        if(onRowClick && typeof onRowClick === 'function'){
+            onRowClick(ev.data)
+        }
+    }
+
+    const TriggerDeleteAllSelection = () => {        
+        if(onDeleteAll && typeof onDeleteAll === 'function'){
+            onDeleteAll(Instance.current.SelectedRowKeys())
+        }
+    }
+
+    const ExpandActionByDataKey = (data) => {
+        const actionPref = 'datagrid_action_data_id'
+        let currentEL = document.querySelector(`#${actionPref}_${data[keyExpr]}`)
+        let allActionElements = document.querySelectorAll('.datagrid_action_data_controller > ul')
+        let currentElList = currentEL.querySelector('ul')
+        let Visibility_Controller = {
+            display: 'block',
+            pointerEvents: 'all'
+        }
+
+        allActionElements.forEach(element => {
+            element.style.display = 'none'
+            element.style.pointerEvents = 'none'
+        })
+
+        const Rects = currentEL.getBoundingClientRect()
+        const ExpandableRects = currentElList.getBoundingClientRect()
+
+        Visibility_Controller['top'] = `${(Rects.top + ExpandableRects.height) + 20}px`
+        Visibility_Controller['left'] = `${(Rects.left - (ExpandableRects.width + 80))}px`
+        
+        Object.assign(currentElList.style,Visibility_Controller)
+    }
+
+    const SyncColumnWithConfigure = (cols) => {
+        columns.current = cols
+        setRenderFlag(state => !state)
+        if(onColumnConfigure && typeof onColumnConfigure === 'function'){
+            onColumnConfigure(columns.current)
+        }
+    }
+
+    const onRowExpanding = (event) => {
+        console.log(event.component.collapseAll(-1))
+    }
+
+    useEffect(() => {
+        if(refresh) {
+            Instance.current.Refresh()
+            console.info('DataSource Refresh.....')
+        }
+    },[refresh])
+
+    useEffect(() => {
+        document.addEventListener('click',ClickHandler)
+        document.addEventListener('wheel',ScrollHandler)
+
+        return () => {
+            document.removeEventListener('click',ClickHandler)
+            document.removeEventListener('wheel',ScrollHandler)
+        }
+    },[])
+  return (
         <div className={`gridWrapper __dx_DataGrid_Component__ light ${theme && !['dark','light'].includes(theme) ? 'light' : theme }`}>
+            
                 {
-                    withColumnConfigure && (
-                        <div className="column_configure_wrapper">
-                            <ColumnConfigure 
-                                items={columns.current} 
-                                change={(cols) => (columns.current = cols,setRenderFlag(state => !state))}
-                            />
+                    (withColumnConfigure || (withDeleteAll && selection?.mode === 'multiple')) && (
+                        <div className="__dx_DataGrid_Toolbar">
+                            <div className="__dx_DataGrid_Toolbar_Leftside">
+                                {
+                                    (withDeleteAll && selection?.mode === 'multiple') && (
+                                        <DeleteAll 
+                                            ref={DeleteAllRef}
+                                            onDeleteAll={TriggerDeleteAllSelection}
+                                        />
+                                    )
+                                }
+                            </div>
+                            <div className="__dx_DataGrid_Toolbar_Righttside">
+                                {
+                                    withColumnConfigure && (
+                                        <div className="column_configure_wrapper">
+                                            <ColumnConfigure 
+                                                items={columns.current.sort((a,b) => a.orderIndex - b.orderIndex)} 
+                                                change={(cols) => SyncColumnWithConfigure(cols)}
+                                            />
+                                        </div>
+                                    )
+                                }
+                            </div>
                         </div>
                     )
                 }
 
                 <DataGrid
-                    style={
-                        {
-                            height: `${height ? height : 'auto'}`
-                        }
-                    }
+                    height={height ? height : ''}
+                    ref={DataGridRef}
                     dataSource={withCustomStore ? store : data}
+                    remoteOperations={true}
                     keyExpr={keyExpr ?? 'id'}
                     allowColumnReordering={false}
-                    allowColumnResizing={true}
-                    columnAutoWidth={true}
+                    allowColumnResizing={false}
+                    columnAutoWidth={columnAutoWidth}
                     showColumnLines={false}
-                    showRowLines={false} 
-                    rowAlternationEnabled={false}
+                    showRowLines={true} 
+                    rowAlternationEnabled={rowAlternationEnabled}
                     showBorders={false}
                     hoverStateEnabled={true}
 
@@ -140,12 +268,13 @@ const Grid = ({
                     onEditCanceled={(event) => LogEvent(event,'onEditCanceled')}
 
                     ///////row focus//////
-                    focusedRowEnabled={true}
+                    focusedRowEnabled={focusedRowEnabled}
                     // focusedRowKey={}
                     autoNavigateToFocusedRow={false}
                     onFocusedRowChanging={onFocusedRowChanging}
                     onFocusedRowChanged={onFocusedRowChanged}
-
+                    onRowClick={RowClick}
+                    onRowExpanding={onRowExpanding}
 
                     // row selection
                     onSelectionChanged={onSelectionChanged}
@@ -166,7 +295,7 @@ const Grid = ({
                                 allowAdding={false} 
                             />
                         )
-                    }
+                        }
 
                     <FilterRow visible={filterOptions?.filterRow ?? false} applyFilter={'auto'} />
                     <SearchPanel visible={searchPanel?.visible ?? false} width={searchPanel?.width ?? 256 } placeholder={searchPanel?.placeholder ?? 'Search...'} />
@@ -191,10 +320,82 @@ const Grid = ({
                                     cellRender={col.template}
                                     allowFiltering={col.allowFiltering}
                                     allowSorting={col.allowSorting}
+                                    allowEditing={col.allowEditing}
                                     visibleIndex={col.orderIndex}
+                                    defaultSortOrder={col.sortOrderType}
                                 />
                             )
                         })
+                    }
+
+                    {
+                        (summary && summary.length && !withCustomStore)  && (
+                            <Summary>
+                                {
+                                    summary && summary.map((s,ind) => {
+                                        return (
+                                            <TotalItem
+                                                key={ind}
+                                                column={s.column}
+                                                summaryType="custom"
+                                                customizeText={s.total}
+                                            />
+                                        )
+                                    })
+                                }
+                            </Summary>
+                        )
+                    }
+
+                    {
+                        (summary && summary.length && withCustomStore) && (
+                            <Summary>
+                                {
+                                    summary.map((s,index) => {
+                                        return (
+                                            <TotalItem
+                                                column={s.column}
+                                                summaryType={s.summaryType}
+                                            />
+                                        )
+                                    })
+                                }
+                            </Summary>
+                        )
+                    }
+
+
+                    {
+                        (customActions && customActions.length) && (
+                            <Column
+                                dataField={null}
+                                caption={'Actions'}
+                                alignment={'left'}
+                                width={100}
+                                allowFiltering={false}
+                                allowSorting={false}
+                                cellRender={(event) => {
+
+                                    return (
+                                        <Actions
+                                            rowData={event.data}
+                                            rowID={event.data[keyExpr]}
+                                            actions={DefaultActions.filter(el => {
+                                                if(el.disabledForKeys && el.disabledForKeys.length){
+                                                    return !el.disabledForKeys.includes(event.data[keyExpr])
+                                                }
+                                                else return el
+                                            })}
+                                            onExpand={(state) => {
+                                                ExpandActionByDataKey(event.data)
+                                                // state ? setExpandedActionsKey(event.data[keyExpr]) : setExpandedActionsKey('')
+                                            }}
+                                        />
+                                    )
+                                }
+                                }
+                            />
+                        )
                     }
 
                     {
@@ -209,19 +410,19 @@ const Grid = ({
                     {/* <Sorting mode="asc" /> */}
                     <LoadPanel enabled={true} />
                     <Scrolling mode={scrollMode ?? 'none'} />
-                    <Paging defaultPageSize={pagerOptions?.defaultPageSize ?? 20} />
+                    <Paging defaultPageSize={pagerOptions?.defaultPageSize ?? 30} />
                     <Pager
-                        visible={pagerOptions?.visible ?? false}
-                        allowedPageSizes={pagerOptions?.allowedPageSizes ?? [5,10,20,40,60,'all']}
-                        showPageSizeSelector={pagerOptions?.showPageSizeSelector ?? false}
-                        showInfo={pagerOptions?.showInfo ?? false}
-                        showNavigationButtons={pagerOptions?.showNavigationButtons ?? false} 
+                        visible={pagerOptions?.visible ?? true}
+                        allowedPageSizes={pagerOptions?.allowedPageSizes ?? [30,60,120,180,'all']}
+                        showPageSizeSelector={pagerOptions?.showPageSizeSelector ?? true}
+                        showInfo={pagerOptions?.showInfo ?? true}
+                        showNavigationButtons={pagerOptions?.showNavigationButtons ?? true} 
                     />
 
-                    
+                  
                 </DataGrid>
         </div>
-    )
+  )
 }
 
 

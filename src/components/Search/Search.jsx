@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import style from '@/components/Search/Search.module.scss'
-import IconSearch from '@/assets/icons/svg/search.svg'
-import IconClear from '@/assets/icons/svg/x.svg'
+// import IconSearch from '@/assets/icons/svg/search.svg'
+import IconSearch from '@/assets/svgComponents/IconSearch.jsx'
+import Xicon from '@/assets/svgComponents/Xicon.jsx'
+// import IconClear from '@/assets/icons/svg/x.svg'
 import { _getSize } from '@/utils/Helpers.js'
 
 const Search = (
@@ -27,7 +29,6 @@ const Search = (
 
     useEffect(() => {
         document.addEventListener('click',ClickHandler)
-
         return () => {
             document.removeEventListener('click',ClickHandler)
         }
@@ -71,7 +72,8 @@ const Search = (
     return (
         <div ref={SearchRef} className={`${style.searchWrapper} ${style[_getSize(size)]} ${Focused ? style.focused : ''}`}>
             <div className={style.iconSearch}>
-                <img src={IconSearch} alt="" />
+                {/* <img src={IconSearch} alt="" /> */}
+                <IconSearch/>
             </div>
             <div className={style.inputWrapper}>
                 <input 
@@ -85,7 +87,7 @@ const Search = (
                 />
             </div>
             <div onClick={clearValue} className={`${style.iconClear} ${value && value.trim() !== '' ? style.visible : style.hidden}`}>
-                <img src={IconClear} alt="" />
+                <Xicon/>
             </div>
             {
                 Collapsed && withSuggestions && suggestions.length && value ? (

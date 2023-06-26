@@ -1,24 +1,28 @@
 .fileUploaderWrapper{
     width: 100%;
 
+    *{
+        font-family: 'Helvetica_Neue_LT_GEO_400';
+    }
+
     .fileUploaderContent{
         width: 100%;
         padding: 1rem;
         @include flex(center,center,column,unset);
         text-align: center;
-        border: 0.0625rem dashed #6F787B;
+        border: 0.0625rem dashed $Day-Steelgrey07;
         border-radius: 0.625rem;
         overflow: hidden;
         transition: $Default-Transition;
 
         &.activeDropzone{
-            background: rgba($Day-Positive80,1);
-            border: 0.0625rem dashed $Day-Positive80;
+            background: rgba($Day-Positive80,1) !important;
+            border: 0.0625rem dashed $Day-Positive80 !important;
 
             .fileUploaderLabel > span {
                 color: $Day-Steelgrey00
             }
-            .iconWrapper img {
+            .iconWrapper svg {
                 filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(29deg) brightness(170%) contrast(102%);
             }
         }
@@ -34,7 +38,7 @@
         .iconWrapper{
             pointer-events: none;
             user-select: none;
-            img{
+            svg{
                 width: 2.75rem;
             }
         }
@@ -71,5 +75,32 @@
             }
         }
 
+    }
+}
+
+:global(body.theme_dark){
+    .fileUploaderWrapper{
+        .fileUploaderContent{
+            border: 0.0625rem dashed rgba($Night-Steelgrey11,.5);
+            background: $Night-Steelgrey06;
+        }
+
+        .iconWrapper{
+            svg{
+                path{
+                    stroke: $Night-Steelgrey11;
+                }
+            }
+        }
+        .fileUploaderLabel{
+            span{
+                color: $Night-Steelgrey20;
+            }
+        }
+        .validators{
+            span{
+                color: $Night-Steelgrey11;
+            }
+        }
     }
 }

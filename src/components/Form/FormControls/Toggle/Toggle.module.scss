@@ -28,7 +28,7 @@
     }
 
     &.checked{
-        background: $Day-Positive100;
+        background: $Day-Positive100 !important;
         .toggleState{
             left: calc(100% - ($stateToggleWidth + 0.125rem));
         }
@@ -48,6 +48,24 @@
         background: $Day-Steelgrey06;
         .toggleState{
             background: $Day-Steelgrey01;
+        }
+    }
+}
+
+:global(body.theme_dark){
+    .toggleWrapper{
+        background: $Night-Steelgrey09;
+
+        &.disabled{
+            background: $Night-Steelgrey07;
+            .toggleState{
+                background: $Night-Steelgrey09;
+            }
+            &.checked{
+                .toggleState{
+                    background: $Night-Steelgrey20;
+                }   
+            }
         }
     }
 }

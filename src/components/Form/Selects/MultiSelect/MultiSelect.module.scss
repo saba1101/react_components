@@ -2,6 +2,10 @@
     width: 100%;
     position: relative;
 
+    *{
+        font-family: 'Helvetica_Neue_LT_GEO_400';
+    }
+
     .selectedTags{
         width: 100%;
         border: 0.0625rem solid $Day-Steelgrey06;
@@ -29,16 +33,15 @@
             right: 1rem;
             transform: translate(0,-50%);
             cursor: pointer;
+            transition: $Default-Transition;
+            @include centerEl;
 
-            &.expanded{
-                img{
-                    transform: rotate(-180deg);
-                }
+            svg{
+                width: 0.75rem;
             }
 
-            img{
-                width: 0.875rem;
-                transition: $Default-Transition;
+            &.expanded{
+                transform: rotate(-180deg) translateY(0.3125rem);
             }
         }
 
@@ -114,7 +117,7 @@
 
     &.focused{
         .selectedTags{
-            border: 0.0625rem solid $Main-Blue-Light;
+            border: 0.0625rem solid $Main-Blue-Light !important;
 
             .selectLabel{
                 top: 0.5rem;
@@ -142,7 +145,7 @@
         }
 
         .selectArrow{
-            img{
+            svg{
                 opacity: .6;
             }
         }
@@ -175,7 +178,7 @@
 
     &.error{
         .selectedTags{
-            border: 0.0625rem solid $Day-Negative100;
+            border: 0.0625rem solid $Day-Negative100 !important;
         }
 
         .msgText{
@@ -186,12 +189,48 @@
     }
     &.success{
         .selectedTags{
-            border: 0.0625rem solid $Day-Positive100;
+            border: 0.0625rem solid $Day-Positive100 !important;
         }
         .msgText{
             p{
                 color: $Day-Positive100;
             }
+        }
+    }
+}
+
+:global(body.theme_dark){
+    .multiselectWrapper{
+
+        &.unfocused{
+            .selectedTags{
+                border: 0.0625rem solid $Night-Steelgrey09 !important;   
+            }
+        }
+
+        .selectedTags{
+            border: 0.0625rem solid $Night-Steelgrey09;
+            background: $Night-Steelgrey06;
+
+            .selectLabel{
+                span{
+                    color: $Night-Steelgrey12;
+                }
+            }
+
+            .selectedTagsList{
+                .singleTag{
+                    span{
+                        color: $Night-Steelgrey20;
+                    }
+                }
+            }
+        }
+
+        .collapsableOptions{
+            border: 0.0625rem solid $Night-Steelgrey09;
+            background: $Night-Steelgrey06;
+            box-shadow: 0 0 0.625rem rgba($Night-Steelgrey09,.2);
         }
     }
 }

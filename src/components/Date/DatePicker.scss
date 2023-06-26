@@ -1,0 +1,54 @@
+.datePickerWrapper{
+    position: relative;
+    &.iconOnly{
+        width: 1.875rem !important;
+
+        .notifierDot{
+            width: 0.4375rem;
+            height: 0.4375rem;
+            border-radius: 50%;
+            background: $Day-Positive80;
+            // opacity: 0;
+            position: absolute;
+            top: -0.25rem;
+            right: -0.25rem;
+            transition: $Default-Transition;
+            opacity: 0;
+
+            &.visible{
+                opacity: 1;
+            }
+        }
+
+        .ant-picker{
+            opacity: 0 !important;
+            cursor: pointer;
+        }
+
+        .iconPlaceholder{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 10;
+            pointer-events: none;
+
+            svg{
+                width: 1.5rem;
+            }
+        }
+    }
+}
+
+body.theme_dark{
+    .datePickerWrapper.iconOnly{
+        .iconPlaceholder{
+            svg{
+                path{
+                    stroke: #ffffff;
+                }
+            }
+        }
+
+    }
+}

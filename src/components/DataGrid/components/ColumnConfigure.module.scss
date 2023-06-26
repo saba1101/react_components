@@ -3,6 +3,12 @@
     width: 2.25rem;
     height: 2.25rem;
 
+    &.active{
+        .iconWrapper{
+
+        }
+    }
+
     .iconWrapper{
         width: 2.25rem;
         height: 2.25rem;
@@ -11,7 +17,7 @@
         @include centerEl;
         cursor: pointer;
 
-        img{
+        svg{
             width: 1.125rem;
             user-select: none;
             pointer-events: none;
@@ -43,7 +49,7 @@
                 @include centerEl;
                 margin-right: 1rem;
                 cursor: pointer;
-                img{
+                svg{
                     pointer-events: none;
                     width: 0.5rem;
                 }
@@ -54,5 +60,38 @@
                 margin-left: 0.625rem;
             }
         }
+    }
+}
+
+:global(body.theme_dark){
+    .configureWrapper{
+
+        .iconWrapper{
+            background: $Night-Steelgrey06;
+            svg{
+                path{
+                    stroke: $Night-Steelgrey20;
+                }
+            }
+        }
+        
+        ul{
+            background: $Night-Steelgrey06;
+            box-shadow: 0 0 0.625rem $Night-Steelgrey06;
+            border: 0.0625rem solid $Night-Steelgrey07;
+
+            li{
+                .iconDrag{
+                    svg{
+                        path{
+                            fill: $Night-Steelgrey20;
+                        }
+                    }
+                }
+                span{
+                    color: $Night-Steelgrey20;
+                }
+            }
+        }   
     }
 }

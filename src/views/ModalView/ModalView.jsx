@@ -5,7 +5,6 @@ import PropsDoc from '@/localComponents/PropsDoc.jsx'
 import Popup from '@/components/Modal/Popup.jsx'
 import ToggleView from '@/views/FormView/ToggleView/ToggleView.jsx'
 
-
 const ModalView = () => {
 
     const [renderFlag,setRenderFlag] = useState(false)
@@ -66,6 +65,11 @@ const ModalView = () => {
             title: 'template',
             description: 'Popup Slot for Template',
             type: 'Function / React Component',
+        },
+        {
+            title: 'children',
+            description: 'Slot',
+            type: 'Dom Elements',
         },
         {
             title: 'options',
@@ -208,6 +212,7 @@ const ModalView = () => {
                 }
 
             </div>
+
 
             <div className="docs__component_static_preview_props">
                 <PropsDoc propsList={propsList} />

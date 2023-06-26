@@ -12,4 +12,12 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
   },
+  "no-unused-vars": [
+    "error",
+    {
+        "ignoreRestSiblings": true,
+        "destructuredArrayIgnorePattern": "[A-Z]",
+        "caughtErrors": "none"
+    }
+]
 }

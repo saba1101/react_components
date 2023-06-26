@@ -13,7 +13,7 @@
     .checkMark{
         @include centerEl;
 
-        img{
+        svg{
             width: 0.625rem;
             user-select: none;
             pointer-events: none;
@@ -21,13 +21,13 @@
     }
 
     &:hover{
-        background: rgba($Day-Positive80,.2);
-        border: 0.0625rem solid $Day-Positive80;
+        background: rgba($Day-Positive80,.2) !important;
+        border: 0.0625rem solid $Day-Positive80 !important;
     }
 
     &.checked{
-        background: $Day-Positive80;
-        border: 0.0625rem solid $Day-Positive80;
+        background: $Day-Positive80 !important;
+        border: 0.0625rem solid $Day-Positive80 !important;
 
         &:hover{
             background: $Day-Positive120;
@@ -36,9 +36,12 @@
 
         &.disabled{
             .checkMark{
-                img{
+                svg{
                     opacity: .4;
-                    filter: invert(93%) sepia(5%) saturate(134%) hue-rotate(145deg) brightness(95%) contrast(85%);
+                    path{
+                        fill: $Day-Positive80;
+                    }
+                    // filter: invert(93%) sepia(5%) saturate(134%) hue-rotate(145deg) brightness(95%) contrast(85%);
                 }
             }
         }
@@ -46,7 +49,20 @@
     &.disabled{
         pointer-events: none;
         user-select: none;
-        background: $Day-Steelgrey01;
-        border: 0.0625rem solid $Day-Steelgrey07;
+        background: $Day-Steelgrey01 !important;
+        border: 0.0625rem solid $Day-Steelgrey07 !important;
+    }
+}
+
+:global(body.theme_dark){
+    .checkboxWrapper{
+        border: 0.0625rem solid $Night-Steelgrey09;
+        background: $Night-Steelgrey06;
+
+        &.disabled{
+            opacity: .4;
+            border: 0.0625rem solid $Night-Steelgrey07 !important;
+            background: $Night-Steelgrey06 !important;
+        }
     }
 }

@@ -50,3 +50,21 @@
         }
     }
 }
+
+:global(body.theme_dark){
+    .radioWrapper{
+        background: $Night-Steelgrey06;
+        border: 0.0625rem solid $Night-Steelgrey09;
+
+        &:hover{
+            background: $Night-Steelgrey06;
+        }
+
+        &.disabled{
+            border: 0.0625rem solid $Night-Steelgrey07;
+            .radioState{
+                background: $Night-Steelgrey09;
+            }
+        }
+    }
+}

@@ -4,6 +4,10 @@
     transition: $Default-Transition;
     border-radius: 0.125rem;
     cursor: pointer;
+    outline: none !important;
+    *{
+        font-family: 'Helvetica_Neue_LT_GEO_Caps_500';
+    }
 
     &.loadingState{
         pointer-events: none;

@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react'
 import style from '@/components/Form/FormControls/Checkbox/Checkbox.module.scss'
-import IconCheckMark from '@/assets/icons/svg/checkmark.svg'
-import IconMinus from '@/assets/icons/svg/minus.svg'
+// import IconCheckMark from '@/assets/icons/svg/checkmark.svg'
+// import IconMinus from '@/assets/icons/svg/minus.svg'
+import Minus from '@/assets/svgComponents/Minus.jsx'
+import Checkmark from '@/assets/svgComponents/Checkmark.jsx'
 const Checkbox = (
     {
         checked,
@@ -35,7 +37,8 @@ const Checkbox = (
                         required={isRequired ?? false}
                     />
                     {
-                        checked ? (<img src={multipleChecked ? IconMinus : IconCheckMark} alt="" />): ''
+                        checked ? (multipleChecked ? <Minus/> : <Checkmark/>) : ''
+                        // checked ? (<img src={multipleChecked ? IconMinus : IconCheckMark} alt="" />): ''
                     }
                 </div>
             </div>

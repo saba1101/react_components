@@ -5,6 +5,12 @@ import IconInfo from '@/assets/icons/svg/info.svg'
 import IconWarning from '@/assets/icons/svg/warning.svg'
 import IconSuccess from '@/assets/icons/svg/success.svg'
 
+import Success from '@/assets/svgComponents/Success.jsx'
+import Warning from '@/assets/svgComponents/Warning.jsx'
+import Info from '@/assets/svgComponents/Info.jsx'
+import Error from '@/assets/svgComponents/Error.jsx'
+
+
 
 const Popup = (
     {
@@ -12,22 +18,23 @@ const Popup = (
         size,
         template,
         options,
+        children,
     }
 ) => {
     const _getType = () =>{
         if(!options || !options?.type) return
         switch (String(options?.type)){
             case 'error':{
-                return IconError
+                return <Error/>
             }
             case 'warning':{
-                return IconWarning
+                return <Warning/>
             }
             case 'success':{
-                return IconSuccess
+                return <Success/>
             }
             case 'info':{
-                return IconInfo
+                return <Info/>
             }
         }
     }
@@ -48,7 +55,7 @@ const Popup = (
                         {
                             _getType() && (
                                 <div className={style.typeIcon}>
-                                    <img src={_getType()} alt="type" />
+                                    {_getType()}
                                 </div>
                             )
                         }
@@ -69,6 +76,7 @@ const Popup = (
                     </div>
                     <div className={style.templateWrapper}>
                         {template && template()}
+                        {children && children}
                     </div>
                 </div>
             </div>

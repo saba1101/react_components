@@ -19,16 +19,16 @@
         box-shadow: 0 0 1.25rem rgba(#00000080,.1);
         overflow: auto;
         animation: fadeIn .3s forwards;
-        @keyframes fadeIn {
-            from{
-                transform: translateY(1.25rem);
-                opacity: 0;
-            }
-            to{
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+        // @keyframes fadeIn {
+        //     from{
+        //         transform: translateY(1.25rem);
+        //         opacity: 0;
+        //     }
+        //     to{
+        //         transform: translateY(0);
+        //         opacity: 1;
+        //     }
+        // }
 
         .popupHeader{
             width: 100%;
@@ -67,7 +67,7 @@
             .typeIcon{
                 margin-bottom: 1.5rem;
                 pointer-events: none;
-                img{
+                svg{
                     width: 2.25rem;
                     user-select: none;
                 }
@@ -88,6 +88,27 @@
         }
         &.large{
             width: calc(100% - 7.5rem);
+        }
+    }
+}
+
+:global(body.theme_dark){
+    .modalOverlay{
+        .popupContainer,.popupHeader{
+            background: $Night-Steelgrey06;
+        }
+
+        .popupHeader{
+            .popupTitle{
+                h2{
+                    color: $Night-Steelgrey20;
+                }
+            }
+            .popupDescription{
+                p{
+                    color: $Night-Steelgrey12;   
+                }
+            }
         }
     }
 }

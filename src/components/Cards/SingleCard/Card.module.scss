@@ -1,0 +1,168 @@
+.cardsGridWrapper{
+    width: 18.9375rem;
+    max-height: 9rem;
+    border-radius:  0.375rem;
+    background: $Day-Steelgrey00;
+    border: 0.0625rem solid $Day-Steelgrey05;
+    box-shadow: 0 0 0.625rem $Day-Steelgrey05;
+    position: relative;
+
+    *{
+        font-family: 'Helvetica_Neue_LT_GEO_400';
+    }
+
+    .cardContent{
+        width: 100%;
+        height: 100%;
+        padding: 0.75rem 0;
+        cursor: pointer;
+
+        user-select: none;
+
+        .cardTopContent,.cardMiddleContent,.cardBottomContent{
+            padding: 0 0.75rem;
+        }
+
+        .cardTopContent{
+            
+            h1,h4{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .cardLabel{
+                width: 100%;
+
+    
+                h1{
+                    color: $Day-TextPrimary;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    font-weight: 700;
+                }
+            }
+            .subLabel{
+                h4{
+                    color: $Day-TextSecondary;
+                    font-size: 0.875rem;
+                    line-height: 1.5rem;
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .cardMiddleContent{
+            width: 100%;
+            .cardDescription{
+                width: 100%;
+
+                p{
+                    color: #6F787B;
+                    font-size: 0.75rem;
+                    margin-top: 0.75rem;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        .cardBottomContent{
+            width: 100%;
+            margin-top: 1rem;
+            border-top: 0.0625rem solid $Day-Steelgrey05;
+            padding-top: 0.5rem !important;
+            .contentsModeDefault{
+                width: 100%;
+                @include flex(space-between,center,row,unset);
+
+                ul{
+
+                    @include flex(flex-start,center,row,2.125rem);
+                    li{
+                        max-width: 5.8125rem;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
+                        span{
+                            line-height: 1.25rem;
+                            font-size: 0.75rem;
+                            font-weight: 500;
+                            color: $Day-TextPrimary;
+                        }
+                    }
+                }
+
+                .cardItemsCount{
+                    cursor: pointer;
+                    
+                    span{
+                        color: $Day-TextPrimary;
+                        white-space: nowrap;
+                        font-size: 0.875rem;
+                    }
+                }
+            }
+
+            .contentsModeActions{
+                width: 100%;
+                @include flex(space-between,center,row,unset);
+                .iconAndLabel{
+                    @include flex(flex-start,center,row,unset);
+
+                    .icon{
+                        @include centerEl;
+                        svg{
+                            width: 1.125rem;
+                        }
+                    }
+
+                    .label{
+                        @include centerEl;
+                        margin-left: 0.3331rem;
+                        span{
+                            font-size: 0.75rem;
+                            color: $Day-TextPrimary;
+                            font-weight: 600;
+                        }
+                    }
+                }
+                .action{
+
+                }
+            }
+        }
+    }
+}
+
+:global(body.theme_dark){
+    .cardsGridWrapper{
+        background: $Night-Steelgrey06 !important;
+        border: 0.0625rem solid $Night-Steelgrey05 !important;
+        box-shadow: 0 0 0.625rem $Night-Steelgrey05 !important;
+
+        .cardTopContent{
+            h1{
+                color: $Night-Steelgrey20 !important;
+            }
+            h4{
+                color: $Night-Steelgrey12 !important;
+            }
+        }
+
+        .cardMiddleContent{
+            p{
+                color: $Night-Steelgrey11 !important;
+            }
+        }
+
+        .cardBottomContent{
+            border-top: 0.0625rem solid $Night-Steelgrey05;
+            span{
+                color: $Night-Steelgrey20 !important;
+            }
+        }
+    }
+}

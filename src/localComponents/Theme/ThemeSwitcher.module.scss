@@ -1,0 +1,36 @@
+
+
+.themeSwitcherWrapper{
+    position: fixed;
+    bottom: 0.9375rem;
+    right: 0.9375rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: $Day-Steelgrey15;
+    cursor: pointer;
+    @include centerEl;
+    background: $Day-Steelgrey06;
+    box-shadow: 0 0 1.25rem $Day-Steelgrey01;
+    transition: $Default-Transition;
+    
+    svg{
+        user-select: none;
+        pointer-events: none;
+        path{
+            fill: #171B1C;
+        }
+    }
+}   
+
+:global(body.theme_dark){
+    .themeSwitcherWrapper{
+        background: $Day-Steelgrey20;
+        box-shadow: 0 0 1.25rem $Day-Steelgrey15;
+        svg{
+            path{
+                fill: #FFF;
+            }
+        }
+    }
+}

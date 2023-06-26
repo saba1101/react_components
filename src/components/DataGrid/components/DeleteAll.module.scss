@@ -1,0 +1,54 @@
+.deleteAllWrapper{
+    @include flex(flex-start,center,row,0.5rem);
+
+    .iconContainer{
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.25rem;
+        background: $Day-Steelgrey07;
+        @include centerEl;
+        cursor: pointer;
+        transition: $Default-Transition;
+
+        &:hover{
+            background: $Day-Negative100 !important;
+            svg{
+                path{
+                    stroke: $Day-Steelgrey01;
+                }
+            }
+        }
+
+        svg{
+            width: 1.1rem;
+            path{
+                stroke: $Day-Negative100; 
+            }
+        }
+    }
+
+    .deleteItemsCountLabel{
+        span{
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            color: $Day-TextPrimary;
+            font-family: 'Helvetica_Neue_LT_GEO_Caps_500';
+        }
+    }
+}
+
+:global(body.theme_dark){
+    .datagridDeleteAllAction{
+        &.deleteAllWrapper{
+            .iconContainer{
+                background: $Night-Steelgrey04;
+            }
+        }
+        .deleteItemsCountLabel{
+            span{
+                color: $Night-Steelgrey20;
+            }
+        }
+    }
+}

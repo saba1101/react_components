@@ -49,13 +49,13 @@ const InputView = () => {
             title: 'inputType',
             description: 'input attribute type',
             type: 'String',
-            example: 'Text,Password',
+            example: 'Text | Password',
         },
         {
             title: 'size',
-            description: 'input size, height',
+            description: 'input size, height / Default is small',
             type: 'String',
-            example: 'small,medium,large',
+            example: 'xs | small | medium | large',
         },
         {
             title: 'msg',
@@ -95,7 +95,7 @@ const InputView = () => {
             },
             {
                 label: 'Default Filled With Label',
-                value: 'Vue is better',
+                value: 'Default Filled With Label',
             },
             {
                 label: 'Label and Placeholder',
@@ -155,6 +155,11 @@ const InputView = () => {
                     type:'success',
                     text:'success message'
                 },
+            },
+            {
+                label: 'Type Number',
+                value: '',
+                inputType: 'number'
             },
             {
                 label: 'large',

@@ -1,5 +1,5 @@
-@import 'devextreme/dist/css/dx.material.teal.light.css';
-// @import 'devextreme/dist/css/dx.material.teal.dark.css';
+// @import 'devextreme/dist/css/dx.material.blue.light.css';
+// @import 'devextreme/dist/css/dx.material.teal.light.css';
 
 .__dx_DataGrid_Component__{
     .dx-datagrid-header-panel{
@@ -13,15 +13,18 @@
         padding-bottom: 0.625rem;
     }
 
-    &.light{
-        .dx-header-row{
-                background: $Day-Steelgrey05;
-        }
+    .dx-header-row{
+        background: $Day-Steelgrey05;
     }
 
-    &.dark{
-        .dx-header-row{
-            background: $Night-Steelgrey06;
-        }
+    .__dx_DataGrid_Toolbar{
+        @include flex(space-between,center,row,unset);
+        padding-bottom: 0.3125rem;
+    }
+}
+
+body.theme_dark{
+    .dx-header-row{
+        background: $Night-Steelgrey06;
     }
 }

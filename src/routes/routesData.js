@@ -62,5 +62,17 @@ export const RoutesData = [
         label : 'TreeNodeView',
         path : '/TreeNodeView',
     },
+    {
+        label : 'Date Picker',
+        path : '/DatePickerView',
+    },
+    {
+        label : 'Cards',
+        path : '/CardsView',
+    },
+    {
+        label : 'Tooltip',
+        path : '/TooltipView',
+    },
 
 ]

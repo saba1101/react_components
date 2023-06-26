@@ -3,6 +3,8 @@ import '@/views/Guide/Guide.scss';
 
 const Guide = () => {
   const [code, setCode] = useState(`plugins: [
+  import federation from "@originjs/vite-plugin-federation";
+
     react(),
     {
       include: "**/*.jsx",
@@ -56,6 +58,7 @@ const Guide = () => {
 
   return (
     <div className="__guide_dependencies__">
+
       <h1>Installation and Dependencies Guide</h1>
 
       <p>

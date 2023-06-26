@@ -1,6 +1,32 @@
+.msgText{
+    margin-top: 0.5rem;
+    text-align: left;
+    p{
+        font-size: 0.75rem;
+        word-wrap: break-word;
+    }
+
+    &.error{
+        p{
+            color: $Day-Negative100;
+        }
+    }
+    &.success{
+        p{
+            color: $Day-Positive100;
+        }
+    }
+
+}
+
+
 .selectWrapper{
     width: 100%;
     position: relative;
+
+    *{
+        font-family: 'Helvetica_Neue_LT_GEO_400';
+    }
 
     @include centerEl;
     place-items: baseline;
@@ -9,6 +35,7 @@
         width: 100%;
         height: 100%;
         border: 0.0625rem solid $Day-Steelgrey06;
+        background: $Day-Steelgrey00;
         transition: $Default-Transition;
         border-radius: 0.25rem;
         padding: 0.0625rem;
@@ -58,7 +85,7 @@
             right: 2.5rem;
             transform: translate(0,-50%);
 
-            img{
+            svg{
                 width: 1.125rem;
             }
         }
@@ -71,7 +98,7 @@
             transform: translate(0,-50%);
             cursor: pointer;
 
-            img{
+            svg{
                 width: 0.875rem;
                 transition: $Default-Transition;
             }
@@ -79,15 +106,6 @@
     
         &.active{
 
-        }
-    }
-
-    .msgText{
-        margin-top: 0.5rem;
-        text-align: left;
-        p{
-            font-size: 0.75rem;
-            word-wrap: break-word;
         }
     }
 
@@ -100,7 +118,7 @@
         .selectContainer{
             border: 0.0625rem solid $Day-Steelgrey06;
 
-            img{
+            svg{
                 opacity: .6;
             }
         }
@@ -109,7 +127,7 @@
 
     &.error{
         .selectContainer{
-            border: 0.0625rem solid rgba($Day-Negative100,.6);
+            border: 0.0625rem solid rgba($Day-Negative100,.6) !important;
         }
         .msgText > p{
             color: $Day-Negative100;
@@ -117,7 +135,7 @@
     }
     &.success{
         .selectContainer{
-            border: 0.0625rem solid rgba($Day-Positive100,.6);
+            border: 0.0625rem solid rgba($Day-Positive100,.6) !important;
         }
         .msgText > p{
             color: $Day-Positive100;
@@ -125,6 +143,9 @@
     }
 
     &.focused{
+        .selectContainer{
+            border: 0.0625rem solid $Main-Blue-Light;
+        }
 
         &.small{
             .selectLabel > span{
@@ -146,17 +167,52 @@
             top: 0.75rem !important;
         }
     }
+
+    &.focusedAndFilled{
+        .selectContainer{
+            border: 0.0625rem solid $Day-Steelgrey06 !important;
+        }
+    }
     
 
     &.small{
-        // height: 2.625rem;
+        &.focused{
+            .selectContainer > .selectLabel > span{
+                font-size: 0.6875rem;
+            }
+        }
+        .selectContainer{
+            height: 2.625rem;
+
+            .selectedOption{
+                input{
+                    height: calc(100% - 0.8rem);
+                    font-size: 0.8125rem;
+                }
+            }
+        }
+
+        .collapsableOptions{
+            ul {
+
+                li{
+                    padding: 0.6875rem 1rem;
+                    span{
+                        font-size: 0.75rem;
+                        font-family: 'Helvetica_Neue_LT_GEO_Caps_500';
+                    } 
+                }
+            }
+        }
 
         .selectLabel > span{
             font-size: 0.875rem;
         }
     }
     &.medium{
-        height: 3rem;
+        .selectContainer{
+            height: 3rem;
+        }
 
         .selectLabel > span{
             font-size: 0.875rem;
@@ -164,7 +220,9 @@
         }
     }
     &.large{
-        height: 3.5rem;
+        .selectContainer{
+            height: 3.5rem;
+        }
         
         .selectLabel > span{
             font-size: 1rem;
@@ -192,6 +250,13 @@
                 transition: $Default-Transition;
                 position: relative;
                 cursor: pointer;
+
+                
+                &.searchBar{
+                    &:hover{
+                        background: none;
+                    }
+                }
     
                 &:hover{
                     background: $Day-Steelgrey03;
@@ -225,5 +290,58 @@
                 }
             }
         }
+    }
+}
+
+:global(body.theme_dark){
+    .selectWrapper{
+
+        &.focused{
+            .selectContainer{
+                border: 0.0625rem solid $Main-Blue-Light !important;
+            }
+        }
+
+        &.focusedAndFilled{
+            .selectContainer{
+                border: 0.0625rem solid $Night-Steelgrey09 !important;
+            }
+        }
+
+        .selectContainer{
+            border: 0.0625rem solid $Night-Steelgrey09;
+            background: $Night-Steelgrey06;
+
+            .selectLabel{
+                span:not(.requiredMark){
+                    color: $Night-Steelgrey12;
+                }
+            }
+            .selectedOption{
+                input{
+                    color: $Night-Steelgrey20;
+                }
+            }
+        }
+
+        .collapsableOptions{
+            border: 0.0625rem solid $Night-Steelgrey09;
+            background: $Night-Steelgrey06;
+
+            li{
+                span{
+                    color: $Night-Steelgrey20;
+                }
+
+                &.selected{
+                    background: $Night-Steelgrey05;
+                }
+
+                &:hover{
+                    background: $Night-Steelgrey05;
+                }
+            }
+        }
+
     }
 }

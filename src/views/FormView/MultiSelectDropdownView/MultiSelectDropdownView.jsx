@@ -54,6 +54,11 @@ const MultiSelectDropdownView = () => {
             example: "{type: 'error' || 'success', visible: true || false, text: String}",
         },
         {
+            title: 'fixedDropdown',
+            description: 'Overlays Collapsable Dropdown',
+            type: 'Boolean',
+        },
+        {
             propType: 'event',
             title: 'change',
             description: 'returns Selected Items Flat Array of Objects',

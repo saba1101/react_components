@@ -1,0 +1,89 @@
+.actionsWrapper{
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+
+    .moreActionsButton{
+        @include flex(center,center,row,0.125rem);
+        cursor: pointer;
+        padding: 0.3125rem;
+        position: relative;
+
+        & > div{
+            width: 0.375rem;
+            height: 0.375rem;
+            border: 0.125rem solid rgba($Day-Steelgrey15,.8);
+            border-radius: 50%;
+            background: transparent;
+        }
+    }
+
+    ul{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 8rem;
+        z-index: 120;
+        border-radius: 0.375rem;
+        box-shadow: 0 0 0.25rem rgba(#C6C6C6,.6);
+        background: $Day-Steelgrey00;
+        transition: none;
+        
+        li{
+            @include flex(flex-start,center,row,0.5rem);
+            padding: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+
+            &:hover{
+                background: rgba(#C6C6C6,.2);
+            }
+
+            .actionIcon{
+                @include centerEl;
+                svg{
+                    width: 1rem;
+                    max-height: 80%;
+                    object-fit: contain;
+                }
+            }
+
+            .actionLabel{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                span{
+                    font-size: 0.75rem;
+                    font-family: 'Helvetica-Medium';
+                    line-height: 1.25rem;
+                    color: $Day-TextPrimary;
+                }
+            }
+        }
+    }
+}
+
+:global(body.theme_dark){
+    .actionsWrapper{
+        .moreActionsButton > div{
+            border: 0.125rem solid $Night-Steelgrey20;
+        }
+
+        ul{
+            background: $Night-Steelgrey05 !important;
+            box-shadow: 0 0 0.625rem $Night-Steelgrey04;
+
+            svg{
+                path{
+                    stroke: #fff;
+                }
+            }
+
+            .actionLabel{
+                span{
+                    color: $Night-Steelgrey20;
+                }
+            }
+        }
+    }
+}

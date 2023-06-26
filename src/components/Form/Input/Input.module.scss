@@ -7,6 +7,11 @@
     transition: $Default-Transition;
     padding: 0.0625rem;
 
+    *{
+        font-family: 'Helvetica_Neue_LT_GEO_Caps_400';
+    }
+
+
     .inputLabel{
         position: absolute;
         top: 50%;
@@ -35,7 +40,7 @@
     .inputElementWrapper{
         width: 100%;
         height: 100%;
-
+        position: relative;
         input{
             width: 100%;
             height: 100%;
@@ -50,6 +55,34 @@
                 padding-right: 2.1875rem;
             }
         }
+
+        .numberTypeInput{
+            position: absolute;
+            top: 50%;
+            transform: translate(0,-50%);
+            right: 0.3125rem;
+            @include flex(center,center,column,0);
+            .numberTypeActionArrowUp,.numberTypeActionArrowDown{
+                cursor: pointer;
+                @include centerEl;
+                cursor: pointer;
+                &:hover{
+                    svg{
+                        path{
+                            fill:$Main-Blue-Light;
+                        }
+                    }
+                }
+                svg{
+                    width: 0.9375rem;
+                }
+            }
+
+            .numberTypeActionArrowDown{
+                margin-top: -0.625rem;
+            }
+            
+        }
     }
 
     .iconPassword{
@@ -60,18 +93,42 @@
         @include centerEl;
         cursor: pointer;
 
-        img{
+        svg{
             width: 1.125rem;
             pointer-events: none;
             user-select: none;
         }
     }
 
-    .msgText{
-        margin-top: 0.5rem;
+    ~.msgText{
+        // margin-top: 0.5rem;
         p{
             font-size: 0.75rem;
             word-wrap: break-word;
+        }
+    }
+
+    &.xs{
+        height: 2.375rem;
+        .inputElementWrapper > input{
+            padding: 1rem 1rem 0.3125rem 1rem;
+        }
+        .inputLabel > span{
+            font-size: 0.75rem;
+        }
+        .iconPassword{
+            svg{
+                width: 1rem;
+            }
+        }
+
+        &.focused{
+            .inputLabel{
+                top: 0.375rem;
+                span{
+                    font-size: 0.625rem;
+                }
+            }
         }
     }
 
@@ -140,7 +197,7 @@
     }
 
     &.active{
-        border: 0.0625rem solid rgba($Main-Blue,.5);
+        border: 0.0625rem solid rgba($Main-Blue-Light,1) !important;
 
     }
 
@@ -156,14 +213,14 @@
     }
 
     &.error{
-        border: 0.0625rem solid rgba($Day-Negative100,.6);
-        .msgText > p{
+        border: 0.0625rem solid rgba($Day-Negative100,.6) !important;
+        ~ .msgText > p{
             color: $Day-Negative100;
         }
     }
     &.success{
-        border: 0.0625rem solid rgba($Day-Positive100,.6);
-        .msgText > p{
+        border: 0.0625rem solid rgba($Day-Positive100,.6) !important;
+        ~ .msgText > p{
             color: $Day-Positive100;
         }
     }
@@ -171,8 +228,8 @@
 
 :global(body.theme_dark){
     .componentInputWrapper{
-        border: 0.0625rem solid $Night-Steelgrey06;
-        background: $Night-Steelgrey00;
+        border: 0.0625rem solid $Night-Steelgrey09;
+        background: $Night-Steelgrey06;
 
         .inputLabel{
             span{

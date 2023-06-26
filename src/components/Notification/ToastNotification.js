@@ -89,6 +89,7 @@ const createStyles = () =>{
              font-size: 14px;
              font-weight: 400;
              user-select: none;
+            font-family: 'Helvetica_Neue_LT_GEO_Caps_400';
         }
          .notifications_wrapper .toast_notification.info {
             background: #4996fd;

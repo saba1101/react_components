@@ -60,9 +60,14 @@ const SingleSelectDropdownView = () => {
             example: "{type: 'error' || 'success', visible: true || false, text: String}",
         },
         {
-            title: 'selectedOptonID',
+            title: 'selectedOptionID',
             description: 'selects item that contains same id',
             type: 'Number,String',
+        },
+        {
+            title: 'fixedDropdown',
+            description: 'Overlays Collapsable Dropdown',
+            type: 'Boolean',
         },
         {
             propType: 'event',
@@ -84,7 +89,7 @@ const SingleSelectDropdownView = () => {
                 label: 'Default Filled With Label',
                 data : Data.Plain,
                 selected: null,
-                selectedOptonID: 12,
+                selectedOptionID: 2,
             },
             {
                 label: 'With Filter',
@@ -194,7 +199,7 @@ const SingleSelectDropdownView = () => {
                                     disabled={c.disabled}
                                     msg={c.msg}
                                     data={c.data}
-                                    selectedOptonID={c.selectedOptonID}
+                                    selectedOptionID={c.selectedOptionID}
                                     selected={(obj) => (c.selected = obj,setRenderFlag(state => !state))}
                                 />
                             </div>

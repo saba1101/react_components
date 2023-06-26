@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import IconConfigure from '@/assets/icons/svg/configure.svg';
 import style from '@/components/DataGrid/components/ColumnConfigure.module.scss'
 import CheckBox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx';
-import IconDrag from '@/assets/icons/svg/drag.svg';
+// import IconConfigure from '@/assets/icons/svg/configure.svg';
+// import IconDrag from '@/assets/icons/svg/drag.svg';
+import Drag from '@/assets/svgComponents/Drag.jsx'
+import Configure from '@/assets/svgComponents/Configure.jsx'
+
 
 const ColumnConfigure = ({ items, change }) => {
   const listItemsRef = useRef(items);
@@ -88,9 +91,10 @@ const ColumnConfigure = ({ items, change }) => {
   };
 
   return (
-    <div className={style.configureWrapper} ref={confugureRef}>
+    <div className={`${style.configureWrapper} ${listVisible ? style.active : ''}`} ref={confugureRef}>
       <div className={style.iconWrapper} onClick={ExpandList}>
-        <img src={IconConfigure} alt="" />
+        <Configure/>
+        {/* <img src={IconConfigure} alt="" /> */}
       </div>
       {listVisible && (
         <ul className="draggable-list" ref={collapsableRef}>
@@ -107,7 +111,8 @@ const ColumnConfigure = ({ items, change }) => {
               onDragEnd={handleDragEnd}
             >
               <div className={style.iconDrag}>
-                <img src={IconDrag} alt="" />
+                <Drag/>
+                {/* <img src={IconDrag} alt="" /> */}
               </div>
               <CheckBox
                 checked={item.visible || false}
