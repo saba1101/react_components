@@ -1,0 +1,30 @@
+.mcCircularLoaderComponent{
+    margin: 0 0 2em;
+    height: 100px;
+    width: 20%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;
+    display: inline-block;
+    vertical-align: top;
+    z-index: 2500;
+
+    &.modeInline{
+
+    }
+
+    &.modeOutline{
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        @include centerEl;
+    }
+
+    // svg{
+    //     path{
+    //         fill: $NIGHT_COLOR_TEXT_INFO_INITIAL;
+    //     }
+    // }
+}

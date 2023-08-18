@@ -1,13 +1,14 @@
 export const Data = {
     Plain : [
         {
-            label : 'Long Name Item Long Name Item Long Name Item ',
-            id : 1,
+            label : 'item 1',
+            id : 0,
             // itemNodeID: crypto.randomUUID(),
         },
         {
             label : 'item2',
             id : 2,
+            selected:true,
             // itemNodeID: crypto.randomUUID(),
         },
         {
@@ -51,6 +52,55 @@ export const Data = {
             // itemNodeID: crypto.randomUUID(),
         },
     ],
+    AdvancedSearch: {
+      Plain: [
+        {
+          label: 'Filter Item 1',
+          parameter: 'filteritem1',
+          id: 1,
+        },
+        {
+          label: 'Filter Item 2',
+          parameter: 'filteritem2',
+          id: 2,
+        },
+        {
+          label: 'Filter Item 3',
+          parameter: 'filteritem3',
+          id: 3,
+        }
+      ],
+      Group: [
+        {
+          label: 'Group 1',
+          group: true,
+          children: [
+            {
+              label: 'Filter Item 1.2',
+              parameter: 'filteritem1.2'
+            },
+            {
+              label: 'Filter Item 1.3',
+              parameter: 'filteritem1.3'
+            }
+          ]
+        },
+        {
+          label: 'Group 2',
+          group: true,
+          children: [
+            {
+              label: 'Filter Item 2.2',
+              parameter: 'filteritem2.2'
+            },
+            {
+              label: 'Filter Item 23',
+              parameter: 'filteritem2.3'
+            }
+          ]
+        },
+      ]
+    },
     Tree : [
         {
           id: 1,
@@ -128,6 +178,7 @@ export const Data = {
                   {
                     id: 10,
                     label: 'Node 1.1.1.1',
+                    disabled: true,
                     children: [],
                   },
                   {

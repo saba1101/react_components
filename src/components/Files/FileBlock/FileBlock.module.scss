@@ -31,6 +31,7 @@
     }
 
     .leftSide{
+        width: 80%;
         @include flex(flex-start,center,row,1rem);
         
         .filePreviewFormat{
@@ -64,6 +65,7 @@
         }
     
         .fileName{
+            width: 100%;
             
             span{
                 color: $Day-TextPrimary;

@@ -1,5 +1,5 @@
 const _getSize = (size) => {
-    if(size && !['xs','small','medium','large'].includes(size)) return 'medium'
+    if(size && !['xs','small','medium','large','fullsize'].includes(size)) return 'medium'
     return size ? size : 'small'
 }
 
@@ -53,6 +53,14 @@ const __formatDate = (dateOrTimestamp, format) =>  {
   return formattedString;
 }
 
+const __formatToFixedPoint = (int,fixedPoint) => {
+  const stringTypeFormat =  int.toString()
+  const splitTypeFormat = stringTypeFormat.split('')
+  const fixedsplitTypeFormat = splitTypeFormat.slice(0,splitTypeFormat.length - fixedPoint)
+  const joinedFixedTypeFormat = fixedsplitTypeFormat.join('')
+  return Number(joinedFixedTypeFormat) || parseInt(joinedFixedTypeFormat)
+}
+
 
 
 export {
@@ -61,5 +69,6 @@ export {
     _getFileFormat,
     _toBase64,
     _isProd,
-    __formatDate
+    __formatDate,
+    __formatToFixedPoint,
 }

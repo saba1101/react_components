@@ -8,6 +8,25 @@
     z-index: 250;
     background: rgba(#00000080,.3);
 
+    &.popupDrawerMode{
+        overflow: hidden;
+        place-items: end;
+        .popupContainer{
+            min-height: unset;
+            max-height: unset;
+            height: 100vh !important;
+            animation: EnterFromLeft .3s forwards !important;
+            @keyframes EnterFromLeft {
+                from {
+                    left: 100%;
+                }
+                to{
+                    left: 0;
+                }
+            }
+        }
+    }
+
     .popupContainer{
         min-height: 13.75rem;
         max-height: calc(100vh - 5.625rem);
@@ -19,16 +38,14 @@
         box-shadow: 0 0 1.25rem rgba(#00000080,.1);
         overflow: auto;
         animation: fadeIn .3s forwards;
-        // @keyframes fadeIn {
-        //     from{
-        //         transform: translateY(1.25rem);
-        //         opacity: 0;
-        //     }
-        //     to{
-        //         transform: translateY(0);
-        //         opacity: 1;
-        //     }
-        // }
+        @keyframes fadeIn {
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
+        }
 
         .popupHeader{
             width: 100%;
@@ -37,6 +54,7 @@
             background: $Day-Steelgrey00;
             z-index: 1;
             padding: 1.375rem 1.375rem;
+            padding-bottom: 0;
 
             &.left{
                 text-align: left;
@@ -54,6 +72,7 @@
                     font-size: 1.5rem;
                     color: $Day-TextPrimary;
                     font-weight: 700;
+                    font-family: 'Helvetica_Neue_LT_GEO_Caps_400';
                 }
             }
             .popupDescription{
@@ -62,6 +81,7 @@
                     font-size: 0.875rem;
                     color: $Night-Steelgrey10;
                     line-height: 1.5rem;
+                    font-family: 'Helvetica_Neue_LT_GEO_Caps_400';
                 }
             }
             .typeIcon{
@@ -79,15 +99,20 @@
             padding: 1.375rem 1.375rem;
             position: relative;
         }
-
-        &.small{
+        &.xs{
             width: 22.5rem;
+        }
+        &.small{
+            width: 35.125rem;
         }
         &.medium{
             width: 51.75rem ;
         }
         &.large{
             width: calc(100% - 7.5rem);
+        }
+        &.fullsize{
+            width: 100%;
         }
     }
 }

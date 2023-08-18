@@ -1,5 +1,5 @@
 .cardsGridWrapper{
-    width: 18.9375rem;
+    width: 100%;
     max-height: 9rem;
     border-radius:  0.375rem;
     background: $Day-Steelgrey00;
@@ -77,14 +77,19 @@
                 width: 100%;
                 @include flex(space-between,center,row,unset);
 
-                ul{
-
-                    @include flex(flex-start,center,row,2.125rem);
+                &.ellipsis {
                     li{
                         max-width: 5.8125rem;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+                    }
+                }
+
+                ul{
+
+                    @include flex(flex-start,center,row,2.125rem);
+                    li{
 
                         span{
                             line-height: 1.25rem;

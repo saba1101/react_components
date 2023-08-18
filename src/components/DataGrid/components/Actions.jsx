@@ -74,7 +74,13 @@ const Actions = ({
                                 key={ind}
                                 onClick={(e) => ActionClick(e,action)}
                             >
-                                <div className={style.actionIcon}>
+                                <div className={
+                                    `
+                                        ${['delete'].includes(action.type) ? style.staticColor : ''}
+                                        ${style.actionIcon}
+                                        ${_getDefaultActionIcon(action) && _getDefaultActionIcon(action) !== 'no_icon' ? style.defaultIcons : ''}
+                                    `
+                                }>
                                     {
                                         _getDefaultActionIcon(action) && _getDefaultActionIcon(action) !== 'no_icon' ? _getDefaultActionIcon(action) : action?.icon()
                                     }

@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import style from '@/components/Reusable/Tree/TreeNode.module.scss'
 import Checkbox from '@/components/Form/FormControls/Checkbox/Checkbox.jsx';
-// import IconArrow from '@/assets/icons/svg/arrow.svg';
 import Arrow from '@/assets/svgComponents/Arrow.jsx'
 import MainButton from '@/components/Button/MainButton.jsx';
 
-const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, SearchValue }) => {
+const TreeNode = ({ node,onSingleNodeChange, onSelect, onExpand, expandedNodes, selectedNodes, SearchValue }) => {
   const [isExpanded, setIsExpanded] = useState(expandedNodes.includes(node.itemNodeID));
-  const isSelected = selectedNodes.some((el) => el.itemNodeID === node.itemNodeID);
+  const isSelected = node.selected //selectedNodes.some((el) => el.itemNodeID === node.itemNodeID) ?? node.selected;
 
   const HandleNodeClick = () => {
     onSelect(node);
   };
 
   const HandleExpandClick = () => {
-    onExpand(node.itemNodeID);
+    onExpand(node.itemNodeID,node);
     setIsExpanded((state) => !state);
   };
 
   useEffect(() => {
-    if (node && node.selected) {
-      HandleNodeClick(node);
+    if (node && node.selected) { 
+      if(onSingleNodeChange && typeof onSingleNodeChange === 'function') onSingleNodeChange(node)
+      // HandleNodeClick(node);
     }
   }, [node]);
 
@@ -93,7 +93,7 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, Sear
       className={SetNodeVisibilityState(SearchValue) ? style.visible : style.hidden}
     >
       <div className={style.nodeContent}>
-        {node.children && node.children.length ? (
+        {node.children ? (
           <div
             className={`${style.collapseIcon} ${isExpanded ? style.expanded : ''}`}
             onClick={HandleExpandClick}
@@ -103,9 +103,13 @@ const TreeNode = ({ node, onSelect, onExpand, expandedNodes, selectedNodes, Sear
         ) : (
           ''
         )}
-        <div className={style.checkbox}>
-          <Checkbox checked={isSelected} change={HandleRecursiveSelect} />
-        </div>
+        {
+          (!node.checkboxHidden) ? (
+            <div className={style.checkbox}>
+              <Checkbox disabled={!!node.disabled} checked={isSelected} change={HandleRecursiveSelect} />
+            </div>
+          ) : node.checkboxHidden ? '' : ''
+        }
         <div className={style.nodeLabel}>
           <span>{node.label}</span>
         </div>
@@ -148,6 +152,8 @@ const TreeNodeDropdown = ({
   Apply,
   WithBottomAction,
   WithMaxHeight,
+  onItemClick,
+  onNodeExpand,
 }) => {
   const [expandedNodes, setExpandedNodes] = useState([]);
   const [selectedNodes, setSelectedNodes] = useState([]);
@@ -168,16 +174,19 @@ const TreeNodeDropdown = ({
       }
     };
 
-    const isSelected = selectedNodes.some((el) => el.itemNodeID === node.itemNodeID);
-
+    const isSelected = node.selected // selectedNodes.some((el) => el.itemNodeID === node.itemNodeID) ?? node.selected;
     if (isSelected) {
       selectNodeAndChildren(node, false);
+      node['selected'] = false
+      if(onItemClick && typeof onItemClick == 'function') onItemClick(node)
     } else {
       selectNodeAndChildren(node, true);
+      node['selected'] = true
+      if(onItemClick && typeof onItemClick == 'function') onItemClick(node)
     }
   };
 
-  const handleNodeExpand = (nodeId) => {
+  const handleNodeExpand = (nodeId,node) => {
     const isExpanded = expandedNodes.includes(nodeId);
 
     if (isExpanded) {
@@ -186,6 +195,12 @@ const TreeNodeDropdown = ({
       );
     } else {
       setExpandedNodes((prevExpandedNodes) => [...prevExpandedNodes, nodeId]);
+    }
+
+    if(onNodeExpand && typeof onNodeExpand === 'function'){
+      let ItemNode = node
+      ItemNode['expanded'] = !isExpanded
+      onNodeExpand(ItemNode)
     }
   };
 
@@ -197,6 +212,7 @@ const TreeNodeDropdown = ({
     const flattenNodes = (nodes) => {
       let flattened = [];
       nodes.forEach((node) => {
+        node.selected = true
         flattened.push(node);
         if (node.children && node.children.length > 0) {
           flattened = flattened.concat(flattenNodes(node.children));
@@ -210,6 +226,16 @@ const TreeNodeDropdown = ({
   };
 
   const handleClearAll = () => {
+    const LoopNodes = (nodes) => {
+      nodes.forEach((node) => {
+        node.selected = false
+        if (node.children && node.children.length > 0) {
+          LoopNodes(node.children)
+        }
+      });
+      return;
+    };
+    LoopNodes(selectedNodes)
     setSelectedNodes([]);
   };
 
@@ -227,6 +253,9 @@ const TreeNodeDropdown = ({
           expandedNodes={expandedNodes}
           selectedNodes={selectedNodes}
           SearchValue={SearchValue}
+          onSingleNodeChange={(singleNode) => {
+              setSelectedNodes((prevSelectedNodes) => [...prevSelectedNodes, singleNode]);
+          }}
         />
       </li>
     ));

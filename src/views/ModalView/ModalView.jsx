@@ -25,7 +25,7 @@ const ModalView = () => {
         return (
             <MainButton
                 label={'Close'}
-                size={'small'}
+                size={'xs'}
                 customStyle={
                     {
                         border: `0.0625rem solid #EF4D4D`,
@@ -59,7 +59,7 @@ const ModalView = () => {
             title: 'size',
             description: 'Popup Size Types in Width',
             type: 'String',
-            example: 'small,medium,large',
+            example: 'xs,small,medium,large',
         },
         {
             title: 'template',
@@ -81,6 +81,7 @@ const ModalView = () => {
                     description: String,
                     type: String(error,success,info,warning)
                     align: String(left,center,right)
+                    mode: drawer | default
                 }
             `
         },
@@ -89,14 +90,14 @@ const ModalView = () => {
     const componentTypes = useRef(
         [
             {
-                label: 'Small Popup Type Error',
+                label: 'xs Popup Type Error',
                 closeButton: true,
                 customStyle: {
                     background: '#EF4D4D',
                     color: '#FFF',
                 },
                 popupConfig: {
-                    size: 'small',
+                    size: 'xs',
                     template: closeButtonTemplate,
                     options: {
                         type: 'error',
@@ -107,14 +108,14 @@ const ModalView = () => {
                 }
             },
             {
-                label: 'Small Popup Type Warning',
+                label: 'xs Popup Type Warning',
                 closeButton: true,
                 customStyle: {
                     background: '#EBB924',
                     color: '#FFF',
                 },
                 popupConfig: {
-                    size: 'small',
+                    size: 'xs',
                     options: {
                         type: 'warning',
                         title: 'Warning',
@@ -124,14 +125,14 @@ const ModalView = () => {
                 }
             },
             {
-                label: 'Small Popup Type Info',
+                label: 'xs Popup Type Info',
                 closeButton: true,
                 customStyle: {
                     background: '#00ADEE',
                     color: '#FFF',
                 },
                 popupConfig: {
-                    size: 'small',
+                    size: 'xs',
                     options: {
                         type: 'info',
                         title: 'Info',
@@ -141,13 +142,13 @@ const ModalView = () => {
                 }
             },
             {
-                label: 'Small Popup Type Success',
+                label: 'xs Popup Type Success',
                 customStyle: {
                     background: '#27B989',
                     color: '#FFF',
                 },
                 popupConfig: {
-                    size: 'small',
+                    size: 'xs',
                     options: {
                         type: 'success',
                         title: 'Success',
@@ -177,6 +178,18 @@ const ModalView = () => {
                         title: 'Large Size',
                         description: 'Large Size Popup with Toggle Views Template inside',
                         align: 'left',
+                    }
+                }
+            },
+            {
+                label: 'Drawer Mode',
+                popupConfig: {
+                    size: 'small',
+                    options: {
+                        type: 'none',
+                        title: 'Drawer',
+                        description: 'Drawer Description',
+                        mode: 'drawer'
                     }
                 }
             },
@@ -226,16 +239,16 @@ const ModalView = () => {
                     return (
                         <div
                             style={
-                                PopupConfig?.size === 'small' ? {width:'100%',display:'flex',justifyContent:'center'} : {}
+                                PopupConfig?.size === 'xs' ? {width:'100%',display:'flex',justifyContent:'center'} : {}
                             }
                         >
                                 {
-                                    PopupConfig.size === 'small' ? closeButtonTemplate() : (
+                                    PopupConfig.size === 'xs' ? closeButtonTemplate() : (
                                         <ToggleView />
                                     )
                                 }
                                 {
-                                    PopupConfig.size !== 'small' ? (
+                                    PopupConfig.size !== 'xs' ? (
                                         <div style={
                                             {width:'100%',display:'flex',justifyContent:'center',marginTop: '1.25rem'}
                                         }>

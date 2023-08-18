@@ -109,6 +109,7 @@ const DatepickerView = () => {
                 mode:'single',
                 defaultValue: null,
                 value: null,
+                placeholder:'Default Single Mode Datepicker',
             },
             {
                 title:'Default Single with Time Picker',
@@ -118,13 +119,16 @@ const DatepickerView = () => {
                 valueFormat: 'DD/MM/YYYY HH:mm',
                 format: 'DD/MM/YYYY HH:mm',
                 showTime: true,
+                placeholder:'Default Single with Time Picker',
+
             },
             {
                 title:'With allowClear',
                 mode:'single',
                 allowClear: true,
                 value: null,
-                defaultValue: new Date()
+                defaultValue: new Date(),
+                placeholder:'With allowClear',
             },
             {
                 title:'With bordered : false',
@@ -132,6 +136,7 @@ const DatepickerView = () => {
                 allowClear: true,
                 value: null,
                 bordered: false,
+                placeholder:'With bordered : false',
             },
             {
                 title:'With inputReadOnly',
@@ -139,6 +144,7 @@ const DatepickerView = () => {
                 allowClear: true,
                 value: null,
                 inputReadOnly: true,
+                placeholder:'With inputReadOnly',
             },
             {
                 title:'With disabled',
@@ -146,6 +152,7 @@ const DatepickerView = () => {
                 allowClear: true,
                 value: null,
                 disabled: true,
+                placeholder:'With disabled',
             },
             //////////////////////////////////////
             {
@@ -153,6 +160,7 @@ const DatepickerView = () => {
                 mode:'range',
                 defaultValue: null,
                 value: null,
+                placeholder:'Default Range Mode Datepicker',
             },
             {
                 title:'Range Defined Values',
@@ -163,6 +171,7 @@ const DatepickerView = () => {
                     '03/06/2022',
                     '05/12/2023',
                 ],
+                placeholder:'Range Defined Values',
             },
             {
                 title:'Range With bordered : false',
@@ -170,6 +179,7 @@ const DatepickerView = () => {
                 allowClear: true,
                 value: null,
                 bordered: false,
+                placeholder:'Range With bordered : false',
             },
             {
                 title:'Range disabled',
@@ -177,6 +187,7 @@ const DatepickerView = () => {
                 allowClear: true,
                 value: null,
                 disabled: true,
+                placeholder:'Range disabled',
             },
             {
                 title:'With Icon Only',
@@ -209,13 +220,13 @@ const DatepickerView = () => {
                                 key={ind}
                             >
 
-                                {
+                                {/* {
                                     c.title && (
                                         <h5>
                                             {c.title}
                                         </h5>
                                     )
-                                }
+                                } */}
 
                                 <Datepicker
                                     placeholder={c.placeholder}

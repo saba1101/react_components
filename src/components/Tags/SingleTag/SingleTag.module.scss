@@ -1,0 +1,301 @@
+.singleTagComponentWrapper{
+    min-width: 1.3125rem;
+    max-width: 10rem;
+    display: inline-block;
+    &.medium{
+        height: 1.75rem;
+    }
+
+    &.small{
+        height: 1.375rem;
+    }
+
+    .tagContentWrapper{
+        width: 100%;
+        height: 100%;
+        border-radius: 1.5rem;
+        border: 0.0625rem solid transparent;
+        @include flex(space-between,center,row,0.3125rem);
+        transition: $Default-Transition;
+        cursor: pointer;
+        padding: 0.1875rem 0.5rem;
+
+
+        .tagIconPlaceholder{
+            @include centerEl;
+            svg{
+                width: 1rem;
+            }
+        }
+
+        .tagLabelPlaceholder{
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            @include centerEl;
+            span{
+                font-size: 0.75rem;
+                font-family: 'Helvetica_Neue_LT_GEO_Caps_400';
+            }
+        }
+
+        .tagActionPlaceholder{
+            @include centerEl;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 5;
+            transition: $Default-Transition;
+            flex-shrink: 0;
+            svg{
+                width: 0.625rem;
+                path{
+                    fill: #141719;
+                }
+            }
+        }
+
+        &.disabled{
+            background: #BCC1C2;
+            opacity: .6;
+            pointer-events: none;
+            border: 0.0625rem solid transparent;
+        }
+
+        &.gray{
+            background: $Day-Steelgrey04;
+
+            &:hover{
+                background: #E1E4E5;
+            }
+
+            &.active{
+                background: #BCC1C2;
+                border: 0.0625rem solid #0266EF;
+            }
+
+            .tagLabelPlaceholder{
+                span{
+                    color: #141719;
+                }
+            }
+
+            .tagActionPlaceholder{
+                &:hover{
+                    background: #BCC1C2;
+                }
+                svg{
+                    path{
+                        fill: #141719;
+                    }
+                }
+            }
+
+        }
+        &.red{
+            background: #DA1A1C1A;
+
+            &:hover{
+                background: #DA1A1C33;
+            }
+
+            &.active{
+                background: #DA1A1C4D;
+                border: 0.0625rem solid #0266EF;
+            }
+
+            .tagLabelPlaceholder{
+                span{
+                    color: #DA1A1C;
+                }
+            }
+
+            .tagActionPlaceholder{
+                &:hover{
+                    background: #DA1A1C33;
+                }
+                svg{
+                    path{
+                        fill: #DA1A1C;
+                    }
+                }
+            }
+
+        }
+        &.purple{
+            background: #6853F71A;
+
+            &:hover{
+                background: #6853F733;
+            }
+
+            &.active{
+                background: #6853F74D;
+                border: 0.0625rem solid #0266EF;
+            }
+
+            .tagLabelPlaceholder{
+                span{
+                    color: #5236E4;
+                }
+            }
+
+            .tagActionPlaceholder{
+                &:hover{
+                    background: #6853F733;
+                }
+                svg{
+                    path{
+                        fill: #5236E4;
+                    }
+                }
+            }
+        }
+        &.coolBlue{
+            background: #1A59A31A;
+            
+            &:hover{
+                background: #1A59A333;
+            }
+
+            &.active{
+                background: #1A59A34D;
+                border: 0.0625rem solid #0266EF;
+            }
+
+            .tagLabelPlaceholder{
+                span{
+                    color: #0F437F;
+                }
+            }
+
+            .tagActionPlaceholder{
+                &:hover{
+                    background: #1A59A333;
+                }
+                svg{
+                    path{
+                        fill: #0F437F;
+                    }
+                }
+            }
+        }
+        &.blue{
+            background: #0266EF1A;
+
+            &:hover{
+                background: #0266EF33;
+            }
+
+            &.active{
+                background: #0266EF4D;
+                border: 0.0625rem solid #0266EF;
+            }
+
+            .tagLabelPlaceholder{
+                span{
+                    color: #0266EF;
+                }
+            }
+
+            .tagActionPlaceholder{
+                &:hover{
+                    background: #0266EF33;
+                }
+                svg{
+                    path{
+                        fill: #0266EF;
+                    }
+                }
+            }
+        }
+        &.yellow{
+            background: #EFBD4E1A;
+            
+            &:hover{
+                background: #EFBD4E33;
+            }
+
+            &.active{
+                background: #EFBD4E4D;
+                border: 0.0625rem solid #0266EF;
+            }
+            
+            .tagLabelPlaceholder{
+                span{
+                    color: #8C6A00;
+                }
+            }
+
+            .tagActionPlaceholder{
+                &:hover{
+                    background: #EFBD4E33;
+                }
+                svg{
+                    path{
+                        fill: #8C6A00;
+                    }
+                }
+            }
+        }
+        &.green{
+            background: #1387611A;
+                        
+            &:hover{
+                background: #13876133;
+            }
+
+            &.active{
+                background: #1387614D;
+                border: 0.0625rem solid #0266EF;
+            }
+
+            .tagLabelPlaceholder{
+                span{
+                    color: #44A082;
+                }
+            }
+
+            .tagActionPlaceholder{
+                &:hover{
+                    background: #13876133;
+                }
+                svg{
+                    path{
+                        fill: #138761;
+                    }
+                }
+            }
+        }
+        &.hightContrast{
+            background: #1A1E1F;
+            &:hover{
+                background: #23282A;
+            }
+
+            &.active{
+                background: #141719;
+                border: 0.0625rem solid #0266EF;
+            }
+
+            .tagLabelPlaceholder{
+                span{
+                    color: #FFFFFF;
+                }
+            }
+
+            .tagActionPlaceholder{
+                svg{
+                    path{
+                        fill: #fff,
+                    }
+                }
+                &:hover{
+                    background: #23282A;
+                }
+            }
+        }
+    }
+}

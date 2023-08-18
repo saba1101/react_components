@@ -49,7 +49,7 @@ const InputView = () => {
             title: 'inputType',
             description: 'input attribute type',
             type: 'String',
-            example: 'Text | Password',
+            example: 'text | password | number',
         },
         {
             title: 'size',

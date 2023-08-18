@@ -33,6 +33,11 @@ const SingleSelectDropdownView = () => {
             type: 'Boolean',
         },
         {
+            title: 'withDropdownSearch',
+            description: 'adds input filter inside Dropdown',
+            type: 'Boolean',
+        },
+        {
             title: 'withClear',
             description: 'adds clear icon inside select container',
             type: 'Boolean',
@@ -89,7 +94,7 @@ const SingleSelectDropdownView = () => {
                 label: 'Default Filled With Label',
                 data : Data.Plain,
                 selected: null,
-                selectedOptionID: 2,
+                selectedOptionID: 0,
             },
             {
                 label: 'With Filter',

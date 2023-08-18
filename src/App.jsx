@@ -22,7 +22,14 @@ import FileUploaderView from '@/views/FileUploaderView/FileUploaderView.jsx'
 import DatepickerView from '@/views/DatepickerView/DatepickerView.jsx'
 import CardsView from '@/views/CardsView/CardsView'
 import TooltipView from "@/views/TooltipView/TooltipView.jsx"
+import TagsView from "@/views/TagsView/TagsView.jsx"
+import ToogerTripView from '@/views/ToogerTripView/ToogerTripView'
+import TimepickerView from '@/views/TimePickerView/TimePickerView'
+import AdvancedSearchView from '@/views/AdvancedSearchView/AdvancedSearchView'
+import CircularLoaderView from '@/views/CircularLoader/CircularLoaderView'
 import {_isProd} from '@/utils/Helpers.js'
+
+import TimeLine from '@/modules/Timeline/Timeline.jsx'
 
 function App() {
   useEffect(() => {
@@ -75,7 +82,19 @@ function App() {
 
                 <Route path={_isProd ? '/mc/TooltipView' : '/TooltipView'} element={<TooltipView />} />
 
+                <Route path={_isProd ? '/mc/TagsView' : '/TagsView'} element={<TagsView />} />
 
+                <Route path={_isProd ? '/mc/ToogerTripView' : '/ToogerTripView'} element={<ToogerTripView />} />
+
+                <Route path={_isProd ? '/mc/TimeLine' : '/TimeLine'} element={<TimeLine />} />
+                
+                <Route path={_isProd ? '/mc/TimepickerView' : '/TimepickerView'} element={<TimepickerView />} />
+
+                <Route path={_isProd ? '/mc/AdvancedSearchView' : '/AdvancedSearchView'} element={<AdvancedSearchView />} />
+
+                <Route path={_isProd ? '/mc/CircularLoaderView' : '/CircularLoaderView'} element={<CircularLoaderView />} />
+
+                
 
               </Routes>
             </div>

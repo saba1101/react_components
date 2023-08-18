@@ -8,6 +8,7 @@ const DropdownAction = ({
     onExpand,
     actions,
     itemID,
+    align,
 }) => {
     const ActionButtonRef = useRef(null)
     const ExpandableRef = useRef(null)
@@ -52,7 +53,7 @@ const DropdownAction = ({
                 <div></div>
                 <div></div>
             </div>
-            <ul ref={ExpandableRef}>
+            <ul className={align && align === 'right' ? style.alignRight : ''} ref={ExpandableRef}>
                 {
                     (visible && actions) && actions.map((action,ind) => {
                         return (

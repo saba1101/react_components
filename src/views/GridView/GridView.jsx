@@ -5,9 +5,11 @@ import { Data } from '@/utils/Data.js'
 import IconEdit from '@/assets/svgComponents/IconEdit.jsx'
 import IconDelete from '@/assets/svgComponents/IconDelete.jsx'
 const Grid  = lazy(() => import('@/components/DataGrid/Grid.jsx'))
+import JSONData from '../../utils/Data.json'
 
 
 const GridView = () => {
+    console.log(JSONData)
 
     const [renderFlag,setRenderFlag] = useState(false)
 
@@ -49,7 +51,7 @@ const GridView = () => {
                 columnName: 'IP Address',
                 visible:true,
                 orderIndex: 4,
-
+                alignment: 'right'
             },
             {
                 columnKey: 'car',
@@ -92,9 +94,12 @@ const GridView = () => {
                     width:Number,
                     visible:Boolean,
                     dataType:String,
+                    fixedNumber: Boolean,
+                    alignment: String("left | right")
                     format:String,
                     fixed:Boolean,
                     allowFiltering:Boolean,
+                    allowHeaderFiltering:Boolean
                     allowSorting:Boolean,
                     allowEditing: Boolean,
                     orderIndex:Number,
@@ -306,7 +311,15 @@ const GridView = () => {
             type: 'function',
             example: 'onDeleteAll={(SelectedRowKeys) => ....}',
         },
-
+        {
+            propType:'event',
+            title: 'onFilterValueChange',
+            description: 'returns event when filter value changes',
+            type: 'function',
+            example: `
+                onFilterValueChange={ (object) => {....} }
+            `
+        },
     ]
 
     const componentTypes = useRef(
@@ -423,37 +436,92 @@ const GridView = () => {
                 }
             },
             {
-                title: 'Summary Totals',
-                data: Data.GridForSummary.slice(0,5),
-                keyExpr: 'ID',
+                title: 'Large Data',
+                data:   JSONData,
                 customColumns: [
                     {
-                        columnKey: 'OrderNumber',
+                        columnKey: 'id',
+                        columnName: 'ID',
+                        orderIndex: 0,
+                        visible:true,
                     },
                     {
-                        columnKey: 'SaleAmount',
-                    }
-                ],
-                summary: [
-                    {
-                        column: 'OrderNumber',
-                        total: () => {
-                            return `Total: 5 (Items)`
-                        }
+                        columnKey: 'name',
+                        columnName: 'Name',
+                        orderIndex: 0,
+                        visible:true,
                     },
                     {
-                        column: 'SaleAmount',
-                        total: () => {
-                            return `Total Amounts: ($${Data.GridForSummary.slice(0,5).reduce((accumulator, object) => {
-                                return accumulator + object.SaleAmount
-                              }, 0)})`
-                        }
+                        columnKey: 'gender',
+                        columnName: 'Gender',
+                        orderIndex: 0,
+                        visible:true,
+                    },
+                    {
+                        columnKey: 'company',
+                        columnName: 'Gender',
+                        orderIndex: 0,
+                        visible:true,
+                    },
+                    {
+                        columnKey: 'latitude',
+                        columnName: 'latitude',
+                        orderIndex: 0,
+                        dataType: 'number',
+                        fixedNumber: true,
+                        visible:true,
+                    },
+                    {
+                        columnKey: 'longitude',
+                        columnName: 'longitude',
+                        orderIndex: 0,
+                        dataType: 'number',
+                        fixedNumber: true,
+                        visible:true,
+                    },
+                    {
+                        columnKey: 'balance',
+                        columnName: 'Balance',
+                        orderIndex: 0,
+                        visible:true,
+                        dataType: 'number',
+                        fixedNumber: true,
+                        
                     }
                 ],
-                selection:{
-                    mode: 'single'
-                }
             },
+            // {
+            //     title: 'Summary Totals',
+            //     data: Data.GridForSummary.slice(0,5),
+            //     keyExpr: 'ID',
+            //     customColumns: [
+            //         {
+            //             columnKey: 'OrderNumber',
+            //         },
+            //         {
+            //             columnKey: 'SaleAmount',
+            //         }
+            //     ],
+            //     summary: [
+            //         {
+            //             column: 'OrderNumber',
+            //             total: () => {
+            //                 return `Total: 5 (Items)`
+            //             }
+            //         },
+            //         {
+            //             column: 'SaleAmount',
+            //             total: () => {
+            //                 return `Total Amounts: ($${Data.GridForSummary.slice(0,5).reduce((accumulator, object) => {
+            //                     return accumulator + object.SaleAmount
+            //                   }, 0)})`
+            //             }
+            //         }
+            //     ],
+            //     selection:{
+            //         mode: 'single'
+            //     }
+            // },
         ]
     )
 

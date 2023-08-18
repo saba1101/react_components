@@ -1,5 +1,5 @@
 import '@/components/Date/DatePicker.scss'
-import { useState,useRef } from 'react';
+import { useState,useRef, useEffect } from 'react';
 import {__formatDate} from '@/utils/Helpers.js'
 import { DatePicker, ConfigProvider, theme  } from 'antd';
 import IconCalendar from '@/assets/svgComponents/IconCalendar.jsx';
@@ -34,11 +34,17 @@ const Datepicker = (
         }
     )
 
+    const [Focused,setFocused] = useState(false)
+
     const [notifierFlag,setNotifierFlag] = useState(false)
 
     const change = (date,dateString) => {
         let dateValue
-        
+
+        if(!date) {
+            setNotifierFlag(false)
+        }
+
         const syncDateChange = () => {
             if(onChange && typeof onChange === 'function'){
                 onChange(dateValue)
@@ -75,6 +81,17 @@ const Datepicker = (
         syncDateChange()
     }
 
+    const GetFocus = (event) => {
+        setFocused(true)
+    }
+    const GetBlur = (event) => {
+        setFocused(false)
+    }
+
+    useEffect(() => {
+        setNotifierFlag(defaultValue ? true : false)
+    },[defaultValue])
+
     return (
         <ConfigProvider
             theme={{
@@ -96,7 +113,15 @@ const Datepicker = (
                         </div>
                     )
                 }
-
+                {
+                    !iconOnly && (
+                        <div className={`datepickerCustomLabel ${Focused || (notifierFlag)  ? 'focused' : ''}`}>
+                            <span>
+                                {placeholder}
+                            </span>
+                        </div>
+                    )
+                }
                 {
                     (mode && mode === 'single') && (
                         <DatePicker
@@ -111,8 +136,10 @@ const Datepicker = (
                             format={format ? format : Instance.current.DefaultFormat}
                             onChange={(date,dateString) => change(date,dateString)}
                             size={size ? size : Instance.current.DefaultSize}
-                            placeholder={placeholder}
+                            placeholder={''}//placeholder
                             showTime={showTime ? { format: 'HH:mm',visible:false } : false}
+                            onFocus={GetFocus}
+                            onBlur={GetBlur}
                         />
                     )
                 }
@@ -133,7 +160,9 @@ const Datepicker = (
                                 ] : null
                             }
                             size={size ? size : Instance.current.DefaultSize}
-                            placeholder={placeholder}
+                            placeholder={''}//placeholder
+                            onFocus={GetFocus}
+                            onBlur={GetBlur}
                         />
                     )
                 }

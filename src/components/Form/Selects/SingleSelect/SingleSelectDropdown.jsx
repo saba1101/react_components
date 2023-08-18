@@ -97,7 +97,7 @@ const SingleSelectDropdown = ({
     }
 
     const SetPreSelectedObj = () => {
-        if(selectedOptionID) {
+        if(selectedOptionID || selectedOptionID === 0) {
             let target_obj = data.filter(el => Number(el.id) === Number(selectedOptionID))
             console.log(target_obj)
             if(target_obj && target_obj[0]){

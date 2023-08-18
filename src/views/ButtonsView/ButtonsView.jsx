@@ -32,6 +32,12 @@ const ButtonsView = () => {
             example: 'background,border,text',
         },
         {
+            title: 'buttonType',
+            description: 'Button type Attribute',
+            type: 'String',
+            example: 'submit | button | reset',
+        },
+        {
             title: 'size',
             description: 'button height size',
             type: 'String',

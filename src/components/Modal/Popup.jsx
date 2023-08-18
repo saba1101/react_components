@@ -46,34 +46,43 @@ const Popup = (
 
     return (
         visible && (
-            <div className={style.modalOverlay}>
+            <div className={
+                `
+                    ${style.modalOverlay}
+                    ${options && options.mode === 'drawer' ? style.popupDrawerMode : ''}
+                `
+            }>
                 <div className={`
                     ${style.popupContainer}
                     ${style[_getSize(size)]}
                 `}>
-                    <div className={`${style.popupHeader} ${style[_getAlign()]}`}>
-                        {
-                            _getType() && (
-                                <div className={style.typeIcon}>
-                                    {_getType()}
-                                </div>
-                            )
-                        }
-                        {
-                            (options && options?.title) && (
-                                <div className={style.popupTitle}>
-                                    <h2> { options?.title ?? '' } </h2>
-                                </div>
-                            )
-                        }
-                        {
-                            (options && options?.description) && (
-                                <div className={style.popupDescription}>
-                                    <p> { options?.description ?? '' } </p>
-                                </div>
-                            )
-                        }
-                    </div>
+                    {
+                        (options.title || options.description || options.type) && (
+                            <div className={`${style.popupHeader} ${style[_getAlign()]}`}>
+                                {
+                                    _getType() && (
+                                        <div className={style.typeIcon}>
+                                            {_getType()}
+                                        </div>
+                                    )
+                                }
+                                {
+                                    (options && options?.title) && (
+                                        <div className={style.popupTitle}>
+                                            <h2> { options?.title ?? '' } </h2>
+                                        </div>
+                                    )
+                                }
+                                {
+                                    (options && options?.description) && (
+                                        <div className={style.popupDescription}>
+                                            <p> { options?.description ?? '' } </p>
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        )
+                    }
                     <div className={style.templateWrapper}>
                         {template && template()}
                         {children && children}

@@ -33,9 +33,9 @@ const CardsView = () => {
 
         {
             title: 'mode',
-            description: 'Card Mode',
+            description: 'Card Mode, customTemplate = bottom content slot',
             type: 'String/Default multipleItems',
-            example: "choose one from (multipleItems,singleItem)"
+            example: "choose one from (multipleItems,singleItem,customTemplate)"
         },
         {
             title: 'id',
@@ -92,6 +92,7 @@ const CardsView = () => {
                         label: 'Delete',
                         type: 'delete',
                         icon: () => icon(),
+                        (rawSvg: Boolean, if svg is raw string and not react component,)
                         event: (type,data) => {....}
                     }
                 ]
@@ -102,6 +103,12 @@ const CardsView = () => {
             description: 'Actions Dropdown Controller',
             type: 'Boolean',
             example: ""
+        },
+        {
+            title: 'alignActions',
+            description: 'align action Position',
+            type: 'String',
+            example: "right | left ... default is left"
         },
         {
             propType:'event',
@@ -193,6 +200,17 @@ const CardsView = () => {
                 actionsVisible: false,
                 id:1,
             },
+            {
+                mode: "multipleItems",
+                title: 'With Color',
+                description: 'complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No',
+                items: ['Floort 3 - In/Out','item - 4 In/Out','item - 4 In/Out','item - 4 In/Out','item - 4 In/Out'],
+                actions: JSON.parse(JSON.stringify(Actions)),
+                alignActions:"right",
+                actionsVisible: false,
+                id:1,
+                color: '#EA8DC5'
+            },
         ]
     )
 
@@ -225,6 +243,8 @@ const CardsView = () => {
                                 actionsVisible={c.actionsVisible}
                                 id={c.id}
                                 onToggleChange={(state) => (c.item.selected = state,setRenderFlag(state => !state))}
+                                color={c.color}
+                                alignActions={c.alignActions}
                             />
 
                             </div>

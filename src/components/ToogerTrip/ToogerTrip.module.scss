@@ -1,0 +1,164 @@
+.toogerTripRootWrapper{
+    position: relative;
+    display: inline-block;
+
+    .toogerTripContentDropdown{
+        position: absolute;
+        width: 16rem;
+        top: calc(100% + 0.5rem);
+        left: 50%;
+        transform: translate(-50%,0);
+        padding: 1rem;
+        z-index: 420;
+        border-radius: 0.125rem;
+        background: $DAY_COLOR_SURFACE_CANVAS_INVERTED_INITIAL;
+        // animation: openFade .2s forwards;
+
+        @keyframes openFade {
+            from {
+                opacity: 0;
+                transform: translate(-50%,-1.25rem);
+            }
+            to{
+                opacity: 1;
+                transform: translate(-50%,0);
+            }
+        }
+
+        .toogerTripContentWrapper{
+            position: relative;
+
+            &::before{
+                content: '';
+                width: 0; 
+                height: 0; 
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                border-bottom: 0.5rem solid $DAY_COLOR_SURFACE_CANVAS_INVERTED_INITIAL;
+                position: absolute;
+                top: -1.4375rem;
+                left: 50%;
+                transform: translate(-50%,0);
+            }
+            .toogerTripDescription{
+    
+                p{
+                    font-size: 0.875rem;
+                    line-height: 1.3125rem;
+                    font-family: 'Helvetica_Neue_LT_GEO_Caps_500';
+                    color: $DAY_COLOR_TEXT_STRONG_INVERTED;
+                }
+            }
+    
+            .toogerTripActions{
+                margin-top: 1rem;
+    
+                .toogerTripDefaultActions{
+                    @include flex(center,center,row,1rem)
+                }
+            }
+        }
+
+        &.right{
+            top: 50%;
+            left: calc(100% + 0.5rem);
+            transform: translate(0,-50%) !important;
+            .toogerTripContentWrapper{
+                
+                &::before{
+                    border-top: 0.5rem solid transparent;
+                    border-bottom: 0.5rem solid transparent; 
+                    border-right: 0.5rem solid $DAY_COLOR_SURFACE_CANVAS_INVERTED_INITIAL; 
+                    top: 50%;
+                    left: -1.875rem;
+                    transform: translate(0,-50%);
+                }
+            }
+        }
+
+        &.top{
+            bottom: calc(100% + 0.5rem);
+            left: 50%;
+            top: unset;
+            transform: translate(-50%,0) !important;
+            .toogerTripContentWrapper{
+                
+                &::before{
+                    border-left: 0.5rem solid transparent;
+                    border-right: 0.5rem solid transparent; 
+                    border-top: 0.5rem solid $DAY_COLOR_SURFACE_CANVAS_INVERTED_INITIAL; 
+                    border-bottom: unset; 
+                    top: unset;
+                    bottom: -1.4375rem;
+                    left: 50%;
+                    transform: translate(-50%,0);
+                }
+            }
+        }
+
+        &.left{
+            top: 50%;
+            right: calc(100% + 0.5rem);
+            left: unset;
+            transform: translate(0,-50%) !important;
+            .toogerTripContentWrapper{
+                
+                &::before{
+                    border-top: 0.5rem solid transparent;
+                    border-bottom: 0.5rem solid transparent; 
+                    border-left: 0.5rem solid $DAY_COLOR_SURFACE_CANVAS_INVERTED_INITIAL; 
+                    top: 50%;
+                    left: unset;
+                    right: -1.875rem;
+                    transform: translate(0,-50%);
+                }
+            }
+        }
+
+    }
+}
+
+:global(body.theme_dark){
+    .toogerTripRootWrapper > {
+        .toogerTripContentDropdown{
+            background: $NIGHT_COLOR_SURFACE_CANVAS_INVERTED_INITIAL;
+            .toogerTripContentWrapper{
+                
+                .toogerTripDescription > p{
+                    color: $NIGHT_COLOR_TEXT_STRONG_INVERTED;
+                }
+            }
+            &.bottom{
+                .toogerTripContentWrapper{
+                    &::before{
+                        border-bottom: 0.5rem solid $NIGHT_COLOR_SURFACE_CANVAS_INVERTED_INITIAL;
+                    }       
+                }
+            }
+
+            &.right{
+                .toogerTripContentWrapper{
+                    &::before{
+                        border-right: 0.5rem solid $NIGHT_COLOR_SURFACE_CANVAS_INVERTED_INITIAL; 
+                    }       
+                }
+            }
+
+            &.top{
+                .toogerTripContentWrapper{
+                    &::before{
+                        border-top: 0.5rem solid $NIGHT_COLOR_SURFACE_CANVAS_INVERTED_INITIAL; 
+                    }
+                }
+            }
+            &.left{
+                .toogerTripContentWrapper{
+                    &::before{
+                        border-left: 0.5rem solid $NIGHT_COLOR_SURFACE_CANVAS_INVERTED_INITIAL; 
+                    }
+                }
+            }
+        }
+    }
+
+}

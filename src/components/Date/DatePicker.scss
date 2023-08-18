@@ -38,17 +38,53 @@
             }
         }
     }
-}
 
-body.theme_dark{
-    .datePickerWrapper.iconOnly{
-        .iconPlaceholder{
-            svg{
-                path{
-                    stroke: #ffffff;
-                }
+    .datepickerCustomLabel{
+        position: absolute;
+        transform: translate(0,-50%);
+        top: 50%;
+        left: 0.75rem;
+        z-index: 20;
+        transition: $Default-Transition;
+        pointer-events: none;
+        user-select: none;
+
+        &.focused{
+            top: 0.5rem;
+            transform: translate(none);
+            span{
+                font-size: 0.625rem;
             }
         }
 
+        span{
+            font-size: 0.75rem;
+            color: $DAY_COLOR_TEXT_SOFT_DEFAULT;
+            font-family: 'Helvetica_Neue_LT_GEO_Caps_400';
+            transition: $Default-Transition;
+        }
+    }
+
+    .ant-picker-input > input {
+        top: 0.3125rem;
+    }
+}
+
+body.theme_dark{
+    .datePickerWrapper{
+        .datepickerCustomLabel{
+            span{
+                color: $NIGHT_COLOR_TEXT_STRONG_DEFAULT;
+            }
+        }
+        &.iconOnly{
+            .iconPlaceholder{
+                svg{
+                    path{
+                        stroke: #ffffff;
+                    }
+                }
+            }
+        }
     }
 }

@@ -18,6 +18,7 @@ const MultiSelect = (
         withApply,
         withSearch = true,
         fixedDropdown,
+        onItemClick,
     }
 ) => {
     const MultiselectRef = useRef(null)
@@ -74,6 +75,10 @@ const MultiSelect = (
         return uniqueArray
       };
 
+      const RemoveUncontrolledTriggers = (arr) => {
+        return arr.filter(el => el.selected)
+      }
+
       const SyncChange = (arr) => {
         if(change && typeof change === 'function'){
             change(RemoveDuplicates(arr))
@@ -123,7 +128,7 @@ const MultiSelect = (
                 {
                     SelectedNodesArr && (
                         <div className={style.selectedTagsList}>
-                            {SelectedNodesArr.map((tag,ind) => {
+                            {SelectedNodesArr.filter(el => el.selected).map((tag,ind) => {
                                 return(
                                     <div 
                                         className={`
@@ -188,6 +193,7 @@ const MultiSelect = (
                             Apply={() => CloseCollapsable()}
                             WithBottomAction={true}
                             WithMaxHeight={true}
+                            onItemClick={onItemClick}
                         />
                     </div>
                 </div>

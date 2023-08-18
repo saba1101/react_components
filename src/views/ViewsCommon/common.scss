@@ -55,7 +55,7 @@
         }
 
         &.comp__uploader{
-            grid-template-columns: auto auto;
+            grid-template-columns: 21.875rem 21.875rem;
             justify-content: left;
         }
 
@@ -72,6 +72,17 @@
                 border-radius: 0.25rem;
                 transition: $Default-Transition;
             }
+        }
+
+        &.comp__tags{
+            grid-template-columns: unset;
+            @include flex(flex-start,center,row,0.9375rem);
+            flex-wrap: wrap;
+        }
+
+        &.comp__toogerTrip{
+            grid-template-columns: auto;
+            place-items: center;
         }
 
         .docs__single_component{

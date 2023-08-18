@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import '@/views/Guide/Guide.scss';
 
 const Guide = () => {
-  const [code, setCode] = useState(`plugins: [
+  const [code, setCode] = useState(`
   import federation from "@originjs/vite-plugin-federation";
+  
+  plugins: [
 
     react(),
     {

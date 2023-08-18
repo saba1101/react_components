@@ -51,7 +51,7 @@
                 text-overflow: ellipsis;
                 span{
                     font-size: 0.75rem;
-                    font-family: 'Helvetica-Medium';
+                    font-family: 'Helvetica_Neue_LT_GEO_Caps_400';
                     line-height: 1.25rem;
                     color: $Day-TextPrimary;
                 }
@@ -66,12 +66,22 @@
             & > div{
                 border: 0.125rem solid rgba($Night-Steelgrey15,.8);
             }
-        }   
+        }
         ul{
             box-shadow: 0 0 0.25rem rgba($Night-Steelgrey06,.6);
             background-color: $Night-Steelgrey06;
 
             li{
+                .actionIcon:not(.staticColor){
+                    &.defaultIcons{
+                        svg{
+                            path{
+                                stroke: #ffffff;
+                            }
+                        }    
+                    }
+                }
+                
                 span{
                     color: $Night-Steelgrey20;
                 }

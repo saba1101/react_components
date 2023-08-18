@@ -43,6 +43,10 @@ export const RoutesData = [
         path : '/SearchView',
     },
     {
+        label : 'Advanced Search',
+        path : '/AdvancedSearchView',
+    },
+    {
         label : 'Notification',
         path : '/NotificationView',
     },
@@ -67,12 +71,30 @@ export const RoutesData = [
         path : '/DatePickerView',
     },
     {
+        label : 'Time Picker',
+        path : '/TimepickerView',
+    },
+    {
         label : 'Cards',
         path : '/CardsView',
     },
     {
         label : 'Tooltip',
         path : '/TooltipView',
+    },
+    {
+        label : 'Tags',
+        path : '/TagsView',
+    },
+
+    {
+        label : 'Tooger Trip',
+        path : '/ToogerTripView',
+    },
+
+    {
+        label : 'Circular Loader',
+        path : '/CircularLoaderView',
     },
 
 ]

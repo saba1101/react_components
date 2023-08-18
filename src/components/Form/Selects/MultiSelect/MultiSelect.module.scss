@@ -68,6 +68,7 @@
                 position: none;
                 span{
                     color: $Main-Blue-Light;
+                    font-size: 0.875rem !important;
                 }
 
                 &.visible{
@@ -155,6 +156,15 @@
     &.small{
         .selectedTags{
             height: 2.625rem;
+        }
+        .selectedTagsList{
+            position: relative;
+            top: -0.25rem;
+            .singleTag{
+                span{
+                    font-size: 0.75rem;
+                }
+            }
         }
     }
 

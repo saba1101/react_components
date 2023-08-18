@@ -1,0 +1,27 @@
+table.timeline{
+    color: #fff;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.875rem;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 1920px;
+    
+    tr,td,th{
+        border: 0.0625rem solid rgba(#fff,.4);
+    }
+    td{
+        width: 9.375rem;
+        border: 0.0625rem solid rgba(#F35,.5);
+        white-space: nowrap;
+        height: 6.875rem;
+        cursor: pointer;
+
+        &.weekDays{
+            border: 0.0625rem solid rgba(#fff,.4);
+        }
+
+        &:hover{
+            background-color:rgba(#283593,.3);
+        }
+    }
+}

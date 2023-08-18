@@ -6,6 +6,7 @@ const MainButton = (
         disabled,
         loading,
         type,
+        buttonType,
         size,
         customStyle,
         icon,
@@ -37,7 +38,8 @@ const MainButton = (
     }
 
     return (
-        <button 
+        <button
+            type={buttonType}
             style={customStyle && typeof customStyle == 'object' ? {...customStyle} : {}} 
             className={`${style['mainButton']} ${style[_getSize()]} ${style[_getType()]} ${disabled ? style['disabled'] : ''} ${loading ? style.loadingState : ''}`}
             onClick={() => {

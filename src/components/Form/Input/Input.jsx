@@ -120,6 +120,7 @@ const Input = (
                         readOnly={readOnly ?? false}
                         spellCheck={false}
                         placeholder={placeholder && !value && FocusStates.focusedIn ? InputPlaceholder : ''}
+                        autoComplete='off'
                     />
                     {
                         inputType === 'number' && (

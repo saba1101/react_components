@@ -25,11 +25,26 @@ const TreeNodeView = () => {
             title: 'data',
             description: 'TreeNode Data',
             type: 'Array / Tree JSON',
+            example: `
+                {
+                    id: (Number,String),
+                    label: String,
+                    children: Array,
+                    disabled: Boolean,
+                    checkboxHidden: Boolean,
+                }
+            `
         },
         {
             propType:'event',
             title: 'onSelectionChange',
             description: 'Returns Selection Array',
+            type: 'function',
+        },
+        {
+            propType:'event',
+            title: 'onNodeExpand',
+            description: 'Returns Expanded Object and State',
             type: 'function',
         },
     ]
@@ -67,6 +82,7 @@ const TreeNodeView = () => {
                                 <TreeNodeDropdown 
                                     data={treeData}
                                     onSelectionChange={handleSelectionChange}
+                                    onNodeExpand={(node) => console.log( node.expanded,'onNodeExpand',node)}
                                 />
 
                             </div>

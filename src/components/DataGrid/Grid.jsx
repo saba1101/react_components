@@ -72,6 +72,8 @@ const Grid = ({
     onColumnConfigure,
     onDeleteAll,
 
+    onFilterValueChange,
+
 }) => {
     // const [columns,setColumns] = useState(customColumns)
     const [renderFlag,setRenderFlag] = useState(false)
@@ -190,6 +192,23 @@ const Grid = ({
         console.log(event.component.collapseAll(-1))
     }
 
+    const onEditorPreparing = (e) => {
+        if (e.parentType === 'filterRow') {
+            e.editorElement.onchange = (event) => {
+                const FilterConfig = {
+                    columnKey : e.dataField,
+                    columnName : e.caption,
+                    filterValue : event.target.value
+                }
+
+                if(onFilterValueChange && typeof onFilterValueChange === 'function'){
+                    onFilterValueChange(FilterConfig)
+                }
+            };
+        }
+
+    }
+
     useEffect(() => {
         if(refresh) {
             Instance.current.Refresh()
@@ -207,7 +226,7 @@ const Grid = ({
         }
     },[])
   return (
-        <div className={`gridWrapper __dx_DataGrid_Component__ light ${theme && !['dark','light'].includes(theme) ? 'light' : theme }`}>
+        <div style={{height: '100%'}} className={`gridWrapper __dx_DataGrid_Component__ light ${theme && !['dark','light'].includes(theme) ? 'light' : theme }`}>
             
                 {
                     (withColumnConfigure || (withDeleteAll && selection?.mode === 'multiple')) && (
@@ -239,7 +258,7 @@ const Grid = ({
                 }
 
                 <DataGrid
-                    height={height ? height : ''}
+                    height={height ? height : '100%'}
                     ref={DataGridRef}
                     dataSource={withCustomStore ? store : data}
                     remoteOperations={true}
@@ -252,6 +271,8 @@ const Grid = ({
                     rowAlternationEnabled={rowAlternationEnabled}
                     showBorders={false}
                     hoverStateEnabled={true}
+
+                    onEditorPreparing={onEditorPreparing}
 
                     // //////// editing events //////////////
                     onEditingStart={(event) => LogEvent(event,'onEditingStart')}
@@ -303,22 +324,32 @@ const Grid = ({
                     {/* <FilterPanel visible={true} />  create filter logic */}
 
                     {
-                        columns.current.map((col,ind) => {
+                        columns && columns.current.map((col,ind) => {
                             return (
                                 <Column
                                     key={ind}
                                     dataField={col.columnKey}
                                     caption={col.columnName}
-                                    alignment={'left'}
+                                    alignment={col.alignment ? col.alignment :
+                                        col.dataType === 'number' ? 'right' : 'left'
+                                    }
                                     width={col.width}
                                     visible={col.visible}
                                     dataType={col.dataType}
-                                    format={col.format || (
-                                        col.format === 'date' ? "M/d/yyyy, HH:mm" : col.format
-                                    )}
+                                    format={
+                                        col.format === 'date' ? "M/d/yyyy, HH:mm" 
+                                            : 
+                                        (col.dataType === 'number' && col.fixedNumber) ? {
+                                            type: "fixedPoint",
+                                            precision: 2
+                                        }
+                                            : 
+                                        col.format
+                                    }
                                     fixed={col.fixed}
                                     cellRender={col.template}
                                     allowFiltering={col.allowFiltering}
+                                    allowHeaderFiltering={col.allowHeaderFiltering}
                                     allowSorting={col.allowSorting}
                                     allowEditing={col.allowEditing}
                                     visibleIndex={col.orderIndex}
@@ -410,13 +441,13 @@ const Grid = ({
                     {/* <Sorting mode="asc" /> */}
                     <LoadPanel enabled={true} />
                     <Scrolling mode={scrollMode ?? 'none'} />
-                    <Paging defaultPageSize={pagerOptions?.defaultPageSize ?? 30} />
+                    <Paging defaultPageSize={pagerOptions?.defaultPageSize} />
                     <Pager
-                        visible={pagerOptions?.visible ?? true}
-                        allowedPageSizes={pagerOptions?.allowedPageSizes ?? [30,60,120,180,'all']}
-                        showPageSizeSelector={pagerOptions?.showPageSizeSelector ?? true}
-                        showInfo={pagerOptions?.showInfo ?? true}
-                        showNavigationButtons={pagerOptions?.showNavigationButtons ?? true} 
+                        visible={pagerOptions?.visible}
+                        allowedPageSizes={pagerOptions?.allowedPageSizes}
+                        showPageSizeSelector={pagerOptions?.showPageSizeSelector}
+                        showInfo={pagerOptions?.showInfo}
+                        showNavigationButtons={pagerOptions?.showNavigationButtons} 
                     />
 
                   

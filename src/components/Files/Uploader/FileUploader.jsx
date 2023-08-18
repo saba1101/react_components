@@ -110,7 +110,14 @@ const FileUploader = (
       }
 
     return (
-        <div className={style.fileUploaderWrapper}>
+        <div 
+            className={style.fileUploaderWrapper}
+            style={
+                {
+                    maxWidth: directionStyle ? '450px' : '21.875rem',
+                }
+            }
+        >
 
             <div 
                 className={`${style.fileUploaderContent} ${directionStyle && directionStyle === 'rowStyle' ? style.directionRow : ''} ${IsActive ? style.activeDropzone : ''}`}

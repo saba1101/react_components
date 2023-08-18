@@ -16,6 +16,11 @@ const SearchView = () => {
             header: true
         },
         {
+            title: 'children',
+            description: 'Wrap you ELEMENT inside <TooltipLabel> ELEMENT </TooltipLabel>',
+            type: 'Slot',
+        },
+        {
             title: 'label',
             description: 'Tooltip Label',
             type: 'String',
@@ -83,7 +88,7 @@ const SearchView = () => {
         <div className="docs__components_preview">
             <div className="docs__components_label">
                 <h1>
-                    Component Import Name : <span> TooltipLabel </span>
+                    Component Import Name : <span>Tooltip</span>
                 </h1>
             </div>
             <div className="docs__component_wrapper">

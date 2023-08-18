@@ -60,6 +60,13 @@ const MultiSelectDropdownView = () => {
         },
         {
             propType: 'event',
+            title: 'onItemClick',
+            description: 'returns Item Object On click',
+            type: 'function',
+            example: "onItemClick(itemObj) => ....."
+        },
+        {
+            propType: 'event',
             title: 'change',
             description: 'returns Selected Items Flat Array of Objects',
             type: 'function',
@@ -69,6 +76,11 @@ const MultiSelectDropdownView = () => {
 
     const componentTypes = useRef(
         [
+            {
+                label: 'Plain Data',
+                data : Data.Plain,
+                selected: null,
+            },
             {
                 label: 'Default Dropdown With Label',
                 data : Data.Tree,
@@ -175,7 +187,7 @@ const MultiSelectDropdownView = () => {
                                     withApply={c.withApply}
                                     withSearch={c.withSearch}
                                     change={(arr) => (c.selected = arr,setRenderFlag(state => !state))}
-
+                                    onItemClick={(item) => {console.trace(item)}}
                                 />
                             </div>
                         )

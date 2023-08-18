@@ -1,6 +1,7 @@
 import style from '@/components/Cards/SingleCard/Card.module.scss'
 import Toggle from '@/components/Form/FormControls/Toggle/Toggle.jsx'
 import DropdownAction from '@/components/Cards/components/DropdownActions/DropdownAction.jsx'
+import RawSvgRenderer from '../components/RawSvgRenderer.jsx'
 import { useEffect, useRef } from 'react'
 
 const Card = ({
@@ -12,6 +13,7 @@ const Card = ({
     items,
     itemsCount,
     item,
+    children,
     actions,
     onExpand,
     actionsVisible,
@@ -20,12 +22,17 @@ const Card = ({
     onOutsideClick,
     onDelete,
     onEdit,
+    alignActions,
+    itemsTextEllipsis = true,
+    VisibleItemsCount = 2,
+    color,
 }) => { 
     const componentRef = useRef(null)
 
     const MODES = {
         DEFAULT: 'multipleItems',
-        MULTIPLE: 'singleItem'
+        MULTIPLE: 'singleItem',
+        CUSTOM_TEMPLATE: 'customTemplate'
     }
 
     const DefaultActions = useRef(
@@ -53,7 +60,6 @@ const Card = ({
         }
     }
 
-    const VisibleItemsCount = 2
 
     const ToggleChange = (state) => {
         if(onToggleChange && typeof onToggleChange === 'function'){
@@ -75,10 +81,16 @@ const Card = ({
     // })
 
     return (
-        <div className={
-            `
-                ${style.cardsGridWrapper}
-            `
+        <div
+            style={
+                {
+                    borderTop: color ? `solid 0.375rem ${color}` : ''
+                }
+            } 
+            className={
+                `
+                    ${style.cardsGridWrapper}
+                `
         }
             ref={componentRef}
         >
@@ -88,6 +100,7 @@ const Card = ({
                 actions={actions && actions.length ? actions : DefaultActions.current}
                 onExpand={(state) => onActionsExpand(state)}
                 itemID={id}
+                align={alignActions}
             />
 
             <div className={style.cardContent} onClick={() => {
@@ -125,7 +138,12 @@ const Card = ({
                 <div className={style.cardBottomContent}>
                     {
                         (mode && mode === MODES.DEFAULT) && (
-                            <div className={style.contentsModeDefault}>
+                            <div className={
+                                `
+                                    ${style.contentsModeDefault}
+                                    ${itemsTextEllipsis ? style.ellipsis : ''}
+                                `
+                            }>
                                 <ul>
                                     {items && items.map((item,index) => {
                                         return (
@@ -142,21 +160,26 @@ const Card = ({
                                 <div className={style.cardItemsCount}>
                                     <span>
                                         {
-                                            itemsCount ? `+${itemsCount}` : (items.length - VisibleItemsCount) == 0 ?  '' : `+ ${items.length - VisibleItemsCount}`
+                                            itemsCount ? `+${itemsCount}` : ''
                                         }
                                     </span>
                                 </div>
                             </div>
                         )
                     }
-
+                    {
+                        (mode && mode === MODES.CUSTOM_TEMPLATE) && (
+                            children && children
+                        )
+                    }
                     {
                         (mode && mode === MODES.MULTIPLE) && (
                             <div className={style.contentsModeActions}>
                                 <div className={style.iconAndLabel}>
                                     <div className={style.icon}>
                                         {
-                                            item && item.icon ? item.icon() : ''
+                                            item && item.icon && !item.rawSvg ? item.icon() : 
+                                            item.rawSvg ? <RawSvgRenderer width={item.iconWidth} svg={item.icon} />  : ''
                                         }
                                     </div>
                                     <div className={style.label}>
